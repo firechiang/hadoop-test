@@ -37,7 +37,7 @@ $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 $ chmod 0600 ~/.ssh/authorized_keys
 ```
 
-### 四、修改HDFS 执行权限
+### 四、添加 HDFS 执行用户
 #### 4.1 修改 [vi sbin/start-dfs.sh] 在顶部空白处添加如下内容
 ```bash
 HDFS_DATANODE_USER=root
@@ -62,4 +62,19 @@ $ bin/hdfs namenode -format
 ### 六、启动NameNode 和 DataNode
 ```bash
 $ sbin/start-dfs.sh
+```
+
+
+### 其它、添加 Yarn 执行用户
+#### 修改 [vi sbin/start-yarn.sh] 在顶部空白处添加如下内容
+```bash
+YARN_RESOURCEMANAGER_USER=root
+YARN_NODEMANAGER_USER=root
+HADOOP_SECURE_DN_USER=yarn
+```
+#### 修改 [vi sbin/stop-yarn.sh] 在顶部空白处添加如下内容
+```bash
+YARN_RESOURCEMANAGER_USER=root
+YARN_NODEMANAGER_USER=root
+HADOOP_SECURE_DN_USER=yarn
 ```
