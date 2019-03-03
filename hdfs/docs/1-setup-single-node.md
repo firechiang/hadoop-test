@@ -53,9 +53,10 @@ $ bin/hdfs namenode -format
 ```
 
 
-#### 六、启动NameNode 和 DataNode
+#### 六、启动NameNode，DataNode，SecondaryNameNode
 ```bash
 $ sbin/start-dfs.sh
+$ jps                          # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://192.168.78.128:9870
 ```
 
 
