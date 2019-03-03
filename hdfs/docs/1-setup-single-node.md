@@ -37,15 +37,22 @@ $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 $ chmod 0600 ~/.ssh/authorized_keys
 ```
 
-#### 四、添加 HDFS 执行用户
-##### 4.1 修改 [vi sbin/start-dfs.sh] 在顶部空白处添加如下内容
+#### 四、修改从节点信息
+##### 4.1 修改 [vi workers] 修改为当前机器名称或IP（有多个的话写多个一行一个）
+```bash
+192.168.78.128
+```
+
+
+#### 五、添加 HDFS 执行用户
+##### 5.1 修改 [vi sbin/start-dfs.sh] 在顶部空白处添加如下内容
 ```bash
 HDFS_DATANODE_USER=root
 HADOOP_SECURE_DN_USER=hdfs
 HDFS_NAMENODE_USER=root
 HDFS_SECONDARYNAMENODE_USER=root
 ```
-##### 4.2 修改 [vi sbin/stop-dfs.sh] 在顶部空白处添加如下内容
+##### 5.2 修改 [vi sbin/stop-dfs.sh] 在顶部空白处添加如下内容
 ```bash
 HDFS_DATANODE_USER=root               # DataNode所使用的角色
 HADOOP_SECURE_DN_USER=hdfs            # HADOOP_SECURE_DN_USER所使用的角色（这个角色单节点可以不配）
@@ -53,13 +60,13 @@ HDFS_NAMENODE_USER=root               # NameNode所使用的角色
 HDFS_SECONDARYNAMENODE_USER=root      # SecondaryNameNode所使用的角色
 ```
 
-#### 五、格式化文件系统
+#### 六、格式化文件系统
 ```bash
 $ bin/hdfs namenode -format
 ```
 
 
-#### 六、启动NameNode 和 DataNode
+#### 七、启动NameNode 和 DataNode
 ```bash
 $ sbin/start-dfs.sh
 ```
