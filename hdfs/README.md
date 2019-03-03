@@ -18,6 +18,17 @@
 第三个副本：与第二个副本相同机架但不同的节点
 更多副本：随机节点
 ```
+
+##### 架构模型（主从模型）
+```bash
+1. 文件元数据MetaData（主：NameNode节点保存文件元数据），文件数据（从：DataNode节点保存文件Block数据）
+       1.1 （主）元数据（数据大小，创建时间，所在位置等等信息）
+       1.2 （从）数据本身
+2. DataNode与NameNode保持心跳，向NameNode提交Block列表信息（当前有几个DataNode可用）  
+3. HdfsClient与NameNode交换元数据信息
+4. HdfsClient与DataNode交换文件Block数据
+5. DataNode利用服务器本地文件系统存储数据块
+```
 ##### [一、单节点搭建][1]
 
 [1]: https://github.com/firechiang/hadoop-test/tree/master/hdfs/docs/1-setup-single-node.md
