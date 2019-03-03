@@ -29,6 +29,21 @@
 4. HdfsClient与DataNode交换文件Block数据
 5. DataNode利用服务器本地文件系统存储数据块
 ```
+
+### HDFS-3.X新特性
+```bash
+1. ClassPath isolation（防止不同版本jar包冲突（开发依赖jar可以重名））
+2. 支持HDFS中的擦除编码（Erasure Encoding）
+       2.1 默认的EC编码可以节约50%的存储空间，同时还可以承受更多的存储故障
+3. DataNode内部添加了负载均衡 Disk Balancer（磁盘之间的负载均衡=如果机器添加了新的硬盘，Disk Balancer会自动将数据均衡到新硬盘上来） 
+4. MapReduce任务级本地优化
+5. MapReduce内存参数自动推断
+       5.1 mapreduce.{map,reduce}.memory.mb
+       5.2 mapreduce.{map,reduce}.java.opts
+6. 基于cGroup的内存隔离和IO Disk隔离
+7. 支持更改分配容器的资源Container resizing                 
+             
+```
 ##### [一、单节点搭建][1]
 
 [1]: https://github.com/firechiang/hadoop-test/tree/master/hdfs/docs/1-setup-single-node.md
