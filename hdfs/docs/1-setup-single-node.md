@@ -47,10 +47,10 @@ HDFS_SECONDARYNAMENODE_USER=root
 ```
 ##### 4.2 修改 [vi sbin/stop-dfs.sh] 在顶部空白处添加如下内容
 ```bash
-HDFS_DATANODE_USER=root
-HADOOP_SECURE_DN_USER=hdfs
-HDFS_NAMENODE_USER=root
-HDFS_SECONDARYNAMENODE_USER=root
+HDFS_DATANODE_USER=root               # DataNode所使用的角色
+HADOOP_SECURE_DN_USER=hdfs            # HADOOP_SECURE_DN_USER所使用的角色（这个角色单节点可以不配）
+HDFS_NAMENODE_USER=root               # NameNode所使用的角色
+HDFS_SECONDARYNAMENODE_USER=root      # SecondaryNameNode所使用的角色
 ```
 
 #### 五、格式化文件系统
@@ -68,9 +68,9 @@ $ sbin/start-dfs.sh
 #### 其它、添加 Yarn 执行用户
 ##### 修改 [vi sbin/start-yarn.sh] 在顶部空白处添加如下内容
 ```bash
-YARN_RESOURCEMANAGER_USER=root
-YARN_NODEMANAGER_USER=root
-HADOOP_SECURE_DN_USER=yarn
+YARN_RESOURCEMANAGER_USER=root    # YARN_RESOURCEMANAGER_USER所使用的角色
+YARN_NODEMANAGER_USER=root        # YARN_NODEMANAGER_USER所使用的角色
+HADOOP_SECURE_DN_USER=yarn        # HADOOP_SECURE_DN_USER所使用的角色
 ```
 ##### 修改 [vi sbin/stop-yarn.sh] 在顶部空白处添加如下内容
 ```bash
