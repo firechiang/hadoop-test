@@ -13,7 +13,7 @@ JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                             
 ```bash
 <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://localhost:9000</value>
+    <value>hdfs://192.168.78.128:9820</value>
 </property>
 <!-- 指定hadoop运行时产生临时文件的存储目录 -->
 <property>
