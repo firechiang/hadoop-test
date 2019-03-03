@@ -56,7 +56,15 @@ $ bin/hdfs namenode -format
 #### 六、启动NameNode，DataNode，SecondaryNameNode
 ```bash
 $ sbin/start-dfs.sh
-$ jps                          # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://192.168.78.128:9870
+$ jps                                                           # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://192.168.78.128:9870
+```
+
+#### 七、简单使用
+```bash
+$ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
+$ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
+$ ./bin/hdfs dfs -put /home/tools/hadoop-3.1.2.tar.gz /tools    #上传文件至HDFS /tools目录
+$ ./bin/hdfs dfs -ls /tools                                     # 查看文件是否存在
 ```
 
 
