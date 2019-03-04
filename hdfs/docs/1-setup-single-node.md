@@ -17,12 +17,12 @@ export HADOOP_SECURE_DN_USER=root                                               
 ```bash
 <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://192.168.78.128:9820</value>
+    <value>hdfs://server-001:9820</value>
 </property>
-<!-- 指定hadoop运行时产生临时文件的存储目录 -->
+<!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/home/hadoop-3.1.2/tem</value>                                                 # 注意创建该目录
+    <value>/home/hadoop-3.1.2/tem</value>                                                
 </property>
 ```
 ##### 2.3 修改 [vi hdfs-site.xml]
@@ -41,25 +41,31 @@ $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys                               
 $ chmod 0600 ~/.ssh/authorized_keys                                                       # 修改权限
 ```
 
-#### 四、修改从节点信息
-##### 4.1 修改 [vi workers] 修改为当前机器名称或IP（有多个的话写多个一行一个）
+#### 四、修改hosts文件信息
+##### 4.1 修改 [vi /etc/hosts] 在空白处添加如下内容
 ```bash
-192.168.78.128
+192.168.78.128 server-001
 ```
 
-#### 五、格式化文件系统
+#### 五、修改从节点信息
+##### 4.1 修改 [vi workers] 修改为当前机器名称或IP（有多个的话写多个一行一个）
+```bash
+server-001
+```
+
+#### 六、格式化文件系统
 ```bash
 $ bin/hdfs namenode -format
 ```
 
 
-#### 六、启动NameNode，DataNode，SecondaryNameNode
+#### 七、启动NameNode，DataNode，SecondaryNameNode
 ```bash
 $ sbin/start-dfs.sh
-$ jps                                                           # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://192.168.78.128:9870
+$ jps                                                           # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://server-001:9870
 ```
 
-#### 七、简单使用
+#### 八、简单使用
 ```bash
 $ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录

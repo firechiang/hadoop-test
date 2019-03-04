@@ -11,18 +11,18 @@ export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                      
 export HDFS_DATANODE_USER=root                                                            # DataNode所使用的角色
 export HDFS_NAMENODE_USER=root                                                            # NameNode所使用的角色
 export HDFS_SECONDARYNAMENODE_USER=root                                                   # SecondaryNameNode所使用的角色
-export HADOOP_SECURE_DN_USER=root                                                         # DataNode数据安全传输所使用的角色（建议不要输用root，这个角色单节点可以不配）
+export HADOOP_SECURE_DN_USER=root                                                         # DataNode数据安全传输所使用的角色（建议不要输用root，这个角色非安全（https）协议可以不配）
 ```
 ##### 2.2 修改 [vi core-site.xml]
 ```bash
 <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://192.168.78.128:9820</value>
+    <value>hdfs://server-001:9820</value>
 </property>
-<!-- 指定hadoop运行时产生临时文件的存储目录 -->
+<!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/home/hadoop-3.1.2/tem</value>                                                 # 注意创建该目录
+    <value>/home/hadoop-3.1.2/tem</value>                                                
 </property>
 ```
 ##### 2.3 修改 [vi hdfs-site.xml]
@@ -35,7 +35,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- SecondaryNameNode地址，这个是做文件合并工作的 -->
 <property>
     <name>dfs.namenode.secondary.http-address</name>
-    <value>192.168.78.128:50090</value>
+    <value>server-001:50090</value>
 </property>
 ```
 
@@ -48,34 +48,56 @@ $ scp ~/.ssh/authorized_keys root@192.168.83.135:~/.ssh/authorized_keys         
 $ ssh 192.168.83.135                                                                      # 测试登陆
 ```
 
-#### 四、修改从节点信息
-##### 4.1 修改 [vi workers] 修改为当前机器名称或IP
+#### 四、修改hosts文件信息
+##### 4.1 修改 [vi /etc/hosts] 在空白处添加如下内容
 ```bash
-192.168.78.129
-192.168.78.130
-192.168.78.131
+192.168.78.132 server-001
+192.168.78.129 server-002
+192.168.78.130 server-003
+192.168.78.131 server-004
+
+$ scp /etc/hosts root@192.168.78.129:/etc/                                                # 分发到各个机器
 ```
 
-#### 五、分发文件
+#### 五、修改从节点信息
+##### 4.1 修改 [vi workers] （从节点信息建议使用主机名，使用IP效率低而且还容易导致 DataNode Block初始化失败）
+```bash
+server-002
+server-003
+server-004
+```
+
+#### 六、分发文件
 ```bash
 scp -r hadoop-3.1.2 root@192.168.78.129:/home                                             # -r 是目录下所有文件和文件夹
 scp -r hadoop-3.1.2 root@192.168.78.130:/home                                             # -r 是目录下所有文件和文件夹
 scp -r hadoop-3.1.2 root@192.168.78.131:/home                                             # -r 是目录下所有文件和文件夹
 ```
 
-#### 五、格式化文件系统
+#### 七、配置Hadoop环境变量[vi /etc/profile]在末尾添加如下内容
 ```bash
-$ bin/hdfs namenode -format
+export HADOOP_HOME=/home/hadoop-3.1.2
+PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
+
+$ scp /etc/profile root@192.168.78.131:/etc                                               # 配置完成后将文件分发到各个机器上
+$ source /etc/profile                                                                     # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
+```
+
+#### 八、格式化文件系统
+```bash
+$ bin/hdfs namenode -format                                                               # 我们配置了环境变量可以在任意目录执行 hdfs namenode -format 即可
+# 格式化成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.1.2/tem/dfs/name has been successfully formatted.
+# 也可以去看 tem 目录所生成的文件
 ```
 
 
-#### 六、启动NameNode，DataNode，SecondaryNameNode
+#### 九、启动集群
 ```bash
-$ sbin/start-dfs.sh
+$ sbin/start-dfs.sh                                             # 配置了环境变量可以在任意目录执行 start-dfs.sh
 $ jps                                                           # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://192.168.78.128:9870
 ```
 
-#### 七、简单使用
+#### 十、简单使用
 ```bash
 $ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
