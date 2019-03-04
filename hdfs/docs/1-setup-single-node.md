@@ -36,9 +36,9 @@ export HADOOP_SECURE_DN_USER=root                                               
 
 #### 三、设置免密码登陆
 ```bash
-$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-$ chmod 0600 ~/.ssh/authorized_keys
+$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa                                               # 生成私钥和公钥
+$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys                                        # 复制公钥到authorized_keys文件
+$ chmod 0600 ~/.ssh/authorized_keys                                                      # 修改权限
 ```
 
 #### 四、修改从节点信息
