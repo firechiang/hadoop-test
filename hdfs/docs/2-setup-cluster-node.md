@@ -45,6 +45,7 @@ $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa                                      
 $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys                                         # 复制公钥到authorized_keys文件
 $ chmod 0600 ~/.ssh/authorized_keys                                                       # 修改权限
 $ scp ~/.ssh/authorized_keys root@192.168.83.135:~/.ssh/authorized_keys                   # 将公钥拷贝到想要登录的主机（如果想要登录的主机.ssh目录不存在，就执行生成《公私钥的命令》）
+$ ssh 192.168.83.135                                                                      # 测试登陆
 ```
 
 #### 四、修改从节点信息
