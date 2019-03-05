@@ -1,4 +1,31 @@
 ### Hadoop-3.x 高可用集群搭建
+#### 理论说明
+```bash
+主备两个（或多个）NameNode
+解决单点故障：
+    主NameNode对外提供服务，备NameNode同步主NameNode元数据，以待切换。
+    所有DataNode同时向两个NameNode汇报数据块信息。  
+    
+    两种切换：
+        手动切换：通过命令实现主备之间切换，可以用于HDFS升级等场合。
+        自动切换：基于Zookeeper实现。
+        
+    基于Zookeeper自动方案
+   Zookeeper Failover Controller：监控NameNode健康状态，并向Zookeeper注册NameNode。
+   NameNode挂掉后，ZKFC为NameNode竞争锁，获得ZKFC锁的NameNode变为active。
+  
+HDFS Federation（多个NameNode并行提供服务）
+    多个NameNode并行提供服务，多个NameNode不能相互访问（相互隔离，像mysql的库一样，一个mysql有多个库）。
+
+
+机器任务分配如下：
+
+              NameNode     DataNode    ZK    ZKFC    JNN
+server-001      是                                                                                      是                 是
+server-002      是                                    是                        是
+server-003                    是                       是                                      是
+server-004                    是                       是                                      是
+```
 #### 一、预先准备环境
 ```bash
 $ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz     # 下载安装包
@@ -10,19 +37,27 @@ $ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.t
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                                # 修改 JAVA_HOME
 export HDFS_DATANODE_USER=root                                                            # DataNode所使用的角色
 export HDFS_NAMENODE_USER=root                                                            # NameNode所使用的角色
-export HDFS_SECONDARYNAMENODE_USER=root                                                   # SecondaryNameNode所使用的角色
+export HDFS_ZKFC_USER=root                                                                # ZKFC所使用的角色
+export HDFS_JOURNALNODE_USER=root                                                         # JournalNode所使用的角色
+export HDFS_SECONDARYNAMENODE_USER=root                                                   # SecondaryNameNode所使用的角色（高可用可以架构可以不配）
 export HADOOP_SECURE_DN_USER=root                                                         # DataNode数据安全传输所使用的角色（建议不要输用root，这个角色非安全（https）协议可以不配）
 ```
 ##### 2.2 修改 [vi core-site.xml]
 ```bash
+<-- HDFS浏览器访问地址，这里使用是NameNode集群逻辑名称（看下面的配置我们自定义了 mycluster） -->
 <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://server-001:9820</value>
+    <value>hdfs://mycluster</value>
 </property>
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
     <value>/home/hadoop-3.1.2/tem</value>                                                
+</property>
+<!-- HDFSWebUI浏览器所使用的用户名  -->
+<property>
+    <name>hadoop.http.staticuser.user</name>
+    <value>root</value>                                                
 </property>
 ```
 ##### 2.3 修改 [vi hdfs-site.xml]
@@ -32,11 +67,85 @@ export HADOOP_SECURE_DN_USER=root                                               
     <name>dfs.replication</name>
     <value>3</value>
 </property>
-<!-- SecondaryNameNode地址，这个是做文件合并工作的 -->
+
+<!-- NameNode集群逻辑名称（这个名称可以随便起）  -->
 <property>
+    <name>dfs.nameservices</name>
+    <value>mycluster</value>
+</property>
+
+<!-- NameNode集群逻辑名称（mycluster）所包含的NameNode节点信息（这里是包含了两个NameNode（myNameNode1和myNameNode2））  -->
+<property>
+    <name>dfs.ha.namenodes.mycluster</name>
+    <value>myNameNode1,myNameNode2</value>
+</property>
+
+<!-- NameNode集群逻辑名称（mycluster）所包含的myNameNode1的详细信息（rpc协议） -->
+<property>
+    <name>dfs.namenode.rpc-address.mycluster.myNameNode1</name>
+    <value>server-001:8020</value>
+</property>
+
+<!-- NameNode集群逻辑名称（mycluster）所包含的myNameNode2的详细信息（rpc协议） -->
+<property>
+    <name>dfs.namenode.rpc-address.mycluster.myNameNode2</name>
+    <value>server-002:8020</value>
+</property>
+
+<!-- NameNode集群逻辑名称（mycluster）所包含的 myNameNode1的详细信息（http协议） -->
+<property>
+    <name>dfs.namenode.http-address.mycluster.myNameNode1</name>
+    <value>server-001:50070</value>
+</property>
+
+<!-- NameNode集群逻辑名称（mycluster）所包含的 myNameNode2的详细信息（http协议） -->
+<property>
+    <name>dfs.namenode.http-address.mycluster.myNameNode2</name>
+    <value>server-002:50070</value>
+</property>
+
+<!-- JournalNode集群配置（最后的名称最好和NameNode集群逻辑名称对应）  -->
+<property>
+    <name>dfs.namenode.shared.edits.dir</name>
+    <value>qjournal://server-001:8485;server-003:8485;server-004:8485/mycluster</value>
+</property>
+
+<!-- JournalNode存放文件的目录 -->
+<property>
+    <name>dfs.journalnode.edits.dir</name>
+    <value>/home/hadoop-3.1.2/journalNode/data</value>
+</property>
+
+<!--故障转移的代理类，HDFS找Active NameNode的代理类，如果没配则找不到Active NameNode会报错（最后的名称最好和NameNode集群逻辑名称对应）  -->
+<property>
+    <name>dfs.client.failover.proxy.provider.mycluster</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+
+<!-- 隔离配置函数-->
+<property>
+    <name>dfs.ha.fencing.methods</name>
+    <value>sshfence</value>
+</property>
+<!-- （和上面的隔离配置函数一起使用）-->
+<!-- 一台NameNode通过密钥强制登录另一台NameNode将其状态改为Standby，防止同一NameNode集群两各NameNode同时提供服务（下面配的就是我们生成的密钥地址）-->
+<property>
+    <name>dfs.ha.fencing.ssh.private-key-files</name>
+    <value>/root/.ssh/id_rsa</value>
+</property>
+
+<!-- 自动故障转移（NameNode挂了自动切换）-->
+<property>
+    <name>dfs.ha.automatic-failover.enabled</name>
+    <value>true</value>
+</property>
+
+<!-- SecondaryNameNode地址，这个是做文件合并工作的（高可用不需要这个节点） -->
+<!-- <property>
     <name>dfs.namenode.secondary.http-address</name>
     <value>server-001:50090</value>
-</property>
+</property> -->
+
 ```
 
 #### 三、设置免密码登陆（在A机器生成一对公钥私钥，将公钥拷贝到想要登录的主机）
