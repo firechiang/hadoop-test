@@ -79,7 +79,7 @@ scp -r hadoop-3.1.2 root@192.168.78.131:/home                                   
 export HADOOP_HOME=/home/hadoop-3.1.2
 PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
 
-$ scp /etc/profile root@192.168.78.131:/etc                                               # 配置完成后将文件分发到各个机器上
+$ scp /etc/profile root@192.168.78.131:/etc                                               # 配置完成后将文件分发到各个主节点（NameNode）机器上
 $ source /etc/profile                                                                     # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
 ```
 
@@ -101,7 +101,7 @@ $ jps                                                           # 查看三个�
 ```bash
 $ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
-$ ./bin/hdfs dfs -put /home/tools/hadoop-3.1.2.tar.gz /tools    #上传文件至HDFS /tools目录
+$ ./bin/hdfs dfs -put /home/tools/hadoop-3.1.2.tar.gz /tools    # 上传文件至HDFS /tools目录
 $ ./bin/hdfs dfs -ls /tools                                     # 查看文件是否存在
 ```
 
