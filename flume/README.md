@@ -91,7 +91,7 @@ flume-ng  agent -conf ../conf  -conf-file ../conf/syslog-tcp-conf.properties  -n
 telnet localhost 44444                       #连接测试  windows telnet如果没有开启到 卸载程序下 找到 打开或关闭windows下开启
 ```
 
-##### Stress 源（有点像序列生成器，已启动就生成大量事件，主要用于压力测试）配置文件[stress-conf.properties]
+##### 使用Stress 源（有点像序列生成器，已启动就生成大量事件，主要用于压力测试）配置文件[stress-conf.properties]
 ```bash
 flume-ng  agent -conf ../conf  -conf-file ../conf/stress-conf.properties  -name a1  -property flume.root.logger=INFO,console                     # windows启动
 ```
