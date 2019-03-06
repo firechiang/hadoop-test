@@ -49,15 +49,23 @@ export HADOOP_SECURE_DN_USER=root                                               
     <name>fs.defaultFS</name>
     <value>hdfs://mycluster</value>
 </property>
+
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/home/hadoop-3.1.2/tem</value>                                                
+    <value>/home/hadoop-3.1.2/data</value>                                                
 </property>
+
 <!-- HDFSWebUI浏览器所使用的用户名  -->
 <property>
     <name>hadoop.http.staticuser.user</name>
     <value>root</value>                                                
+</property>
+
+<!-- Zookeeper集群配置  -->
+<property>
+    <name>ha.zookeeper.quorum</name>
+    <value>server-002:2181,server-002:2181,server-004:2181</value>
 </property>
 ```
 ##### 2.3 修改 [vi hdfs-site.xml]
