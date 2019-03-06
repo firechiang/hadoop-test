@@ -153,7 +153,10 @@ export HADOOP_SECURE_DN_USER=root                                               
 $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa                                                # 生成私钥和公钥
 $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys                                         # 复制公钥到authorized_keys文件
 $ chmod 0600 ~/.ssh/authorized_keys                                                       # 修改权限
-$ scp ~/.ssh/authorized_keys root@192.168.83.135:~/.ssh/authorized_keys                   # 将公钥拷贝到想要登录的主机（如果想要登录的主机.ssh目录不存在，就执行生成《公私钥的命令》）
+$ scp ~/.ssh/id_rsa.pub root@192.168.83.135:~/.ssh/id_rsa.pub_131                         # 将公钥拷贝到想要登录的主机（如果想要登录的主机.ssh目录不存在，就执行生成《公私钥的命令》）
+$ cat ~/.ssh/id_rsa.pub_131 >> ~/.ssh/authorized_keys                                     #（到想要登录的主机上执行）将上一步考过来的公钥 复制到 authorized_keys
+$ rm -rf id_rsa.pub_131                                                                   #（到想要登录的主机上执行）删除上一步考过来的公钥
+
 $ ssh 192.168.83.135                                                                      # 测试登陆
 ```
 
