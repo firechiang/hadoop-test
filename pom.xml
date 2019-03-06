@@ -35,5 +35,6 @@
 	<modules>
 		<module>hdfs</module>
     <module>flume</module>
+    <module>zookeeper</module>
   </modules>
 </project>
