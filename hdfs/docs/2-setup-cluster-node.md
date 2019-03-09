@@ -22,7 +22,7 @@ HDFS Federation（多个NameNode并行提供服务）
 
               NameNode     DataNode    ZK    ZKFC    JNN
 server-001      是                                                                                      是                 是
-server-002      是                                    是                        是
+server-002      是                                    是                        是                是
 server-003                    是                       是                                      是
 server-004                    是                       是                                      是
 ```
@@ -30,9 +30,21 @@ server-004                    是                       是                     
 ```bash
 $ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz     # 下载安装包
 ```
-#### 二、修改配置文件
 
-##### 2.1 修改 [vi hadoop-env.sh]
+#### 二、修改hosts文件信息
+##### 2.1 修改 [vi /etc/hosts] 在空白处添加如下内容
+```bash
+192.168.78.132 server-001
+192.168.78.129 server-002
+192.168.78.130 server-003
+192.168.78.131 server-004
+
+$ scp /etc/hosts root@192.168.78.129:/etc/                                                # 分发到各个机器
+```
+
+#### 三、修改配置文件
+
+##### 3.1 修改 [vi hadoop-env.sh]
 ```bash
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                                # 修改 JAVA_HOME
 export HDFS_DATANODE_USER=root                                                            # DataNode所使用的角色
@@ -42,9 +54,9 @@ export HDFS_JOURNALNODE_USER=root                                               
 export HDFS_SECONDARYNAMENODE_USER=root                                                   # SecondaryNameNode所使用的角色（高可用可以架构可以不配）
 export HADOOP_SECURE_DN_USER=root                                                         # DataNode数据安全传输所使用的角色（建议不要输用root，这个角色非安全（https）协议可以不配）
 ```
-##### 2.2 修改 [vi core-site.xml]
+##### 3.2 修改 [vi core-site.xml]
 ```bash
-<-- HDFS浏览器访问地址，这里使用是NameNode集群逻辑名称（看下面的配置我们自定义了 mycluster） -->
+<!-- HDFS浏览器访问地址，这里使用是NameNode集群逻辑名称（看下面的配置我们自定义了 mycluster） -->
 <property>
     <name>fs.defaultFS</name>
     <value>hdfs://mycluster</value>
@@ -65,10 +77,10 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- Zookeeper集群配置  -->
 <property>
     <name>ha.zookeeper.quorum</name>
-    <value>server-002:2181,server-002:2181,server-004:2181</value>
+    <value>server-002:2181,server-003:2181,server-004:2181</value>
 </property>
 ```
-##### 2.3 修改 [vi hdfs-site.xml]
+##### 3.3 修改 [vi hdfs-site.xml]
 ```bash
 <!-- 指定HDFS副本的数量 -->
 <property>
@@ -118,7 +130,7 @@ export HADOOP_SECURE_DN_USER=root                                               
     <value>qjournal://server-001:8485;server-003:8485;server-004:8485/mycluster</value>
 </property>
 
-<!-- JournalNode存放文件的目录 -->
+<!-- JournalNode存放文件的目录 （注意创建该目录）-->
 <property>
     <name>dfs.journalnode.edits.dir</name>
     <value>/home/hadoop-3.1.2/journalNode/data</value>
@@ -156,7 +168,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 
 ```
 
-#### 三、设置免密码登陆（在A机器生成一对公钥私钥，将公钥拷贝到想要登录的主机）
+#### 四、设置免密码登陆（在A机器生成一对公钥私钥，将公钥拷贝到想要登录的主机）
 ```bash
 $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa                                                # 生成私钥和公钥
 $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys                                         # 复制公钥到authorized_keys文件
@@ -168,19 +180,8 @@ $ rm -rf id_rsa.pub_131                                                         
 $ ssh 192.168.83.135                                                                      # 测试登陆
 ```
 
-#### 四、修改hosts文件信息
-##### 4.1 修改 [vi /etc/hosts] 在空白处添加如下内容
-```bash
-192.168.78.132 server-001
-192.168.78.129 server-002
-192.168.78.130 server-003
-192.168.78.131 server-004
-
-$ scp /etc/hosts root@192.168.78.129:/etc/                                                # 分发到各个机器
-```
-
 #### 五、修改从节点信息
-##### 4.1 修改 [vi workers] （从节点信息建议使用主机名，使用IP效率低而且还容易导致 DataNode Block初始化失败）
+##### 5.1 修改 [vi workers] （从节点信息建议使用主机名，使用IP效率低而且还容易导致 DataNode Block初始化失败）
 ```bash
 server-002
 server-003
@@ -203,18 +204,50 @@ $ scp /etc/profile root@192.168.78.131:/etc                                     
 $ source /etc/profile                                                                     # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
 ```
 
-#### 八、格式化文件系统
+#### 八、启动journalNode集群
 ```bash
-$ bin/hdfs namenode -format                                                               # 我们配置了环境变量可以在任意目录执行 hdfs namenode -format 即可
-# 格式化成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.1.2/tem/dfs/name has been successfully formatted.
-# 也可以去看 tem 目录所生成的文件
+$ bin/hdfs --daemon start journalnode                                                     # （启动）到所有journalNode所在节点执行，要停止的话将 start 改成 stop 即可
+$ jps                                                                                     # 如果有JournalNode进程说明启动成功
+```
+
+#### 九、格式化文件系统
+```bash
+$ bin/hdfs namenode -format                                                               # （多台NameNode任选一台）每次格式化都会产生新集群ID
+# 格式化成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.1.2/data/dfs/name has been successfully formatted.
+# 也可以去看 data 目录所生成的文件
+```
+
+#### 十、同步NameNode元数据
+```bash
+$ bin/hdfs --daemon start namenode                                                        # （到已格式化文件系统的NameNode机器上）启动NameNode
+$ bin/hdfs namenode -bootstrapStandby                                                     # （到未格式化的NameNode机器上执行）同步NameNode元数据，前提是已格式化文件系统的NameNode要启动
+# 同步成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.1.2/data/dfs/name has been successfully formatted.
+# 也可以去看 data 目录所生成的文件
+```
+
+#### 十一、将Hadoop集群信息注册到Zookeeper集群（前提是Zookeeper集群已启动）
+```bash
+$ bin/hdfs zkfc -formatZK                                                                 # 到已启动NameNode的机器上执行
+# 是否注册成功在倒数第几行会打印：ha.ActiveStandbyElector: Successfully created /hadoop-ha/mycluster in ZK.
+# 也可以到Zookeeper集群去看所生成的目录文件
 ```
 
 
-#### 九、启动集群
+#### 十二、启动集群
 ```bash
 $ sbin/start-dfs.sh                                             # 配置了环境变量可以在任意目录执行 start-dfs.sh
-$ jps                                                           # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://192.168.78.128:9870
+$ jps                                                           # 查看进程情况，浏览器访问：http://NameNode节点IP:50070（看看NameNode情况）
+```
+
+#### 十三、测试NameNode是否自动故障切换
+```bash
+$ bin/hdfs --daemon stop namenode                               # （模拟提供服务的NameNode停止）到Active NameNode上执行
+#   浏览器访问：http://NameNode节点IP:50070（看看NameNode情况）
+```
+
+#### 十四、停止集群
+```bash
+$ sbin/stop-dfs.sh                                              # 配置了环境变量可以在任意目录执行 stop-dfs.sh
 ```
 
 #### 十、简单使用
