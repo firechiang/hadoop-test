@@ -232,25 +232,34 @@ $ bin/hdfs zkfc -formatZK                                                       
 # 也可以到Zookeeper集群去看所生成的目录文件
 ```
 
-
-#### 十二、启动集群
+#### 十二、检查所有NameNode机器是否支持进程管理（fuser），Hadoop用这个来才看进程和杀进程（如果机器不执行fuser，自动故障切换将会失败）
 ```bash
+# 如果NameNode发现另一台NameNode离线但没有断网和宕机，则会登录另一台NameNode机器，将NameNode进程杀掉，再将自己升为Active（严格保证只有一台NameNode为Active）
+$ fuser                                                         # 检查所有NameNode机器是否支持进程管理命令（fuser）
+$ yum install -y psmisc                                         # 如果NameNode机器不支持fuser命令（上面那个）才安装
+```
+
+
+#### 十三、启动集群
+```bash
+$ fuser                                                         # 查看所有NameNode机器是否支持进程管理命令
+$ yum install -y psmisc                                         # 如果NameNode机器不支持fuser命令（上面那个）才安装
 $ sbin/start-dfs.sh                                             # 配置了环境变量可以在任意目录执行 start-dfs.sh
 $ jps                                                           # 查看进程情况，浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
 ```
 
-#### 十三、测试NameNode是否自动故障切换
+#### 十四、测试NameNode是否自动故障切换
 ```bash
 $ bin/hdfs --daemon stop namenode                               # （模拟提供服务的NameNode停止）到Active NameNode上执行
 #   浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
 ```
 
-#### 十四、停止集群
+#### 十五、停止集群
 ```bash
 $ sbin/stop-dfs.sh                                              # 配置了环境变量可以在任意目录执行 stop-dfs.sh
 ```
 
-#### 十、简单使用
+#### 十六、简单使用
 ```bash
 $ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
