@@ -242,9 +242,7 @@ $ yum install -y psmisc                                         # 如果NameNode
 
 #### 十三、启动集群
 ```bash
-$ fuser                                                         # 查看所有NameNode机器是否支持进程管理命令
-$ yum install -y psmisc                                         # 如果NameNode机器不支持fuser命令（上面那个）才安装
-$ sbin/start-dfs.sh                                             # 配置了环境变量可以在任意目录执行 start-dfs.sh
+$ sbin/start-dfs.sh                                             # （NameNode机器上执行）配置了环境变量可以在任意目录执行 start-dfs.sh
 $ jps                                                           # 查看进程情况，浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
 ```
 
