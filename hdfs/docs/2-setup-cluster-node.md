@@ -115,13 +115,13 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- NameNode集群逻辑名称（mycluster）所包含的 myNameNode1的详细信息（http协议） -->
 <property>
     <name>dfs.namenode.http-address.mycluster.myNameNode1</name>
-    <value>server-001:50070</value>
+    <value>server-001:9870</value>
 </property>
 
 <!-- NameNode集群逻辑名称（mycluster）所包含的 myNameNode2的详细信息（http协议） -->
 <property>
     <name>dfs.namenode.http-address.mycluster.myNameNode2</name>
-    <value>server-002:50070</value>
+    <value>server-002:9870</value>
 </property>
 
 <!-- JournalNode集群配置（最后的名称最好和NameNode集群逻辑名称对应）  -->
@@ -236,13 +236,13 @@ $ bin/hdfs zkfc -formatZK                                                       
 #### 十二、启动集群
 ```bash
 $ sbin/start-dfs.sh                                             # 配置了环境变量可以在任意目录执行 start-dfs.sh
-$ jps                                                           # 查看进程情况，浏览器访问：http://NameNode节点IP:50070（看看NameNode情况）
+$ jps                                                           # 查看进程情况，浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
 ```
 
 #### 十三、测试NameNode是否自动故障切换
 ```bash
 $ bin/hdfs --daemon stop namenode                               # （模拟提供服务的NameNode停止）到Active NameNode上执行
-#   浏览器访问：http://NameNode节点IP:50070（看看NameNode情况）
+#   浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
 ```
 
 #### 十四、停止集群
