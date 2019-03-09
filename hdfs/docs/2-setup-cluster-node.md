@@ -21,23 +21,23 @@ HDFS Federation（多个NameNode并行提供服务）
 机器任务分配如下：
 
               NameNode     DataNode    ZK    ZKFC    JNN
-server-001      是                                                                                      是                 是
-server-002      是                                    是                        是                是
-server-003                    是                       是                                      是
-server-004                    是                       是                                      是
+server001      是                                                                                      是                   是
+server002      是                                    是                        是                是
+server003                    是                       是                                        是
+server004                    是                       是                                        是
 ```
 #### 一、预先准备环境
 ```bash
-$ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz     # 下载安装包
+$ wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz    # 下载安装包
 ```
 
 #### 二、修改hosts文件信息
 ##### 2.1 修改 [vi /etc/hosts] 在空白处添加如下内容
 ```bash
-192.168.78.132 server-001
-192.168.78.129 server-002
-192.168.78.130 server-003
-192.168.78.131 server-004
+192.168.78.128 server001
+192.168.78.129 server002
+192.168.78.130 server003
+192.168.78.131 server004
 
 $ scp /etc/hosts root@192.168.78.129:/etc/                                                # 分发到各个机器
 ```
@@ -77,7 +77,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- Zookeeper集群配置  -->
 <property>
     <name>ha.zookeeper.quorum</name>
-    <value>server-002:2181,server-003:2181,server-004:2181</value>
+    <value>server002:2181,server003:2181,server004:2181</value>
 </property>
 ```
 ##### 3.3 修改 [vi hdfs-site.xml]
@@ -103,37 +103,37 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- NameNode集群逻辑名称（mycluster）所包含的myNameNode1的详细信息（rpc协议） -->
 <property>
     <name>dfs.namenode.rpc-address.mycluster.myNameNode1</name>
-    <value>server-001:8020</value>
+    <value>server001:8020</value>
 </property>
 
 <!-- NameNode集群逻辑名称（mycluster）所包含的myNameNode2的详细信息（rpc协议） -->
 <property>
     <name>dfs.namenode.rpc-address.mycluster.myNameNode2</name>
-    <value>server-002:8020</value>
+    <value>server002:8020</value>
 </property>
 
 <!-- NameNode集群逻辑名称（mycluster）所包含的 myNameNode1的详细信息（http协议） -->
 <property>
     <name>dfs.namenode.http-address.mycluster.myNameNode1</name>
-    <value>server-001:9870</value>
+    <value>server001:9870</value>
 </property>
 
 <!-- NameNode集群逻辑名称（mycluster）所包含的 myNameNode2的详细信息（http协议） -->
 <property>
     <name>dfs.namenode.http-address.mycluster.myNameNode2</name>
-    <value>server-002:9870</value>
+    <value>server002:9870</value>
 </property>
 
 <!-- JournalNode集群配置（最后的名称最好和NameNode集群逻辑名称对应）  -->
 <property>
     <name>dfs.namenode.shared.edits.dir</name>
-    <value>qjournal://server-001:8485;server-003:8485;server-004:8485/mycluster</value>
+    <value>qjournal://server001:8485;server003:8485;server004:8485/mycluster</value>
 </property>
 
 <!-- JournalNode存放文件的目录 （注意创建该目录）-->
 <property>
     <name>dfs.journalnode.edits.dir</name>
-    <value>/home/hadoop-3.1.2/journalNode/data</value>
+    <value>/home/hadoop-3.1.2/data/journalnode</value>
 </property>
 
 <!--故障转移的代理类，HDFS找Active NameNode的代理类，如果没配则找不到Active NameNode会报错（最后的名称最好和NameNode集群逻辑名称对应）  -->
@@ -163,7 +163,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- SecondaryNameNode地址，这个是做文件合并工作的（高可用不需要这个节点） -->
 <!-- <property>
     <name>dfs.namenode.secondary.http-address</name>
-    <value>server-001:50090</value>
+    <value>server001:50090</value>
 </property> -->
 
 ```
@@ -183,9 +183,9 @@ $ ssh 192.168.83.135                                                            
 #### 五、修改从节点信息
 ##### 5.1 修改 [vi workers] （从节点信息建议使用主机名，使用IP效率低而且还容易导致 DataNode Block初始化失败）
 ```bash
-server-002
-server-003
-server-004
+server002
+server003
+server004
 ```
 
 #### 六、分发文件
