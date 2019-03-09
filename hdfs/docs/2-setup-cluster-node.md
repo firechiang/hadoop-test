@@ -234,7 +234,7 @@ $ bin/hdfs zkfc -formatZK                                                       
 
 #### 十二、检查所有NameNode机器是否支持进程管理（fuser），Hadoop用这个来才看进程和杀进程（如果机器不执行fuser，自动故障切换将会失败）
 ```bash
-# 如果NameNode发现另一台NameNode离线但没有断网和宕机，则会登录另一台NameNode机器，将NameNode进程杀掉，再将自己升为Active（严格保证只有一台NameNode为Active）
+# 如果NameNode发现另一台NameNode离线但没有断网和宕机，则会登录另一台NameNode机器使用fuser将NameNode进程杀掉，再将自己升为Active（严格保证只有一台NameNode为Active）
 $ fuser                                                         # 检查所有NameNode机器是否支持进程管理命令（fuser）
 $ yum install -y psmisc                                         # 如果NameNode机器不支持fuser命令（上面那个）才安装
 ```
