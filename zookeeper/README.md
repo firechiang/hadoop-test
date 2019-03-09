@@ -22,16 +22,16 @@ $ vi zoo.cfg                                                  # 修改配置文�
     clientPort=2181                                           # 客户端所连接的服务器所监听的端口号，默认是2181。即zookeeper对外提供访问的端口号
     dataDir=/home/zookeeper-3.4.6/data                        # Zookeeper数据目录（注意创建这个目录）
            # 新增内容; 2888是主与从的数据通信端口,3888是当主挂断以后选举新的主节点的通信端口（选举通信端口）
-    server.1=server-002:2888:3888
-    server.2=server-003:2888:3888
-    server.3=server-004:2888:3888
+    server.1=server002:2888:3888
+    server.2=server003:2888:3888
+    server.3=server004:2888:3888
     
-$ scp -r ./zookeeper-3.4.6/ root@server-003:/home             # 分发安装包到各个机器  
+$ scp -r ./zookeeper-3.4.6/ root@server003:/home              # 分发安装包到各个机器  
 
 # 配置集群id信息，要与zoo.cfg配置文件里面的id和机器对应，具体依次执行如下命令
-$ echo 1 > /home/zookeeper-3.4.6/data/myid      # （server-002执行）在ZK数据目录（/home/zookeeper-3.4.6/data） 下建立文件myid里面的内容是1
-$ echo 2 > /home/zookeeper-3.4.6/data/myid      # （server-003执行）在ZK数据目录（/home/zookeeper-3.4.6/data） 下建立文件myid里面的内容是2
-$ echo 3 > /home/zookeeper-3.4.6/data/myid      # （server-004执行）在ZK数据目录（/home/zookeeper-3.4.6/data） 下建立文件myid里面的内容是3
+$ echo 1 > /home/zookeeper-3.4.6/data/myid      # （server002执行）在ZK数据目录（/home/zookeeper-3.4.6/data） 下建立文件myid里面的内容是1
+$ echo 2 > /home/zookeeper-3.4.6/data/myid      # （server003执行）在ZK数据目录（/home/zookeeper-3.4.6/data） 下建立文件myid里面的内容是2
+$ echo 3 > /home/zookeeper-3.4.6/data/myid      # （server004执行）在ZK数据目录（/home/zookeeper-3.4.6/data） 下建立文件myid里面的内容是3
 $ cat /home/zookeeper-3.4.6/data/myid           # 查看myid文件是否有id信息
 
 $ zkServer.sh start                              # 到各个节点上启动Zookeeper
