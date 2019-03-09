@@ -240,7 +240,7 @@ $ yum install -y psmisc                                         # 如果NameNode
 ```
 
 
-#### 十三、启动集群
+#### 十三、启动集群（浏览器访问：http://NameNode节点IP:9870）
 ```bash
 $ sbin/start-dfs.sh                                             # （NameNode机器上执行）配置了环境变量可以在任意目录执行 start-dfs.sh
 $ jps                                                           # 查看进程情况，浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
@@ -249,7 +249,9 @@ $ jps                                                           # 查看进程�
 #### 十四、测试NameNode是否自动故障切换
 ```bash
 $ bin/hdfs --daemon stop namenode                               # （模拟提供服务的NameNode停止）到Active NameNode上执行
-#   浏览器访问：http://NameNode节点IP:9870（看看NameNode情况）
+$ bin/hdfs --daemon start namenode                              # 启动NameNode
+$ bin/hdfs --daemon stop zkfc                                   # （模拟提供服务的NameNode的zkfc停止）到Active NameNode上执行
+$ bin/hdfs --daemon start zkfc                                  # 启动zkfc
 ```
 
 #### 十五、停止集群
