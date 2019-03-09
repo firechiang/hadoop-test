@@ -229,7 +229,7 @@ $ bin/hdfs namenode -bootstrapStandby                                           
 ```bash
 $ bin/hdfs zkfc -formatZK                                                                 # 到已启动NameNode的机器上执行
 # 是否注册成功在倒数第几行会打印：ha.ActiveStandbyElector: Successfully created /hadoop-ha/mycluster in ZK.
-# 也可以到Zookeeper集群去看所生成的目录文件
+# 也可以到Zookeeper集群去看多了一个hadoop-ha目录数据
 ```
 
 #### 十二、检查所有NameNode机器是否支持进程管理（fuser），Hadoop用这个来才看进程和杀进程（如果机器不执行fuser，自动故障切换将会失败）
