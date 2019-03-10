@@ -1,4 +1,9 @@
 ### 基础理论
+##### 存储模型
+![image](https://github.com/firechiang/hadoop-test/tree/master/mapreduce/image/1-map-reduce.png)
+```bash
+
+```
 
 
 #### [一、单节点搭建][1]
