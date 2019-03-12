@@ -13,6 +13,23 @@
 （一组数据不能对应多个Reduce，这违背了原语）     
 ```
 
+##### Shuffler<洗牌>  内部执行流程
+![image](https://github.com/firechiang/hadoop-test/blob/master/mapreduce/image/2-map-reduce.jpeg)
+###### 一、Map阶段
+```bash
+1.1，首先一个Split（切片）对应一个Map，每一条记录调用一次Map，Map的输出映射成Key和Value
+1.2，Map映射成Key和Value之后，再经过我们自己的算法，经过算法之后映射成Key，Value，Partition（分区）
+1.3，经过算法之后每一条记录都会有Partition（所在分区），然后将数据放到内存（Buffer In Memory）
+1.4，当数据量到达一定大小之后，会将数据先按Partition（分区）做一个（Sort）排序（同一分区放到一起），再按Key排序，最后将这些数据Flash到磁盘成一个小文件
+1.5，Map一直输出会生成很多小文件， 这些个小文件都有一个特征就是：内部有序，外部无序。然后再进行归并，成为一个文件
+1.6，归并的过程会将同一分区的数据放到一起，而且Key有序。（如果有多个Map就会有多个归并文件）
+```
+###### 二、Reduce阶段
+```bash
+2.1，Reduce拉取所有属于自己分区的文件，再进行一次归并，再进行Reduce（计算），最后输出
+```
+##### Shuffler典型案列
+![image](https://github.com/firechiang/hadoop-test/blob/master/mapreduce/image/3-map-reduce.jpg)
 #### [一、单节点搭建][1]
 #### [一、高可用搭建][2]
 
