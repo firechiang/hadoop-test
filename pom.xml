@@ -68,5 +68,6 @@
 		<module>flume</module>
 		<module>zookeeper</module>
     <module>mapreduce</module>
+    <module>yarn</module>
   </modules>
 </project>
