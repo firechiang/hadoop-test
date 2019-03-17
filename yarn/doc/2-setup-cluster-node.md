@@ -1,11 +1,11 @@
 ##### 机器任务分配（在HDFS集群之上）如下：
 ```bash
 
-              NameNode     DataNode    ZK    ZKFC   JournalNode     ReourceManager      NodeManager
-server001        是                                                                                   是                        是                                                是
-server002        是                                 是                        是                是                                                                                                                                    是
-server003                     是                       是                                             是                                                是                                                  是
-server004                     是                       是                                             是                                                                                                       是
+              NameNode     DataNode      ZooKeeper     ZKFC     JournalNode     ReourceManager      NodeManager
+server001        是                                     是           是               是
+server002        是           是            是          是                                               是
+server003                     是            是                       是               是                 是
+server004                     是            是                       是                                  是
 ```
 
 ##### 修改[vi yarn-env.sh]
