@@ -20,11 +20,11 @@ HDFS Federation（多个NameNode并行提供服务）
 
 机器任务分配如下：
 
-              NameNode     DataNode    ZK    ZKFC    JNN
-server001      是                                                                                      是                   是
-server002      是                                    是                        是                是
-server003                    是                       是                                        是
-server004                    是                       是                                        是
+              NameNode     DataNode      ZooKeeper     ZKFC        JournalNode
+server001      是                                       是              是
+server002      是            是             是          是
+server003                    是             是                          是
+server004                    是             是                          是
 ```
 #### 一、预先准备环境
 ```bash
