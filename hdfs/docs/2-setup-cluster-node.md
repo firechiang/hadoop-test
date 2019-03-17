@@ -266,18 +266,3 @@ $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录�
 $ ./bin/hdfs dfs -put /home/tools/hadoop-3.2.0.tar.gz /tools    # 上传文件至HDFS /tools目录
 $ ./bin/hdfs dfs -ls /tools                                     # 查看文件是否存在
 ```
-
-
-#### 其它、添加 Yarn 执行用户
-##### 修改 [vi sbin/start-yarn.sh] 在顶部空白处添加如下内容
-```bash
-YARN_RESOURCEMANAGER_USER=root    # YARN_RESOURCEMANAGER_USER所使用的角色
-YARN_NODEMANAGER_USER=root        # YARN_NODEMANAGER_USER所使用的角色
-HADOOP_SECURE_DN_USER=yarn        # HADOOP_SECURE_DN_USER所使用的角色
-```
-##### 修改 [vi sbin/stop-yarn.sh] 在顶部空白处添加如下内容
-```bash
-YARN_RESOURCEMANAGER_USER=root
-YARN_NODEMANAGER_USER=root
-HADOOP_SECURE_DN_USER=yarn
-```
