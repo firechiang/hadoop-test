@@ -265,4 +265,6 @@ $ ./bin/hdfs dfs --help                                         # 查看 hdfs df
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
 $ ./bin/hdfs dfs -put /home/tools/hadoop-3.2.0.tar.gz /tools    # 上传文件至HDFS /tools目录
 $ ./bin/hdfs dfs -ls /tools                                     # 查看文件是否存在
+
+$ ./bin/hdfs dfs -get /tools/test.txt ./                        # 下载tools目录下test.txt文件到本地，当前目录（./）
 ```
