@@ -8,7 +8,7 @@
 ```bash
 1，HDFS是Map的输入，Map是Reduce的输入，Reduce再输出到HDFS
 2，一个Split（切片：默认是HDFS的Block块，但是可以自定义再切块以增加Map加快执行效率）对应一个Map程序
-3，Map的数量由切片来决定，切片由我们的程序来决定
+3，Map的数量由切片来决定，切片由我们的程序来决定，切片包含：文件，起始位置，结束位置，Block所在Host，缓存所在Host 等信息
 4，一组（分组）数据对应一个Reduce（如果一组数据对多个Reduce也只会有一个Reduce执行，其它的Reduce放空），只有多组数据时才会有多个Reduce（比如：按性别分组统计男女各个总数量就会有两个Reduce同时并行）
 （一组数据不能对应多个Reduce，这违背了原语）     
 ```

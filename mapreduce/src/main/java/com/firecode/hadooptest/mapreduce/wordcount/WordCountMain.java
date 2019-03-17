@@ -26,6 +26,11 @@ public class WordCountMain {
 		job.setJobName("WordCount");
 		//添加输入文件路径
 		FileInputFormat.addInputPath(job, new Path("/test_txt/wordcount.txt"));
+		//将每个切片的大小设置为1（切片小了，Map就多了，线程就多了（一个Map对应一个切片）），线程多了就加快了计算速度
+		//FileInputFormat.setMaxInputSplitSize(job, 1);
+		//增大切片大小 就 减少Map数量 就 减少线程数量
+		//FileInputFormat.setMinInputSplitSize(job, 1000);
+		
 		Path outputDir = new Path("/test_txt/result/wordcount");
 		//判断文件是否存在，存在就删除
 		if(outputDir.getFileSystem(conf).exists(outputDir)) {
@@ -39,6 +44,12 @@ public class WordCountMain {
 		job.setMapOutputKeyClass(Text.class);
 		//Map计算结果输出Value的类型
 		job.setMapOutputValueClass(IntWritable.class);
+		
+		//设置Reduce数量这个数量不是乱写的，应该是根据实际业务，数据有多少分组，而计算出来的
+		//job.setNumReduceTasks(1);
+		
+		//设置分区类
+		//job.setPartitionerClass(cls);
 		
 		//Reduce计算类
 		job.setReducerClass(WordCountReduce.class);
