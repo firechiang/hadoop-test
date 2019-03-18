@@ -195,13 +195,13 @@ scp -r hadoop-3.2.0 root@192.168.78.130:/home                                   
 scp -r hadoop-3.2.0 root@192.168.78.131:/home                                             # -r 是目录下所有文件和文件夹
 ```
 
-#### 七、配置Hadoop环境变量[vi /etc/profile]在末尾添加如下内容
+#### 七、配置Hadoop环境变量[vi ~/.bashrc]在末尾添加如下内容
 ```bash
 export HADOOP_HOME=/home/hadoop-3.2.0
 PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
 
-$ scp /etc/profile root@192.168.78.131:/etc                                               # 配置完成后将文件分发到各个主节点（NameNode）机器上
-$ source /etc/profile                                                                     # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
+$ scp ~/.bashrc root@192.168.78.131:/~                                                    # 配置完成后将文件分发到各个主节点（NameNode）机器上
+$ source ~/.bashrc                                                                        # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
 ```
 
 #### 八、启动journalNode集群
