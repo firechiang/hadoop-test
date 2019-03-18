@@ -22,7 +22,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/home/hadoop-3.1.2/tem</value>                                                
+    <value>/home/hadoop-3.2.0/tem</value>                                                
 </property>
 ```
 ##### 2.3 修改 [vi hdfs-site.xml]
@@ -53,19 +53,28 @@ $ chmod 0600 ~/.ssh/authorized_keys                                             
 server-001
 ```
 
-#### 六、格式化文件系统
+#### 六、配置Hadoop环境变量[vi ~/.bashrc]在末尾添加如下内容
+```bash
+export HADOOP_HOME=/home/hadoop-3.2.0
+PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
+
+$ scp ~/.bashrc root@192.168.78.131:~                                                     # 配置完成后将文件分发到各个主节点（NameNode）机器上
+$ source ~/.bashrc                                                                        # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
+```
+
+#### 七、格式化文件系统
 ```bash
 $ bin/hdfs namenode -format
 ```
 
 
-#### 七、启动NameNode，DataNode，SecondaryNameNode
+#### 八、启动NameNode，DataNode，SecondaryNameNode
 ```bash
 $ sbin/start-dfs.sh
 $ jps                                                           # 查看三个节点是否都启动了，如果都启动了可以到浏览器访问：http://server-001:9870
 ```
 
-#### 八、简单使用
+#### 九、简单使用
 ```bash
 $ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
