@@ -1,7 +1,7 @@
 ### Hadoop-3.x 单节点搭建
 #### 一、预先准备环境
 ```bash
-$ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz     # 下载安装包
+$ wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz    # 下载安装包
 ```
 #### 二、修改配置文件
 
