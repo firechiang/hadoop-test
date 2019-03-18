@@ -57,8 +57,6 @@ server-001
 ```bash
 export HADOOP_HOME=/home/hadoop-3.2.0
 PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
-
-$ scp ~/.bashrc root@192.168.78.131:~                                                     # 配置完成后将文件分发到各个主节点（NameNode）机器上
 $ source ~/.bashrc                                                                        # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
 ```
 
