@@ -10,7 +10,7 @@ $ start winrar x -y hadoop-3.2.0.tar.gz ./                    # 使用Winrar将�
 
 ##### 3.1 修改 \etc\hadoop\hadoop-env.cmd 文件
 ```bash
-set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171            # 修改 JAVA_HOME（因为Program Files文件夹中存在空格所以要添加双引号）
+set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_171            # 修改 JAVA_HOME（(如果路径中有"Program Files"，则将Program Files改为 PROGRA~1）
 ```
 
 ##### 3.2 修改 \etc\hadoop\core-site.xml 文件
