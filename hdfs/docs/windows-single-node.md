@@ -5,13 +5,13 @@ http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz 
 $ start winrar x -y hadoop-3.2.0.tar.gz ./                                           # 使用Winrar将文件解压到当前目录（用管理员身份打开命令行）
 ```
 
-#### 二、添加 hadoop.dll 和 winutils.exe到bin目录（注意使用相应版本），下载地址：https://github.com/steveloughran/winutils
+#### 二、添加 hadoop.dll和winutils.exe到bin目录（注意对应版本），下载地址：https://github.com/steveloughran/winutils
 
 #### 三、修改配置文件
 
-##### 3.1 修改 \etc\hadoop\hadoop-env.cmd 文件，配置JAVA_HOME，如果我们的电脑配置了 JAVA_HOME 环境变量就不需要改了
+##### 3.1 修改 \etc\hadoop\hadoop-env.cmd 文件
 ```bash
-set JAVA_HOME=%JAVA_HOME%                                                            # %JAVA_HOME%（直接取环境变量JAVA_HOME的值）
+set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171                                   # 修改 JAVA_HOME（因为Program Files文件夹中存在空格所以要添加双引号）
 ```
 
 ##### 3.2 修改 \etc\hadoop\core-site.xml 文件
@@ -23,7 +23,7 @@ set JAVA_HOME=%JAVA_HOME%                                                       
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/E:/hadoop-3.2.0/tmp</value>                                            
+    <value>E:\hadoop-3.2.0\tem</value>                                            
 </property>
 ```
 
@@ -37,7 +37,7 @@ set JAVA_HOME=%JAVA_HOME%                                                       
 <!-- HDFS数据存储目录（注意创建该目录） -->
 <property>
     <name>dfs.data.dir</name>
-    <value>/E:/hadoop-3.2.0/data</value>
+    <value>E:\hadoop-3.2.0\data</value>
 </property>
 ```
 
