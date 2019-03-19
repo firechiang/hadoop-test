@@ -37,6 +37,21 @@
     <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>  
     <value>org.apache.hadoop.mapred.ShuffleHandle</value>  
 </property> -->
+
+<property> 
+    <name>yarn.resourcemanager.address</name>  
+    <value>localhost:8032</value>  
+</property>  
+
+<property>  
+    <name>yarn.resourcemanager.scheduler.address</name>  
+    <value>localhost:8030</value>  
+</property>  
+
+<property>  
+    <name>yarn.resourcemanager.resource-tracker.address</name>  
+    <value>localhost:8031</value>  
+</property>
 ```
 
 ##### 启动yarn（浏览器访问使用：http://ResourceManager机器:8088）
