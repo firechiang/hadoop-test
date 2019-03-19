@@ -1,7 +1,6 @@
 ### Windows开发搭建
-#### 一、预先准备环境
+#### 一、预先准备环境，下载安装包：http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz
 ```bash
-http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz      # 下载安装包
 $ start winrar x -y hadoop-3.2.0.tar.gz ./                                           # 使用Winrar将文件解压到当前目录（用管理员身份打开命令行）
 ```
 
@@ -23,7 +22,7 @@ set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171                              
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>E:\hadoop-3.2.0\tem</value>                                            
+    <value>/E:/hadoop-3.2.0/tem</value>                                            
 </property>
 ```
 
@@ -34,10 +33,17 @@ set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171                              
     <name>dfs.replication</name>
     <value>1</value>
 </property>
+
+<!-- HDFS NameNode数据存储目录（注意创建该目录） -->
+<property>
+    <name>dfs.namenode.name.dir</name>  
+    <value>/E:/hadoop-3.2.0/name</value>
+</property>
+
 <!-- HDFS数据存储目录（注意创建该目录） -->
 <property>
     <name>dfs.data.dir</name>
-    <value>E:\hadoop-3.2.0\data</value>
+    <value>/E:/hadoop-3.2.0/data</value>
 </property>
 ```
 
