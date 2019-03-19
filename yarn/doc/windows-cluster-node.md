@@ -8,19 +8,19 @@
 </property>
 
 <!-- Hadoop资源目录，YARN执行MapReduce程序需要  -->
-<property>  
-    <name>mapreduce.application.classpath</name>  
+<property>
+    <name>mapreduce.application.classpath</name>
     <value>
-	    /E:/hadoop-3.2.0/etc/hadoop,  
-	    /E:/hadoop-3.2.0/share/hadoop/common/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/common/lib/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/hdfs/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/hdfs/lib/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/mapreduce/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/mapreduce/lib/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/yarn/*,  
-	    /E:/hadoop-3.2.0/share/hadoop/yarn/lib/*  
-    </value>  
+	    %HADOOP_HOME%/etc/hadoop,
+	    %HADOOP_HOME%/share/hadoop/common/*,
+	    %HADOOP_HOME%/share/hadoop/common/lib/*,
+	    %HADOOP_HOME%/share/hadoop/hdfs/*,
+	    %HADOOP_HOME%/share/hadoop/hdfs/lib/*,
+	    %HADOOP_HOME%/share/hadoop/mapreduce/*,
+	    %HADOOP_HOME%/share/hadoop/mapreduce/lib/*,
+	    %HADOOP_HOME%/share/hadoop/yarn/*,
+	    %HADOOP_HOME%/share/hadoop/yarn/lib/*
+    </value>
 </property>
 ```
 
@@ -54,7 +54,7 @@
 </property>
 ```
 
-##### 启动yarn（浏览器访问使用：http://ResourceManager机器:8088）
+##### 启动yarn（使用管理员模式打开命令行）（浏览器访问使用：http://ResourceManager机器:8088）
 ```bash
 $ start-yarn.sh                           # 启动yarn
 $ jps                                     # 查看进程进程启动信息

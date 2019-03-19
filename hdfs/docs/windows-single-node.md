@@ -43,7 +43,7 @@ set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171            # 修改 JAVA_HOME
 $ hdfs namenode -format
 ```
 
-#### 六、启动NameNode，DataNode
+#### 六、启动NameNode，DataNode（使用管理员模式打开命令行）
 ```bash
 $ start-dfs                                                   # 启动
 $ jps                                                         # 看看NameNode，DataNode进程是否启动
