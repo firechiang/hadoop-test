@@ -4,7 +4,7 @@
 $ start winrar x -y hadoop-3.2.0.tar.gz ./                    # 使用Winrar将文件解压到当前目录（用管理员身份打开命令行）
 ```
 
-#### 二、添加 hadoop.dll和winutils.exe到bin目录，下载地址：https://github.com/s911415/apache-hadoop-3.1.0-winutils
+#### 二、添加 hadoop.dll和winutils.exe到bin目录，下载地址：https://github.com/firechiang/apache-hadoop-3.1.0-winutils
 
 #### 三、修改配置文件
 
