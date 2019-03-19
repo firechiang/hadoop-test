@@ -1,3 +1,7 @@
+#### [一、Windows开发搭建][3]
+#### [二、单节点搭建][1]
+#### [三、高可用搭建][2]
+
 ### HDFS基础理论
 ##### 存储模型
 ```bash
@@ -44,11 +48,9 @@
 7. 支持更改分配容器的资源Container resizing                 
              
 ```
-#### [一、单节点搭建][1]
-#### [一、高可用搭建][2]
-
 [1]: https://github.com/firechiang/hadoop-test/tree/master/hdfs/docs/1-setup-single-node.md
 [2]: https://github.com/firechiang/hadoop-test/tree/master/hdfs/docs/2-setup-cluster-node.md
+[3]: https://github.com/firechiang/hadoop-test/tree/master/hdfs/docs/windows-single-node.md
 
 
 
