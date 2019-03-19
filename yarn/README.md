@@ -1,3 +1,7 @@
+#### [一、Windows开发搭建][3]
+#### [二、单节点搭建][1]
+#### [三、高可用搭建][2]
+
 ### YARN（资源管理框架）
 
 ##### 基础理论
@@ -16,8 +20,6 @@
 4，Container里面包含MapReduce任务代码和归属那个NodeManager管理（具体在那台机上跑），需要多少资源等相关信息
 5，Application Master通过Container描述信息来调度Container执行，然后Container向Application Master汇报作业执行情况
 ```
-#### [一、单节点搭建][1]
-#### [一、高可用搭建][2]
-
 [1]: https://github.com/firechiang/hadoop-test/blob/master/yarn/doc/1-setup-single-node.md
 [2]: https://github.com/firechiang/hadoop-test/blob/master/yarn/doc/2-setup-cluster-node.md
+[3]: https://github.com/firechiang/hadoop-test/blob/master/yarn/doc/windows-cluster-node.md
