@@ -11,15 +11,15 @@
 <property>  
     <name>mapreduce.application.classpath</name>  
     <value>
-	    /home/hadoop-3.2.0/etc/hadoop,  
-	    /home/hadoop-3.2.0/share/hadoop/common/*,  
-	    /home/hadoop-3.2.0/share/hadoop/common/lib/*,  
-	    /home/hadoop-3.2.0/share/hadoop/hdfs/*,  
-	    /home/hadoop-3.2.0/share/hadoop/hdfs/lib/*,  
-	    /home/hadoop-3.2.0/share/hadoop/mapreduce/*,  
-	    /home/hadoop-3.2.0/share/hadoop/mapreduce/lib/*,  
-	    /home/hadoop-3.2.0/share/hadoop/yarn/*,  
-	    /home/hadoop-3.2.0/share/hadoop/yarn/lib/*  
+	    /E:/hadoop-3.2.0/etc/hadoop,  
+	    /E:/hadoop-3.2.0/share/hadoop/common/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/common/lib/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/hdfs/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/hdfs/lib/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/mapreduce/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/mapreduce/lib/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/yarn/*,  
+	    /E:/hadoop-3.2.0/share/hadoop/yarn/lib/*  
     </value>  
 </property>
 ```
