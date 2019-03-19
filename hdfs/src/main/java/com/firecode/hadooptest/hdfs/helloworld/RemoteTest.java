@@ -25,7 +25,7 @@ import org.apache.hadoop.io.IOUtils;
  * @author JIANG
  *
  */
-public class TestHDFS implements Closeable {
+public class RemoteTest implements Closeable {
 	
 	private FileSystem fs;
 	private Configuration conf;
@@ -122,7 +122,7 @@ public class TestHDFS implements Closeable {
 	
 	
 	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
-		TestHDFS hdfs = new TestHDFS();
+		RemoteTest hdfs = new RemoteTest();
 		hdfs.connection();
 		p(hdfs.exists(new Path("/tools")));
 		hdfs.mkdir(new Path("/testtest"));

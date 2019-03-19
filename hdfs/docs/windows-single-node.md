@@ -33,6 +33,11 @@ set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171            # 修改 JAVA_HOME
     <name>dfs.replication</name>
     <value>1</value>
 </property>
+<property> 
+    <name>dfs.datanode.data.dir</name> 
+    <value>/E:/hadoop-3.2.0/data1,/E:/hadoop-3.2.0/data2</value>
+    <final>true</final> 
+</property> 
 ```
 
 #### 四、配置Hadoop环境变量 HADOOP_HOME 并将 %HADOOP_HOME%\bin和%HADOOP_HOME%\sbin加入到Path
