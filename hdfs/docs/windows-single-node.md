@@ -43,7 +43,16 @@ set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171                              
 $ hdfs namenode -format
 ```
 
-#### 五、启动NameNode，DataNode
+#### 六、启动NameNode，DataNode
 ```bash
 $ start-dfs
+```
+
+#### 七、简单使用，所有命令可能会报：（'C:\Program' 不是内部或外部命令，也不是可运行的程序或批处理文件。），这个错误可以忽略
+
+```bash
+$ hdfs dfs --help                                             # 查看 hdfs dfs 命令基础使用
+$ hdfs dfs -mkdir /tools                                      # 在根目录下创建 tools 目录
+$ hdfs dfs -put ./jdk-8u171-linux-x64.tar.gz /tools           #上传文件至HDFS /tools目录
+$ hdfs dfs -ls /tools                                         # 查看文件是否存在
 ```
