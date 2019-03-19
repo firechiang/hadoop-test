@@ -19,6 +19,9 @@ public class WordCountMain {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration(true);
+		
+		//conf.set("fs.defaultFS", "hdfs://localhost:9820");  本地跑
+		
 		Job job = Job.getInstance(conf);
 		//任务启动类
 		job.setJarByClass(WordCountMain.class);
@@ -31,7 +34,7 @@ public class WordCountMain {
 		//增大切片大小 就 减少Map数量 就 减少线程数量
 		//FileInputFormat.setMinInputSplitSize(job, 1000);
 		
-		Path outputDir = new Path("/test_txt/result/wordcount");
+		Path outputDir = new Path("/test_txt/result/wordcount1");
 		//判断文件是否存在，存在就删除
 		if(outputDir.getFileSystem(conf).exists(outputDir)) {
 			outputDir.getFileSystem(conf).delete(outputDir,true);
