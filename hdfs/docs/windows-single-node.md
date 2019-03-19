@@ -45,7 +45,9 @@ $ hdfs namenode -format
 
 #### 六、启动NameNode，DataNode
 ```bash
-$ start-dfs
+$ start-dfs                                                   # 启动
+$ jps                                                         # 看看NameNode，DataNode进程是否启动
+$ stop-dfs                                                    # 停止
 ```
 
 #### 七、简单使用，所有命令可能会报：（'C:\Program' 不是内部或外部命令，也不是可运行的程序或批处理文件。），这个错误可以忽略
