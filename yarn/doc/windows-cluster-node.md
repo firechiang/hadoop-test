@@ -57,8 +57,8 @@ $ hadoop jar hadoop-mapreduce-examples-3.2.0.jar wordcount /user/test/test.txt /
 
 
 $ hadoop jar wordcount.jar com.firecode.hadooptest.mapreduce.wordcount.WordCountMain    # 执行自定义计算
-# wordcount.jar                                                       # 自己打的jar包名称
-# com.firecode.hadooptest.mapreduce.wordcount.WordCountMain           # Main函数所在类名
+# wordcount.jar                                                                         # 自己打的jar包名称
+# com.firecode.hadooptest.mapreduce.wordcount.WordCountMain                             # Main函数所在类名
 
 $ hdfs dfs -get /test_txt/result/wordcount/part-r-00000 ./                              # 下载刚刚计算完成的结果文件
 ```
