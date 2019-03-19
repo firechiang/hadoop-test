@@ -5,6 +5,11 @@ $ start winrar x -y hadoop-3.2.0.tar.gz ./                    # 使用Winrar将�
 ```
 
 #### 二、添加 hadoop.dll和winutils.exe到bin目录，下载地址：https://github.com/firechiang/apache-hadoop-3.1.0-winutils
+```bash
+2.1 检查系统C:\Windows\System32和C:\Windows\SysWOW64目录是否有MSVCR120.dll文件
+2.2 如果没有，请下载相应文件到相应目录，下载地址：https://github.com/firechiang/hadoop-test/blob/master/hdfs/msvcr120dll
+2.3 到Hadoop bin目录双击执行一下winutils.exe文件，如果没有弹出任何信息说明环境没有问题，如果有弹出信息，请看具体是缺少什么文件
+```
 
 #### 三、修改配置文件
 
