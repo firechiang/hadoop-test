@@ -13,7 +13,7 @@
     <value>local</value>
 </property>-->
 
-<!-- Hadoop资源目录，YARN执行MapReduce程序需要  -->
+<!-- Hadoop资源目录，YARN执行MapReduce程序需要（注意：配置 HADOOP_HOME 环境变量）  -->
 <property>
     <name>mapreduce.application.classpath</name>
     <value>
