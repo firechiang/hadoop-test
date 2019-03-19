@@ -7,12 +7,6 @@
     <value>yarn</value>
 </property>
 
-<!-- 本地运行MapReduce作业  -->
-<!--<property>
-    <name>mapreduce.jobtracker.address</name>
-    <value>local</value>
-</property>-->
-
 <!-- Hadoop资源目录，YARN执行MapReduce程序需要（注意：配置 HADOOP_HOME 环境变量）  -->
 <property>
     <name>mapreduce.application.classpath</name>
