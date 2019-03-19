@@ -4,7 +4,7 @@
 $ start winrar x -y hadoop-3.2.0.tar.gz ./                    # 使用Winrar将文件解压到当前目录（用管理员身份打开命令行）
 ```
 
-#### 二、添加 hadoop.dll和winutils.exe到bin目录（注意对应版本），下载地址：https://github.com/steveloughran/winutils
+#### 二、添加 hadoop.dll和winutils.exe到bin目录（注意对应版本），下载地址：https://github.com/s911415/apache-hadoop-3.1.0-winutils
 
 #### 三、修改配置文件
 
@@ -33,14 +33,9 @@ set JAVA_HOME="C:\Program Files"\Java\jdk1.8.0_171            # 修改 JAVA_HOME
     <name>dfs.replication</name>
     <value>1</value>
 </property>
-<property> 
-    <name>dfs.datanode.data.dir</name> 
-    <value>/E:/hadoop-3.2.0/data1,/E:/hadoop-3.2.0/data2</value>
-    <final>true</final> 
-</property> 
 ```
 
-#### 四、配置Hadoop环境变量 HADOOP_HOME 并将 %HADOOP_HOME%\bin和%HADOOP_HOME%\sbin加入到Path
+#### 四、配置Hadoop环境变量 HADOOP_HOME 并将 %HADOOP_HOME%\bin和%HADOOP_HOME%\sbin加入到Path（最后记得重启机器才能生效）
 
 
 #### 五、格式化NameNode
