@@ -33,8 +33,6 @@ public class WeatherMain {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration(true);
-		//使用本地文件
-		conf.set("fs.defaultFS", "file:///");
 		Job job = Job.getInstance(conf);
 		//任务启动类
 		job.setJarByClass(WeatherMain.class);
