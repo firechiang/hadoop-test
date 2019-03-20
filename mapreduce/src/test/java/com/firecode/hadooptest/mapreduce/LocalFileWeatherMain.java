@@ -1,4 +1,4 @@
-package com.firecode.hadooptest.mapreduce.weather;
+package com.firecode.hadooptest.mapreduce;
 
 import java.io.IOException;
 
@@ -8,6 +8,13 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+import com.firecode.hadooptest.mapreduce.weather.WeatherGroupingComparator;
+import com.firecode.hadooptest.mapreduce.weather.WeatherKey;
+import com.firecode.hadooptest.mapreduce.weather.WeatherMapper;
+import com.firecode.hadooptest.mapreduce.weather.WeatherPartitioner;
+import com.firecode.hadooptest.mapreduce.weather.WeatherReduce;
+import com.firecode.hadooptest.mapreduce.weather.WeatherSortComparator;
 
 /**
  * 
@@ -29,7 +36,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * @author JIANG
  *
  */
-public class WeatherMain {
+public class LocalFileWeatherMain {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration(true);
@@ -37,13 +44,13 @@ public class WeatherMain {
 		conf.set("fs.defaultFS", "file:///");
 		Job job = Job.getInstance(conf);
 		//任务启动类
-		job.setJarByClass(WeatherMain.class);
+		job.setJarByClass(LocalFileWeatherMain.class);
 		//任务名称
 		job.setJobName("Weather");
 		//添加输入文件路径
-		FileInputFormat.addInputPath(job, new Path("/test_txt/weather.txt"));
+		FileInputFormat.addInputPath(job, new Path("E:/hadoop-test-data/test_txt/weather.txt"));
 		
-		Path outputDir = new Path("/test_txt/result/weather");
+		Path outputDir = new Path("E:/hadoop-test-data/test_txt/result/weather");
 		//判断文件是否存在，存在就删除
 		if(outputDir.getFileSystem(conf).exists(outputDir)) {
 			outputDir.getFileSystem(conf).delete(outputDir,true);
@@ -71,7 +78,7 @@ public class WeatherMain {
 		//自定义分组比较器（调Reduce之前分组（相同的Key为一组））
 		job.setGroupingComparatorClass(WeatherGroupingComparator.class);
 		
-		//组合器（在Map阶段先做一次组合，它的输出和Map的输出一致，在Reduce之前执行）
+		//组合器（在Map阶段先做一次组合）
 		//job.setCombinerClass(WeatherReduce.class);
 		//自定义分组比较器（调Reduce之前分组（相同的Key为一组））
 		//job.setCombinerKeyGroupingComparatorClass(WeatherGroupingComparator.class);

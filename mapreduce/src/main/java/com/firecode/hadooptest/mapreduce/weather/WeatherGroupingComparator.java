@@ -1,9 +1,11 @@
 package com.firecode.hadooptest.mapreduce.weather;
 
+import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 
 /**
- * 自定义分组比较器（调Reduce之前分组（相同的Key为一组））
+ * 分区，排序完成之后执行
+ * 自定义分组比较器（调Reduce之前分组（将相同的Key放到同一组））
  * @author JIANG
  */
 public class WeatherGroupingComparator extends WritableComparator{
@@ -18,9 +20,14 @@ public class WeatherGroupingComparator extends WritableComparator{
 
 	/**
 	 * 我们将年月相同的Key分在同一组，以便找出每个月气温最高的2天
+	 * 
+	 * 
+	 * 
+	 * 注意：参数必须和父类一致(WritableComparable a, WritableComparable b)，不能用Object，否则当前排序类不会起调用
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
-	public int compare(Object a, Object b) {
+	public int compare(WritableComparable a, WritableComparable b) {
 		WeatherKey w1 = (WeatherKey)a;
 		WeatherKey w2 = (WeatherKey)b;
 		
