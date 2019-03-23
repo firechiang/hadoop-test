@@ -18,7 +18,7 @@ public class PageRankMapper extends Mapper<Text,Text,Text,Text>{
 	 * A	B	D 
 	 * 
 	 * 非首次执行输入数据的格式（A指向了B，D两各链接，0.3是A的权重）
-	 * A	B	D  0.3
+	 * A   0.3  B	D
 	 * 
 	 */
 	@Override
