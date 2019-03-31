@@ -74,5 +74,6 @@
 		<module>zookeeper</module>
         <module>mapreduce</module>
         <module>yarn</module>
-    </modules>
+    <module>hive</module>
+  </modules>
 </project>
