@@ -36,7 +36,7 @@ $ :wq                                                                           
 <!-- 连接关系数库的地址（注意创建库名 hive_remote） -->
 <property>  
     <name>javax.jdo.option.ConnectionURL</name>  
-    <value>jdbc:mysql://server004:3306/hive_remote?createDatabaseIfNotExist=true</value>  
+    <value>jdbc:mysql://server004:3306/hive_remote?createDatabaseIfNotExist=true&amp;serverTimezone=UTC</value>  
 </property>  
    
 <!-- JDBC驱动 -->
@@ -68,8 +68,19 @@ $ scp mysql-connector-java-8.0.15.jar /home/apache-hive-3.1.1-bin/lib
 $ mv hive-env.sh.template hive-env.sh
 ```
 
-#### 六、修改[vi hive-env.sh]
+#### 七、修改[vi hive-env.sh]
 ```bash
 HADOOP_HOME=/home/hadoop-3.2.0                                   # Hadoop目录
 export HIVE_CONF_DIR=/home/apache-hive-3.1.1-bin/conf            # HIve配置文件目录
 ```
+
+#### 八、初始化元数据
+```bash
+$ schematool -dbType mysql -initSchema
+```
+
+#### 九、简单使用
+```bash
+$ hive                                                           # 进入Hive（注意日志打印是否有：Class path contains multiple SLF4J bindings错误，看看是不是有jar包冲突，如果有，删除Hive lib目录相应jar包即可）
+```
+
