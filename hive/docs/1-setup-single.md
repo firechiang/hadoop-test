@@ -56,6 +56,18 @@ $ :wq                                                                           
     <name>javax.jdo.option.ConnectionPassword</name>  
     <value>Jiang@123</value>  
 </property> 
+
+<!-- 如果为true，Hive Server会以提交用户的身份去执行语句，如果为false会以hive server daemon的admin user来执行语句  -->
+<property>
+    <name>hive.server2.enable.doAs</name>
+    <value>true</value>
+</property>
+
+<!-- 绑定hiveserver2服务的端口，默认是10000 -->
+<property>
+    <name>hive.server2.thrift.port</name>
+    <value>10001</value>
+</property>
 ```
 
 #### 五、将MySQL驱动包拷贝到Hive程序lib目录下

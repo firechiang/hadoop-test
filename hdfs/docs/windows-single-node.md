@@ -29,6 +29,18 @@ set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_171            # 修改 JAVA_HOME（(如
     <name>hadoop.tmp.dir</name>
     <value>/E:/hadoop-3.2.0/tem</value>                                            
 </property>
+
+<!-- 表示可以通过代理“root”用户操作HDFS，不加代理权限，有些客户端不能操控HDFS文件（比如：Hive hiveserver2服务或浏览器）（下面的root指的是用户，可以改） -->
+<property>
+    <name>hadoop.proxyuser.root.hosts</name>
+    <value>*</value>
+</property>
+
+<!-- 表示可以通过代理“root”用户组操作HDFS，不加代理权限，有些客户端不能操控HDFS文件（比如：Hive hiveserver2服务或浏览器）（下面的root指的是用户，可以改） -->
+<property>
+    <name>hadoop.proxyuser.root.groups</name>
+    <value>*</value>
+</property>
 ```
 
 ##### 3.3 修改 \etc\hadoop\hdfs-site.xml 文件

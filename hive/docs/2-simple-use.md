@@ -30,7 +30,7 @@ $ use test;                        # 进入某个数据（test）
 $ drop database test               # 删除数据库（test）
 ```
 
-#### 三、建立人员测试表（执行建表语句时请将注释删除）
+#### 三、内部表，需要指定数据库，删除时会删除数据（执行建表语句时请将注释删除）
 ```bash
 create table person(
     id int,                        # int类型
@@ -61,4 +61,88 @@ $ load data LOCAL inpath '/home/hive-test-data/person.txt' INTO TABLE person;   
 
 ```bash
 $ select * from person;            # 查询数据
+```
+
+#### 七、外部表，外部表可以不指定数据库，且删除表时不删除数据（执行建表语句时请将注释删除）
+```bash
+create external table person(          # 加入 external 关键字标识外部表
+    id int,                            # int类型
+    name string,                       # string 类型
+    links array<string>,               # 数组类型
+    address map<string,string>         # map类型
+)
+row format delimited                   # 因为我们要导入特定文件的数据，所以我们要定义格式规则，用来匹配解析文件数据，用于导入数据（具体规则如下，数据文件为：person.txt）
+fields terminated by ','               # 属性通过什么隔开（就是id,name,links,address字段的数据用什么隔开）
+collection items terminated by '-'     # 数组用什么隔开（就是links的数据用什么隔开）
+map keys terminated by ':'             # map用什么隔开（就是address的数据用什么隔开）
+lines terminated by '\n'               # 每一行数据用什么隔开，默认也是\n，所以可以不写
+location '/user/hive_remote/external'; # 该表文件存储所在目录（目录会自动创建）
+```
+
+#### 八、Hive表分区，必须在表定义时指定对应的partition字段（分区就是目录）（可以用多个字段分区）（分区字段不能在表的字段当中）
+```bash
+create table person1(
+    id int,                        # int类型
+    name string,                   # string 类型
+    links array<string>,           # 数组类型
+    address map<string,string>     # map类型
+)
+partitioned by (age int)           # 指定分区字段为age（注意：分区字段不能在表的字段当中）
+row format delimited               # 因为我们要导入特定文件的数据，所以我们要定义格式规则，用来匹配解析文件数据，用于导入数据（具体规则如下，数据文件为：person.txt）
+fields terminated by ','           # 属性通过什么隔开（就是id,name,links,address字段的数据用什么隔开）
+collection items terminated by '-' # 数组用什么隔开（就是links的数据用什么隔开）
+map keys terminated by ':'         # map用什么隔开（就是address的数据用什么隔开）
+lines terminated by '\n'           # 每一行数据用什么隔开，默认也是\n，所以可以不写
+;
+```
+
+#### 九、导入分区表数据到Hive（将数据导入到age=10的分区）（注意要进入具体的数据库）
+```bash
+$ load data LOCAL inpath '/home/hive-test-data/person.txt' INTO TABLE person1 partition (age =10);   # LOCAL 表示本地文件
+```
+
+#### 十、添加分区（注意：只能在已有的分区字段上添加，就是在建表的时候指定了哪些分区字段，就用哪些字段）
+```bash
+$ alter table person1 add partition(age=12);   # 添加age=12的分区
+```
+
+#### 十一、删除分区（删除分区的同时也会删除分区里面的数据）
+```bash
+$ alter table person1 drop partition(age=12);  # 删除age=12的分区
+```
+
+#### 十二、复制表数据，自动转成MapReduce操作（单表插入）
+```bash
+from person insert overwrite table person2 select id,name,links,address;   # 将person表id,name,links,address字段的数据全部插入到person2表
+```
+
+#### 十三、复制表数据，自动转成MapReduce操作（多表插入，同时进行）
+```bash
+from person 
+insert overwrite table person2 select id,name,links,address;   # 将person表id,name,links,address字段的数据全部插入到person2表
+insert overwrite table person3 select id,name,links,address;   # 将person表id,name,links,address字段的数据全部插入到person3表
+```
+
+#### 十四、以正则表达式的方式读取文件数据（如果与表达式不匹配的数据，我们在查询的时候会直接返回NULL）
+```bash
+# 建表
+create table log (
+    host string,
+    identity string,
+    t_user string,
+    time_str string,
+    request string,
+    referer string,
+    agent string
+)
+row format serde 'org.apache.hadoop.hive.serde2.RegexSerDe'
+with serdeproperties (
+    "input.regex" = "([^ ]*) ([^ ]*) ([^ ]*) \\[(.*)\\] \"(.*)\" (-|[0-9]*) (-|[0-9]*)"
+)
+stored as textfile;
+
+
+$ load data LOCAL inpath '/home/hive-test-data/log.txt' INTO TABLE log;   # 导入数据
+$ select * from log;                                                      # 查询数据
+
 ```

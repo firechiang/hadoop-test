@@ -74,6 +74,18 @@ export HADOOP_SECURE_DN_USER=root                                               
     <value>root</value>                                                
 </property>
 
+<!-- 表示可以通过代理“root”用户操作HDFS，不加代理权限，有些客户端不能操控HDFS文件（比如：Hive hiveserver2服务或浏览器）（下面的root指的是用户，可以改） -->
+<property>
+    <name>hadoop.proxyuser.root.hosts</name>
+    <value>*</value>
+</property>
+
+<!-- 表示可以通过代理“root”用户组操作HDFS，不加代理权限，有些客户端不能操控HDFS文件（比如：Hive hiveserver2服务或浏览器）（下面的root指的是用户，可以改） -->
+<property>
+    <name>hadoop.proxyuser.root.groups</name>
+    <value>*</value>
+</property>
+
 <!-- Zookeeper集群配置  -->
 <property>
     <name>ha.zookeeper.quorum</name>
