@@ -147,17 +147,74 @@ $ select * from log;                                                      # 查�
 
 ```
 
-#### 十五、复制表结构
+#### 十五、struct 数据类型表示例
+```bash
+create table student(
+    id int,
+    info struct<name:string,age:int>
+)
+row format delimited
+fields terminated by ','
+collection items terminated by ':';
+
+# 导入数据
+$ load data LOCAL inpath '/home/hive-test-data/student.txt' INTO TABLE student;
+```
+
+#### 十六、基站掉话率示例
+```bash
+# 数据表
+create table call_monitor(
+    record_time string,
+    imei string,
+    cell string,
+    ph_num string,
+    call_num string,
+    drop_num int,
+    duration int,
+    drop_rate double,
+    net_type string,
+    erl string
+)
+row format delimited
+fields terminated by ',';
+
+
+# 结果表
+create table call_monitor_value(
+    imei string,
+    drop_num int,
+    duration int,
+    drop_rate double
+)
+row format delimited
+fields terminated by ',';
+
+
+# 导入数据
+$ load data LOCAL inpath '/home/hive-test-data/call_monitor.csv' INTO TABLE call_monitor;
+
+
+# 查询数据，并将查询结果插入 call_monitor_value 表
+from call_monitor cm
+insert into call_monitor_value
+select cm.imei,sum(cm.drop_num),sum(cm.duration),(sum(cm.drop_num) /sum(cm.duration)) a3 group by cm.imei order by a3 desc;
+
+# 查询前十条结果数据
+select * from call_monitor_value limit 10;
+```
+
+#### 十七、复制表结构
 ```bash
 $ create table person5 like person;                                       # 新建表 person5并将person表结构复制过来（就是新表person5和旧表person一模一样，这个不复制表数据）
 ```
 
-#### 十六、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
+#### 十八、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
 ```bash
 $ select explode(links) from person;                                      # explode函数将数据以列的方式输出
 ```
 
-#### 十七、[自定义函数（UDF）][1]
+#### 十九、[自定义函数（UDF）][1]
 
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
