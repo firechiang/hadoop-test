@@ -147,12 +147,17 @@ $ select * from log;                                                      # 查�
 
 ```
 
-#### 十五、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
+#### 十五、复制表结构
 ```bash
-$ select explode(links) from person;          # explode函数将数据以列的方式输出
+$ create table person5 like person;                                       # 新建表 person5并将person表结构复制过来（就是新表person5和旧表person一模一样，这个不复制表数据）
 ```
 
-#### 十六、[自定义函数（UDF）][1]
+#### 十六、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
+```bash
+$ select explode(links) from person;                                      # explode函数将数据以列的方式输出
+```
+
+#### 十七、[自定义函数（UDF）][1]
 
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
