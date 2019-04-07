@@ -151,3 +151,8 @@ $ select * from log;                                                      # 查�
 ```bash
 $ select explode(links) from person;          # explode函数将数据以列的方式输出
 ```
+
+#### 十六、[自定义函数（UDF）][1]
+
+
+[1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
