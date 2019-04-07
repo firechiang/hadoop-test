@@ -146,3 +146,8 @@ $ load data LOCAL inpath '/home/hive-test-data/log.txt' INTO TABLE log;   # 导�
 $ select * from log;                                                      # 查询数据
 
 ```
+
+#### 十五、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
+```bash
+$ select explode(links) from person;          # explode函数将数据以列的方式输出
+```
