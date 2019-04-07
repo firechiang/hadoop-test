@@ -1,0 +1,4 @@
+hello world hive
+hadoop hello hive
+hello
+world

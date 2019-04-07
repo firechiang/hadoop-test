@@ -204,17 +204,42 @@ select cm.imei,sum(cm.drop_num),sum(cm.duration),(sum(cm.drop_num) /sum(cm.durat
 select * from call_monitor_value limit 10;
 ```
 
-#### 十七、复制表结构
+#### 十七、Word Count示例
+```bash
+# 数据表
+create table wc(
+    word string
+);
+
+# 结果表
+create table wc_value(
+    word string,
+    count int
+);
+
+# 导入数据
+$ load data LOCAL inpath '/home/hive-test-data/wc.txt' INTO TABLE wc;
+
+# 查询数据，并将查询结果插入 wc_value 表（这里用到了子查询）
+from (select explode(split(word,' ')) ww from wc) aa
+insert into wc_value
+select ww,count(ww) group by ww;
+
+# 查询结果数据
+select * from wc_value;
+```
+
+#### 十八、复制表结构
 ```bash
 $ create table person5 like person;                                       # 新建表 person5并将person表结构复制过来（就是新表person5和旧表person一模一样，这个不复制表数据）
 ```
 
-#### 十八、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
+#### 十九、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
 ```bash
 $ select explode(links) from person;                                      # explode函数将数据以列的方式输出
 ```
 
-#### 十九、[自定义函数（UDF）][1]
+#### 二十、[自定义函数（UDF）][1]
 
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
