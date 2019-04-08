@@ -234,12 +234,23 @@ select * from wc_value;
 $ create table person5 like person;                                       # 新建表 person5并将person表结构复制过来（就是新表person5和旧表person一模一样，这个不复制表数据）
 ```
 
-#### 十九、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
+#### 十九、Hive参数使用
+###### 19.1，修改hive-site.xml文件
+###### 19.2，hive cli（客户端）启动时，通过--hiveconf key=value的方式设置
+###### 19.3，进入客户端之后，通过set命令
+###### 19.4，在当前用户目录（比如: /tmp/root）下创建 .hiverc 文件，然后在里面写配置即可，hive启动时会自动加载该配置
+```bash
+# 参数设置测试（使用查询语句时显示数据表头）
+$ set hive.cli.print.header = true                                        # set命令，这个时临时设置，退出后自动还原
+$ hive --hiveconf hive.cli.print.header=true                              # hive客户端启动时设置，这个设置是永久的（等于号两边不能有空格）
+```
+
+#### 二十、函数使用（自定义函数请看代码udf包下；自带函数很多，关系型数据库函数，Hive基本都有）
 ```bash
 $ select explode(links) from person;                                      # explode函数将数据以列的方式输出
 ```
 
-#### 二十、[自定义函数（UDF）][1]
+#### 二十一、[自定义函数（UDF）][1]
 
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
