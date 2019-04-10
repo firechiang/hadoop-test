@@ -312,5 +312,49 @@ $ select explode(links) from person;                                      # expl
 
 #### 二十三、[自定义函数（UDF）][1]
 
+#### 二十四、Hive Lateral View（用于和UDTF函数（explode，split）结合使用）
+```bash
+# 具体使用场景
+1，首先通过UDTF函数数组数据拆分成多行，再将多行结果组合成一个支持别名的虚拟表
+2，主要解决在 select 使用UDTF做查询过程中，查询只能包含单个UDTF，不能包含其它字段，以及多个UDTF的问题
+
+# explode函数使用
+select explode(links) from person;                                        # explode函数将数组数据拆分成多行输出（links字段是数组格式的数据）
+
+# Lateral View使用基础如下：（将person表里面的links数据（数组数据）打成lateral view，然后再count里面的总数量）
+select count(a1) from person p
+lateral view explode(links) p as a1
+```
+
+#### 二十五、Hive 视图
+```bash
+# 特点
+1，不支持物化视图
+2，只能查询数据，不能修改数据
+3，视图的创建，只是保存一份元数据，查询视图时才执行对应的子查询
+4，view定义中若包含了order by/limit语句，当查询试图时也进行order by/limit语句操作，view当中定义的优先级更高
+5，view支持迭代视图
+
+# 使用
+create view person_view as select id,name,links,address from person;      # 创建视图 person_view，查询语句是 select id,name,links,address from person
+show tables;                                                              # 查看视图是否创建成功
+select * from person_view;                                                # 查询视图数据
+drop view person_view;                                                    # 删除视图
+```
+
+#### 二十五、Hive 索引
+```bash
+# 为person表，字段id创建索引名字叫 person_id（as表示指定索引器；in table表示索引的数据放在哪张表里面，若不指定默认在default_ person_person_id__表里面，索引数据表都会自动生成）
+create index person_id on table person1(id) as "org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler" 
+with deferred rebuild
+in table person_id_index;
+
+# 为person表的person_id索引，建立索引数据，以加快我们的数据查询速度（如果没有这个操作，我们的索引是没有数据的，也相当于没有索引）
+alter index person_id on person rebuild;
+
+# 删除person表的person_id索引
+drop index person_id on person；
+```
+
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
