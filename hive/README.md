@@ -1,7 +1,7 @@
 #### [一、单用户搭建和基本操作][1]
 #### [一、多用户搭建和基本操作][3]
 #### [二、基本使用][2]
-#### [二、权限控制][4]
+#### [三、权限控制][4]
 #### Hive（1，数据仓库）（2，解析器，编译器，优化器）（3，运行时，元数据存储在关系型数据库里面）
 ![image](https://github.com/firechiang/hadoop-test/blob/master/hive/image/hive-framework.jpg)
 ```bash
