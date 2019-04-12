@@ -345,7 +345,7 @@ drop view person_view;                                                    # 删�
 #### 二十五、Hive 索引
 ```bash
 # 为person表，字段id创建索引名字叫 person_id（as表示指定索引器；in table表示索引的数据放在哪张表里面，若不指定默认在default_ person_person_id__表里面，索引数据表都会自动生成）
-create index person_id on table person1(id) as "org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler" 
+create index person_id on table person1(id) as 'org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler' 
 with deferred rebuild
 in table person_id_index;
 
@@ -353,7 +353,19 @@ in table person_id_index;
 alter index person_id on person rebuild;
 
 # 删除person表的person_id索引
-drop index person_id on person；
+drop index person_id on person;
+```
+
+#### 二十六、Hive 脚本命令使用（这些命令也可正常使用）
+```bash
+# 命令使用
+$ hive -e 'use test; select * from person;'          # 连接hive，先进入test数据库，再 查询    person 所有数据，然后退出hive
+$ hive -e 'use test; select * from person;' > aaa    # 将结果数据保存到当前目录 aaa 文件当中，然后退出hive
+
+# 定义文件aaa，里面的内容是： use test; select * from person;    
+$ vi aaa                                             
+# 执行上面定义的脚本文件（-f：执行完成以后退出hive客服端，-i：不退出）；-i 不退出客户端之后，还可以使用 source aaa;命令再次执行这个脚本文件
+$ hive -f aaa                                    
 ```
 
 

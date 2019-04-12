@@ -13,7 +13,7 @@ $ hive --service metastore &                                # 先到服务端启
 $ ps -aux| grep metastore                                   # 查看 metastore 进程信息
 $ hive                                                      # 再到客户端执行，连接Metastore服务，连上了就可以用命令对Hive进行一系列的操作了
 ```
-#### 四、使用Hiveserver2服务（& 表示后台启动）
+#### 四、使用Hiveserver2服务（& 表示后台启动）（Hive日志默认在 /tmp/'当前系统用户' 目录下）
 ```bash
 $ hive --service hiveserver2 &                              # 先到服务端启动 Hiveserver2服务，这个启动有点慢，而且会报java.lang.NoClassDefFoundError: org/apache/tez/dag/api/TezConfiguration错误，原因是我们没有使用tez
 $ ps -aux| grep hiveserver2                                 # 查看 hiveserver2 进程信息

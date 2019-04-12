@@ -57,7 +57,7 @@ $ :wq                                                                           
     <value>Jiang@123</value>  
 </property> 
 
-<!-- 如果为true，Hive Server会以提交用户的身份去执行语句，如果为false会以hive server daemon的admin user来执行语句  -->
+<!-- 如果控制了权限，建议使用false，如果为true，Hive Server会以提交用户的身份去执行语句，如果为false会以hive server的用户来执行语句  -->
 <property>
     <name>hive.server2.enable.doAs</name>
     <value>true</value>
@@ -91,7 +91,7 @@ export HIVE_CONF_DIR=/home/apache-hive-3.1.1-bin/conf            # HIve配置文
 $ schematool -dbType mysql -initSchema
 ```
 
-#### 九、简单使用
+#### 九、简单使用（Hive日志默认在 /tmp/'当前系统用户' 目录下）
 ```bash
 $ hive                                                           # 进入Hive（注意日志打印是否有：Class path contains multiple SLF4J bindings错误，看看是不是有jar包冲突，如果有，删除Hive lib目录相应jar包即可）
 ```

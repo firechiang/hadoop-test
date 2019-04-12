@@ -1,6 +1,7 @@
 #### [一、单用户搭建和基本操作][1]
 #### [一、多用户搭建和基本操作][3]
 #### [二、基本使用][2]
+#### [二、权限控制][4]
 #### Hive（1，数据仓库）（2，解析器，编译器，优化器）（3，运行时，元数据存储在关系型数据库里面）
 ![image](https://github.com/firechiang/hadoop-test/blob/master/hive/image/hive-framework.jpg)
 ```bash
@@ -27,3 +28,4 @@
 [1]: https://github.com/firechiang/hadoop-test/tree/master/hive/docs/1-setup-single.md
 [2]: https://github.com/firechiang/hadoop-test/tree/master/hive/docs/2-simple-use.md
 [3]: https://github.com/firechiang/hadoop-test/tree/master/hive/docs/2-setup-multi.md
+[4]: https://github.com/firechiang/hadoop-test/tree/master/hive/docs/3-setup-authorization .md
