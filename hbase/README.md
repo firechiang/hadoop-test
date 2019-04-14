@@ -6,22 +6,17 @@
 ```
 
 #### HBase数据模型
----
-Row Key: 11269339
-Time Stamp（时间戳）
-Column Family（CF1）
-Column Family（CF2）
-Column Family（CF2）
----
+```bash
 ----------------------------------------------------------------------------------------------------------
-|  Row Key  |  Time Stamp（时间戳）    |  Column Family（CF1） |  Column Family（CF2） |  Column Family（CF2）|
+|  Row Key  |  Time Stamp（时间戳）        |  Column Family（CF1）  |  Column Family（CF2）   |  Column Family（CF2） |
 |-----------|---------------------- |--------------------- |----------------------|----------------------|
 |           |           t8          |                      |   CF2:q1=value1      |    CF3:q3=value3     |
-|           |                       |                      |                      |                      |
+|           |-----------------------|----------------------|----------------------|----------------------|
 | 11269339  |           t4          |                      |                      |                      |
-|           |                       |                      |                      |                      |
+|           |-----------------------|----------------------|----------------------|----------------------|
 |           |           t2          |     CF1:q2=value1    |                      |                      |
-|           |                       |                      |                      |                      |
+|-----------|-----------------------|----------------------|----------------------|----------------------|
+```
 ###### 一、Row Key
 ```bash
 1,决定一行数据。
@@ -53,7 +48,7 @@ Column Family（CF2）
    3.2，cell中的数据是没有类型的，全部是字节码形式存贮。
 ```
 
-###### 五、HLog(WAL log)实际数据
+###### 五、HLog(WAL log)数据
 ```bash
 1，HLog文件就是一个普通的Hadoop Sequence File，Sequence File 的Key是HLogKey对象，HLogKey中记录了写入数据的归属信息，
        除了table和region名字外，同时还包括 sequence number和timestamp，timestamp是” 写入时间”，sequence number的起始值为0，
