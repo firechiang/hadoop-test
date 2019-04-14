@@ -1,4 +1,4 @@
-#### HBase简介
+#### HBase简介，[架构][1]
 ```bash
 1，Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩、实时读写的分布式数据库
 2，利用Hadoop HDFS作为其文件存储系统,利用Hadoop MapReduce来处理HBase中的海量数据,利用Zookeeper作为其分布式协同服务
@@ -55,5 +55,5 @@
        或者是最近一次存入文件系统中sequence number。
 2，HLog SequeceFile的Value是HBase的KeyValue对象，即对应HFile中的KeyValue
 ```
-#### HBase架构
-![image](https://github.com/firechiang/hadoop-test/blob/master/hbase/image/hbase-001.png)
+
+[1]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/1-framework.md
