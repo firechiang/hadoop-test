@@ -1,5 +1,5 @@
-#### HBase架构
-![image](https://github.com/firechiang/hadoop-test/blob/master/hbase/image/hbase-001.png)
+![image](https://github.com/firechiang/hadoop-test/blob/master/hbase/image/1-framework.png)
+
 ##### Client
 ```bash
 1，包含访问HBase的接口并维护cache来加快对HBase的访问
