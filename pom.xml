@@ -75,5 +75,6 @@
         <module>mapreduce</module>
         <module>yarn</module>
     <module>hive</module>
+    <module>hbase</module>
   </modules>
 </project>
