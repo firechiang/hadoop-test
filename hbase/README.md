@@ -55,3 +55,5 @@
        或者是最近一次存入文件系统中sequence number。
 2，HLog SequeceFile的Value是HBase的KeyValue对象，即对应HFile中的KeyValue
 ```
+#### HBase架构
+![image](https://github.com/firechiang/hadoop-test/blob/master/hbase/image/hbase-001.png)
