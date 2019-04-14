@@ -1,4 +1,4 @@
-### HBase2.1.4 伪分布式搭建（建立在HDFS集群之上）
+### HBase2.1.4 伪分布式搭建（本地文件模式，无HDFS）
 #### 一、安装
 ```bash
 $ wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.1.4/hbase-2.1.4-bin.tar.gz    # 下载服务端安装包
