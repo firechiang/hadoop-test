@@ -368,5 +368,54 @@ $ vi aaa
 $ hive -f aaa                                    
 ```
 
+#### 二十七、Hive 优化运行（调整参数，需注意服务器资源是否够用）
+```bash
+$ explain select count(*) from person;                # 可使用 explain 查看sql执行计划
+
+$ set hive.exec.mode.local.auto;                      # 查看是不是本地运行模式
+$ set hive.exec.mode.local.auto=true;                 # 使用本地模式运行我们的sql（一般测试用，运行速度特别快）
+$ set hive.exec.mode.local.auto.inputbytes.max;       # 本地模式加载文件的最大值，如果文件太大，超过了这个值，任然会以集群模式运行（还想以本地模式运行就加大这个值）
+
+$ set hive.exec.parallel;                             # 查看是不是并行运行模式
+$ set hive.exec.parallel=true;                        # 开启并行运行模式（运行特别快）
+$ set hive.exec.parallel.thread.number;               # 一次sql并行运算，允许最大线程数
+
+# 开启MapReduce严格模式限制，对查询有限制（对分区表查询必须添加where对分区字段的条件过滤，order by语句必须包含limit输出限制，限制执行笛卡尔积的查询）
+$ set hive.mapred.mode=strict;                        # 开启MapReduce严格模式运行（默认是nonstrict非严格模式）
+
+# Hive 排序使用说明
+1，order by 对于查询结果全排序，只允许有一个Reduce处理（当数据量较大时，应慎用，严格模式下，必须结合limit来使用）
+2，sort by对于单个Reduce的数据进行排序
+3，distribute by 分区排序，经常和sort by结合使用
+4，cluster by 相当于sort by 加 distribute by（cluster by不能通过asc和desc的方式指定排序规则，可通过distribute by '列名' sort by '列名' asc|desc 方式使用）
+
+# Hive join使用说明（join计算时，将小表（驱动表）放在join的左边）
+$ set hive.auto.convert.join=true;                    # 开启自动MapJoin（该参数为true时，Hive自动对左边的表统计数量，如果是小表就加如内存，即对小表使用Map Join）        
+$ set hive.mapjoin.smalltable.filesize;               # 大表小表的判断阀值，如果表的大小小于该值则会被加载到内存中运行
+$ set hive.ignore.mapjoin.hint;                       # 默认值是true，是否忽略mapjoin hint即mapjoin标记
+$ set hive.auto.convert.join.noconditionaltask;       # 默认true，将普通的join转化为普通的mapjoin时，是否将多个mapjoin转化为一个mapjoin
+$ set hive.auto.convert.join.noconditionaltask.size;  # 将多个mapjoin转化为一个mapjoin时，其表的最大值
+
+# Map-Side聚合
+$ set hive.map.aggr=true;                             # 开启在Map端的聚合
+$ set hive.groupby.mapaggr.checkinterval;             # map端group by执行聚合时处理的多少行数据（默认：100000）
+$ set hive.map.aggr.hash.min.reduction;               # 进行聚合的最小比例（预先对100000条数据做聚合，若聚合之后的数据量/100000的值大于该配置0.5，则不会聚合）
+$ set hive.map.aggr.hash.percentmemory;               # map端聚合使用的内存的最大值
+$ set hive.map.aggr.hash.force.flush.memory.threshold;# map端做聚合操作是hash表的最大可用内容，大于该值则会触发flush 
+$ set hive.groupby.skewindata;                        # 是否对GroupBy产生的数据倾斜做优化，默认为false
+
+# 控制Hive中Map的数量
+$ set mapred.max.split.size;                          # 一个split的最大值，即每个map处理文件的最大值
+$ set mapred.min.split.size.per.node;                 # 一个节点上split的最小值
+$ set mapred.min.split.size.per.rack;                 # 一个机架上split的最小值
+
+# 控制Hive中Reduce的数量（注意：如果分了桶的话，Reduce的个数必须和桶的个数一致）
+$ set mapred.reduce.tasks;                            # 强制指定reduce任务的数量
+$ set hive.exec.reducers.bytes.per.reducer;           # 每个reduce任务处理的数据量
+$ set hive.exec.reducers.max;                         # 每个任务最大的reduce数
+
+# Hive - JVM重用，适用场景（小文件个数过多，task个数过多）
+$ set mapred.job.reuse.jvm.num.tasks=n;               # n为task插槽个数，不建议使用（缺点：设置开启之后，task插槽会一直占用资源，不论是否有task运行，直到所有的task即整个job全部执行完成时，才会释放所有的task插槽资源）
+```
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/hive/src/main/java/com/firecode/hadooptest/hive/udf/TuoMin.java
