@@ -342,7 +342,7 @@ select * from person_view;                                                # 查�
 drop view person_view;                                                    # 删除视图
 ```
 
-#### 二十五、Hive 索引
+#### 二十六、Hive 索引
 ```bash
 # 为person表，字段id创建索引名字叫 person_id（as表示指定索引器；in table表示索引的数据放在哪张表里面，若不指定默认在default_ person_person_id__表里面，索引数据表都会自动生成）
 create index person_id on table person1(id) as 'org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler' 
@@ -356,7 +356,7 @@ alter index person_id on person rebuild;
 drop index person_id on person;
 ```
 
-#### 二十六、Hive 脚本命令使用（这些命令也可正常使用）
+#### 二十七、Hive 脚本命令使用（这些命令也可正常使用）
 ```bash
 # 命令使用
 $ hive -e 'use test; select * from person;'          # 连接hive，先进入test数据库，再 查询    person 所有数据，然后退出hive
@@ -368,7 +368,7 @@ $ vi aaa
 $ hive -f aaa                                    
 ```
 
-#### 二十七、Hive 优化运行（调整参数，需注意服务器资源是否够用）
+#### 二十八、Hive 优化运行（调整参数，需注意服务器资源是否够用）
 ```bash
 $ explain select count(*) from person;                # 可使用 explain 查看sql执行计划
 
