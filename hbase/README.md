@@ -1,3 +1,4 @@
+#### [伪分布式搭建以及简单使用][2]
 #### HBase简介，[架构][1]
 ```bash
 1，Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩、实时读写的分布式数据库
@@ -57,3 +58,4 @@
 ```
 
 [1]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/1-framework.md
+[2]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/2-setup-single-node.md
