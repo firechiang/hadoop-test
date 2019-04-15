@@ -1,0 +1,67 @@
+### HBase2.1.4 完全分布式搭建（建立在HDFS集群之上）
+```bash
+----------|-------------|-----------------------------------------------------------------------------------------------------------------------------------
+          |   NameNode  |    DataNode      ZooKeeper     ZKFC     JournalNode     ReourceManager      NodeManager      HBaseMaster     HBaseRegionServer
+----------|-------------|------------------------------------------------------------------------------------------------------------------------------------          
+server001 |      是         |                       是           是               是                                   是                是
+----------|-------------|------------------------------------------------------------------------------------------------------------------------------------
+server002 |      是             |是            是          是                                               是
+----------|-------------|-------------------------------------------------------------------------------------------------------------------------------------
+server003 |             |       是            是                       是               是                 是                                  是
+----------|-------------|-------------------------------------------------------------------------------------------------------------------------------------
+server004 |             |       是            是                       是                                  是                是                是
+----------|-------------|-----------------------------------------------------------------------------------------------------------------------------------
+```
+#### 一、安装
+```bash
+$ wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.1.4/hbase-2.1.4-bin.tar.gz    # 下载服务端安装包
+$ tar -zxvf hbase-2.1.4-bin.tar.gz -C ../                                               # 解压安装包到上级目录
+```
+
+#### 二、安装时间同步软件（集群的每台机器都要安装）
+```bash
+$ yum install -y ntp                                                                    # 安装时间同步器
+$ rpm -qa|grep ntp                                                                      # 检查是否安装成功
+$ ntpdate ntp1.aliyun.com                                                               # 同步时间（每台都要同步，这里同步的是"阿里云"时间服务器）
+$ date                                                                                  # 查看本机时间
+```
+
+#### 三、配置环境变量[vi ~/.bashrc]
+```bash
+export HBASE_HOME=/home/hbase-2.1.4
+PATH=$PATH:$HBASE_HOME/bin                                                              # linux以 : 号隔开，windows以 ; 号隔开
+
+$ source ~/.bashrc                                                                      # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个beel然后按Tab键，如果补全了说明配置成功了）
+```
+
+#### 四、修改配置[vi conf/hbase-env.sh]（以下配置在文件里面都有，把注释打开，结果改一下即可）
+```bash
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                              # 配置JDK                                
+```
+
+#### 五、修改配置[vi conf/hbase-site.xml]
+```bash
+<-- 开启集群模式 -->
+<property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+</property>
+
+<!-- HDFS数据目录 -->
+<property>
+    <name>hbase.rootdir</name>
+    <value>hdfs://localhost:8020/hbase</value>
+</property>
+
+<!-- zookeeper集群 -->
+<property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>server002:2181,server003:2181,server004:2181</value>
+</property>
+
+<!-- 存储zookeeper相关信息的目录（目录会自动创建） -->
+<property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/usr/local/zookeeper</value>
+</property>
+```
