@@ -88,7 +88,6 @@ server004
 ```
 #### 八、修改配置[vi conf/backup-masters]（备用HBaseMaster所在机器，这个文件在配置目录里面没有需要自己手动创建）
 ```bash
-server001
 server004
 ```
 #### 九、拷贝HDFS集群配置文件 hdfs-site.xml 到 HBase 的配置目录 conf 目录下
