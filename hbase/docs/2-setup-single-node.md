@@ -16,7 +16,7 @@ $ source ~/.bashrc                                                              
 #### 三、修改配置[vi conf/hbase-env.sh]（以下配置在文件里面都有，把注释打开，结果改一下即可）
 ```bash
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                              # 配置JDK                                
-export HBASE_MANAGES_ZK=true                                                            # 启用自带的Zookeeper
+export HBASE_MANAGES_ZK=true                                                            # 启用HBase自带的Zookeeper
 ```
 
 #### 四、修改配置[vi conf/hbase-site.xml]

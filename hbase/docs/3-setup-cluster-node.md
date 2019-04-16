@@ -44,21 +44,27 @@ $ source ~/.bashrc                                                              
 
 #### 五、修改配置[vi conf/hbase-env.sh]（以下配置在文件里面都有，把注释打开，结果改一下即可）
 ```bash
-export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                              # 配置JDK                                
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                              # 配置JDK
+export HBASE_MANAGES_ZK=false                                                           # 是否启用HBase自带的Zookeeper（我们要使用我们自己的集群所以把这个改为false）                                
 ```
 
 #### 六、修改配置[vi conf/hbase-site.xml]
 ```bash
-<-- 开启集群模式 -->
+<!-- 开启集群模式 -->
 <property>
     <name>hbase.cluster.distributed</name>
     <value>true</value>
 </property>
 
-<!-- HDFS数据目录 -->
+<property>
+    <name>hbase.unsafe.stream.capability.enforce</name>
+    <value>false</value>
+</property>
+
+<!-- HDFS数据目录（目录会自动创建，我们随便指定一台HDFS NameNode机器即可，因为我们下面会拷贝HDFS集群配置文件，HBase会根据拷贝的配置文件来识别HDFS NameNode集群） -->
 <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://localhost:8020/hbase</value>
+    <value>hdfs://server001:8020/hbase</value>
 </property>
 
 <!-- zookeeper集群 -->
@@ -72,4 +78,40 @@ export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                      
     <name>hbase.zookeeper.property.dataDir</name>
     <value>/usr/local/zookeeper</value>
 </property>
+```
+
+#### 七、修改配置[vi conf/regionservers]（HBaseRegionServer所在机器）
+```bash
+server001
+server003
+server004
+```
+#### 八、修改配置[vi conf/backup-masters]（备用HBaseMaster所在机器，这个文件在配置目录里面没有需要自己手动创建）
+```bash
+server001
+server004
+```
+#### 九、拷贝HDFS集群配置文件 hdfs-site.xml 到 HBase 的配置目录 conf 目录下
+```bash
+server001
+$ cp /home/hadoop-3.2.0/etc/hadoop/hdfs-site.xml ./                                     # 拷贝文件（因为我们就在HBase conf目录下，所以直接用 ./） 
+server004
+```
+
+#### 十、解决 hbase-2.1.4 使用的  htrace-core4-4.2.0-incubating.jar 里面没有 org/apache/htrace/SamplerBuilder 类问题
+```bash
+$ rm -rf $HBASE_HOME/lib/client-facing-thirdparty/htrace-core4-4.2.0-incubating.jar     # 删除 htrace-core4-4.2.0-incubating.jar 包
+$ wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.0.5/hbase-2.0.5-bin.tar.gz    # 下载 HBase2.0.5
+$ tar -zxvf hbase-2.0.5-bin.tar.gz -C ./                                                # 解压到当前目录
+$ cp ./hbase-2.0.5/lib/htrace-core-3.2.0-incubating.jar $HBASE_HOME/lib                 # 拷贝htrace-core-3.2.0-incubating.jar包到hbase-2.1.4的lib目录
+```
+
+#### 十一、分发HBase安装文件到各个机器
+```bash
+$ scp -r ./hbase-2.1.4 root@server003:/home
+```
+
+#### 十二、启动HBase（assignment.AssignmentManager: No servers available; cannot place 1 unassigned regions）
+```bash
+$ start-hbase.sh                                      
 ```
