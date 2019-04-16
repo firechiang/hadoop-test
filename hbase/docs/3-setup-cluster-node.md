@@ -18,16 +18,12 @@ $ wget http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.1.4/hbase-2.1.4-bin.ta
 $ tar -zxvf hbase-2.1.4-bin.tar.gz -C ../                                               # 解压安装包到上级目录
 ```
 
-#### 二、所有HBaseMaster免密码登陆所有HBaseRegionServer节点（在A机器生成一对公钥私钥，将公钥拷贝到想要登录的主机）
+#### 二、HBaseMaster节点免密码登陆所有HBaseRegionServer节点（在A机器生成一对公钥私钥，将公钥拷贝到想要登录的主机）
 ```bash
-$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa                                                # 生成私钥和公钥
-$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys                                         # 复制公钥到authorized_keys文件
-$ chmod 0600 ~/.ssh/authorized_keys                                                       # 修改权限
-$ scp ~/.ssh/id_rsa.pub root@192.168.83.135:~/.ssh/id_rsa.pub_131                         # 将公钥拷贝到想要登录的主机（如果想要登录的主机.ssh目录不存在，就执行生成《公私钥的命令》）
-$ cat ~/.ssh/id_rsa.pub_131 >> ~/.ssh/authorized_keys                                     #（到想要登录的主机上执行）将上一步考过来的公钥 复制到 authorized_keys
-$ rm -rf id_rsa.pub_131                                                                   #（到想要登录的主机上执行）删除上一步考过来的公钥
-
-$ ssh 192.168.83.135                                                                      # 测试登陆
+$ ssh-keygen                                                                              # 生成私钥和公钥（如果已经有了就不需要执行了）
+$ ssh-copy-id -i ~/.ssh/id_rsa.pub server001                                              # 将公钥拷贝到 server001上（这样我们就可以直接免密码登录server001了）
+$ ssh server001                                                                           # 测试面密码登陆
+$ exit                                                                                    # 退出登录
 ```
 
 #### 三、安装时间同步软件（集群的每台机器都要安装）
