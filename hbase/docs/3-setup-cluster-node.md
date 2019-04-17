@@ -87,7 +87,7 @@ server004
 ```
 #### 九、拷贝HDFS集群配置文件 hdfs-site.xml 到 HBase 的配置目录 conf 目录下
 ```bash
-$ cp /home/hadoop-3.2.0/etc/hadoop/hdfs-site.xml ./                                     # 拷贝文件（因为我们就在HBase conf目录下，所以直接用 ./） 
+$ cp /home/hadoop-3.1.2/etc/hadoop/hdfs-site.xml ./                                     # 拷贝文件（因为我们就在HBase conf目录下，所以直接用 ./） 
 ```
 
 #### 十、解决 hbase-2.1.4 使用的  htrace-core4-4.2.0-incubating.jar 里面没有 org/apache/htrace/SamplerBuilder 类问题

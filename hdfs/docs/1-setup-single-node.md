@@ -1,7 +1,7 @@
 ### Hadoop-3.x 单节点搭建
 #### 一、预先准备环境
 ```bash
-$ wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz    # 下载安装包
+$ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz    # 下载安装包
 ```
 #### 二、修改配置文件
 
@@ -22,7 +22,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/home/hadoop-3.2.0/tem</value>                                                
+    <value>/home/hadoop-3.1.2/tem</value>                                                
 </property>
 
 <!-- 表示可以通过代理“root”用户操作HDFS，不加代理权限，有些客户端不能操控HDFS文件（比如：Hive hiveserver2服务或浏览器）（下面的root指的是用户，可以改） -->
@@ -67,7 +67,7 @@ server-001
 
 #### 六、配置Hadoop环境变量[vi ~/.bashrc]在末尾添加如下内容
 ```bash
-export HADOOP_HOME=/home/hadoop-3.2.0
+export HADOOP_HOME=/home/hadoop-3.1.2
 PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
 $ source ~/.bashrc                                                                        # （系统重读配置）在各个机器上执行使配置文件生效（实验：敲个hdf然后按Tab键，如果补全了说明配置成功了）
 ```

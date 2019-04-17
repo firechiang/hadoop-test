@@ -1,7 +1,7 @@
 ### Windows开发搭建
-#### 一、预先准备环境，下载安装包：http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz
+#### 一、预先准备环境，下载安装包：http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz
 ```bash
-$ start winrar x -y hadoop-3.2.0.tar.gz ./                    # 使用Winrar将文件解压到当前目录（用管理员身份打开命令行）
+$ start winrar x -y hadoop-3.1.2.tar.gz ./                    # 使用Winrar将文件解压到当前目录（用管理员身份打开命令行）
 ```
 
 #### 二、添加 hadoop.dll和winutils.exe到bin目录，下载地址：https://github.com/firechiang/apache-hadoop-3.1.0-winutils
@@ -27,7 +27,7 @@ set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_171            # 修改 JAVA_HOME（(如
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/E:/hadoop-3.2.0/tem</value>                                            
+    <value>/E:/hadoop-3.1.2/tem</value>                                            
 </property>
 
 <!-- 表示可以通过代理“root”用户操作HDFS，不加代理权限，有些客户端不能操控HDFS文件（比如：Hive hiveserver2服务或浏览器）（下面的root指的是用户，可以改） -->

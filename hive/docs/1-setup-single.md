@@ -82,7 +82,7 @@ $ mv hive-env.sh.template hive-env.sh
 
 #### 七、修改[vi hive-env.sh]
 ```bash
-HADOOP_HOME=/home/hadoop-3.2.0                                   # Hadoop目录
+HADOOP_HOME=/home/hadoop-3.1.2                                   # Hadoop目录
 export HIVE_CONF_DIR=/home/apache-hive-3.1.1-bin/conf            # HIve配置文件目录
 ```
 

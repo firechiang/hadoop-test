@@ -17,15 +17,15 @@ HADOOP_SECURE_DN_USER=root             # HADOOP_SECURE_DN_USER所使用的角色
 <property>  
     <name>mapreduce.application.classpath</name>  
     <value>
-	    /home/hadoop-3.2.0/etc/hadoop,  
-	    /home/hadoop-3.2.0/share/hadoop/common/*,  
-	    /home/hadoop-3.2.0/share/hadoop/common/lib/*,  
-	    /home/hadoop-3.2.0/share/hadoop/hdfs/*,  
-	    /home/hadoop-3.2.0/share/hadoop/hdfs/lib/*,  
-	    /home/hadoop-3.2.0/share/hadoop/mapreduce/*,  
-	    /home/hadoop-3.2.0/share/hadoop/mapreduce/lib/*,  
-	    /home/hadoop-3.2.0/share/hadoop/yarn/*,  
-	    /home/hadoop-3.2.0/share/hadoop/yarn/lib/*  
+	    /home/hadoop-3.1.2/etc/hadoop,  
+	    /home/hadoop-3.1.2/share/hadoop/common/*,  
+	    /home/hadoop-3.1.2/share/hadoop/common/lib/*,  
+	    /home/hadoop-3.1.2/share/hadoop/hdfs/*,  
+	    /home/hadoop-3.1.2/share/hadoop/hdfs/lib/*,  
+	    /home/hadoop-3.1.2/share/hadoop/mapreduce/*,  
+	    /home/hadoop-3.1.2/share/hadoop/mapreduce/lib/*,  
+	    /home/hadoop-3.1.2/share/hadoop/yarn/*,  
+	    /home/hadoop-3.1.2/share/hadoop/yarn/lib/*  
     </value>  
 </property>
 ```
@@ -54,8 +54,8 @@ $ stop-yarn.sh                            # 停止yarn
 
 ##### 简单使用
 ```bash
-$ hadoop jar hadoop-mapreduce-examples-3.2.0.jar wordcount /user/test/test.txt /data/wc/output  # 执行MapReduce执行程序
-# hadoop-mapreduce-examples-3.2.0.jar           # 要执行的jar包（linux文件地址）
+$ hadoop jar hadoop-mapreduce-examples-3.1.2.jar wordcount /user/test/test.txt /data/wc/output  # 执行MapReduce执行程序
+# hadoop-mapreduce-examples-3.1.2.jar           # 要执行的jar包（linux文件地址）
 # wordcount                                     # 要执行的程序名（一个jar包可能包含多个程序）
 # /user/test/test.txt                           # 需要分析的文件地址（HDFS地址）
 # /data/wc/output                               # 文件分析完成结果的输出地址，该目录必须为空或不存在，否则程序立即停止（HDFS地址）

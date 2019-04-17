@@ -28,7 +28,7 @@ server004                    是             是                          是
 ```
 #### 一、预先准备环境
 ```bash
-$ wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz    # 下载安装包
+$ wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz    # 下载安装包
 ```
 
 #### 二、修改hosts文件信息
@@ -65,7 +65,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- 指定hadoop运行时产生临时文件的存储目录（注意创建该目录） -->
 <property>
     <name>hadoop.tmp.dir</name>
-    <value>/home/hadoop-3.2.0/data</value>                                                
+    <value>/home/hadoop-3.1.2/data</value>                                                
 </property>
 
 <!-- HDFSWebUI浏览器所使用的用户名  -->
@@ -145,7 +145,7 @@ export HADOOP_SECURE_DN_USER=root                                               
 <!-- JournalNode存放文件的目录 （注意创建该目录）-->
 <property>
     <name>dfs.journalnode.edits.dir</name>
-    <value>/home/hadoop-3.2.0/data/journalnode</value>
+    <value>/home/hadoop-3.1.2/data/journalnode</value>
 </property>
 
 <!--故障转移的代理类，HDFS找Active NameNode的代理类，如果没配则找不到Active NameNode会报错（最后的名称最好和NameNode集群逻辑名称对应）  -->
@@ -202,14 +202,14 @@ server004
 
 #### 六、分发文件
 ```bash
-scp -r hadoop-3.2.0 root@192.168.78.129:/home                                             # -r 是目录下所有文件和文件夹
-scp -r hadoop-3.2.0 root@192.168.78.130:/home                                             # -r 是目录下所有文件和文件夹
-scp -r hadoop-3.2.0 root@192.168.78.131:/home                                             # -r 是目录下所有文件和文件夹
+scp -r hadoop-3.1.2 root@192.168.78.129:/home                                             # -r 是目录下所有文件和文件夹
+scp -r hadoop-3.1.2 root@192.168.78.130:/home                                             # -r 是目录下所有文件和文件夹
+scp -r hadoop-3.1.2 root@192.168.78.131:/home                                             # -r 是目录下所有文件和文件夹
 ```
 
 #### 七、配置Hadoop环境变量[vi ~/.bashrc]在末尾添加如下内容
 ```bash
-export HADOOP_HOME=/home/hadoop-3.2.0
+export HADOOP_HOME=/home/hadoop-3.1.2
 PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin                                             # linux以 : 号隔开，windows以 ; 号隔开
 
 $ scp ~/.bashrc root@192.168.78.131:/~                                                    # 配置完成后将文件分发到各个主节点（NameNode）机器上
@@ -225,7 +225,7 @@ $ jps                                                                           
 #### 九、格式化文件系统
 ```bash
 $ bin/hdfs namenode -format                                                               # （多台NameNode任选一台）每次格式化都会产生新集群ID
-# 格式化成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.2.0/data/dfs/name has been successfully formatted.
+# 格式化成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.1.2/data/dfs/name has been successfully formatted.
 # 也可以去看 data 目录所生成的文件
 ```
 
@@ -233,7 +233,7 @@ $ bin/hdfs namenode -format                                                     
 ```bash
 $ bin/hdfs --daemon start namenode                                                        # （到已格式化文件系统的NameNode机器上）启动NameNode
 $ bin/hdfs namenode -bootstrapStandby                                                     # （到未格式化的NameNode机器上执行）同步NameNode元数据，前提是已格式化文件系统的NameNode要启动
-# 同步成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.2.0/data/dfs/name has been successfully formatted.
+# 同步成功在倒数第几行会打印：common.Storage: Storage directory /home/hadoop-3.1.2/data/dfs/name has been successfully formatted.
 # 也可以去看 data 目录所生成的文件
 ```
 
@@ -275,7 +275,7 @@ $ sbin/stop-dfs.sh                                              # 配置了环�
 ```bash
 $ ./bin/hdfs dfs --help                                         # 查看 hdfs dfs 命令基础使用
 $ ./bin/hdfs dfs -mkdir /tools                                  # 在根目录下创建 tools 目录
-$ ./bin/hdfs dfs -put /home/tools/hadoop-3.2.0.tar.gz /tools    # 上传文件至HDFS /tools目录
+$ ./bin/hdfs dfs -put /home/tools/hadoop-3.1.2.tar.gz /tools    # 上传文件至HDFS /tools目录
 $ ./bin/hdfs dfs -ls /tools                                     # 查看文件是否存在
 
 $ ./bin/hdfs dfs -get /tools/test.txt ./                        # 下载tools目录下test.txt文件到本地，当前目录（./）
