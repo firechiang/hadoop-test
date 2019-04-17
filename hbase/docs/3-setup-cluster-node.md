@@ -56,11 +56,6 @@ export HBASE_MANAGES_ZK=false                                                   
     <value>true</value>
 </property>
 
-<property>
-    <name>hbase.unsafe.stream.capability.enforce</name>
-    <value>true</value>
-</property>
-
 <!-- HDFS数据目录（目录会自动创建，我们随便指定一台HDFS NameNode机器即可，因为我们下面会拷贝HDFS集群配置文件，HBase会根据拷贝的配置文件来识别HDFS NameNode集群） -->
 <property>
     <name>hbase.rootdir</name>
