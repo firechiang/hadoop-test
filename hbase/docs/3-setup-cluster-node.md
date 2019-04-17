@@ -86,7 +86,7 @@ server001
 server003
 server004
 ```
-#### 八、修改配置[vi conf/backup-master]（备用HBaseMaster所在机器，这个文件在配置目录里面没有需要自己手动创建）
+#### 八、修改配置[vi conf/backup-masters]（备用HBaseMaster所在机器，这个文件在配置目录里面没有需要自己手动创建）
 ```bash
 server004
 ```
