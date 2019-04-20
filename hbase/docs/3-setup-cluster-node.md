@@ -68,6 +68,12 @@ export HBASE_MANAGES_ZK=false                                                   
     <name>hbase.zookeeper.quorum</name>
     <value>server002:2181,server003:2181,server004:2181</value>
 </property>
+
+<!--配置HBase主节点最大时钟偏离，默认是30s-->
+<!-- <property>
+    <name>hbase.master.maxclockskew</name>
+    <value>180000</value>
+</property> -->
 ```
 
 #### 七、修改配置[vi conf/regionservers]（HBaseRegionServer所在机器）
