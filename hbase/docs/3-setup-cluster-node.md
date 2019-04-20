@@ -94,8 +94,9 @@ $ cp /home/hadoop-3.1.2/etc/hadoop/core-site.xml ./                             
 
 #### 十、解决 hbase-2.1.4 使用的  htrace-core4-4.2.0-incubating.jar 里面没有 org/apache/htrace/SamplerBuilder 类问题
 ```bash
-$ cd /home/hbase-2.1.4/lib                                                                              # 到HBase依赖目录
-$ wget https://github.com/firechiang/hadoop-test/blob/master/hbase/lib/htrace-core-3.2.0-incubating.jar # 下载依赖到当前lib目录
+$ cd /home/hbase-2.1.4/lib                                                              # 到HBase依赖目录
+# # 下载依赖到当前lib目录
+$ wget http://central.maven.org/maven2/org/apache/htrace/htrace-core/3.2.0-incubating/htrace-core-3.2.0-incubating.jar 
 ```
 
 #### 十一、分发HBase安装文件到各个机器
