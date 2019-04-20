@@ -88,7 +88,7 @@ server001
 server003
 server004
 ```
-#### 八、修改配置[vi conf/backup-masters]（备用HBaseMaster所在机器，这个文件在配置目录里面没有需要自己手动创建）
+#### 八、修改配置[vi conf/backup-masters]，配置备用主节点所在机器（就是 standby 节点）（注意：在哪台机器上启动集群，默认那台机器就是主节点）
 ```bash
 server004
 ```
@@ -109,7 +109,7 @@ $ wget http://central.maven.org/maven2/org/apache/htrace/htrace-core/3.2.0-incub
 $ scp -r ./hbase-2.1.4 root@server003:/home
 ```
 
-#### 十二、启动HBase
+#### 十二、启动HBase（注意：默认这台机器就是主节点，加上我们上面配置的那台备用主节点，我们现在总共有两个主节点）
 ```bash
-$ start-hbase.sh                                      
+$ start-hbase.sh                   # 启动集群，可以到各台机器上去看看进程启动情况                                
 ```
