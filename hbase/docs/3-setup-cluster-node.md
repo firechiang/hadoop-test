@@ -69,6 +69,13 @@ export HBASE_MANAGES_ZK=false                                                   
     <value>server002:2181,server003:2181,server004:2181</value>
 </property>
 
+<!-- 官方的说话是：使用本地文件存储数据的话设置为false，使用hdfs的话设置为true（但是设置为true的话会报'hbase.procedure.store.wal.use.hsync'，  'hbase.wal.dir' points to a Fi
+leSystem mount that can provide it 错误，所以我们设置为false） -->
+<property>
+    <name>hbase.unsafe.stream.capability.enforce</name>
+    <value>false</value>
+</property>
+
 <!--配置HBase主节点最大时钟偏离，默认是30s-->
 <!-- <property>
     <name>hbase.master.maxclockskew</name>
@@ -89,7 +96,6 @@ server004
 #### 九、拷贝HDFS集群配置文件 hdfs-site.xml 到 HBase 的配置目录 conf 目录下
 ```bash
 $ cp /home/hadoop-3.1.2/etc/hadoop/hdfs-site.xml ./                                     # 拷贝文件（因为我们就在HBase conf目录下，所以直接用 ./） 
-$ cp /home/hadoop-3.1.2/etc/hadoop/core-site.xml ./                                     # 拷贝文件（因为我们就在HBase conf目录下，所以直接用 ./）
 ```
 
 #### 十、解决 hbase-2.1.4 使用的  htrace-core4-4.2.0-incubating.jar 里面没有 org/apache/htrace/SamplerBuilder 类问题
