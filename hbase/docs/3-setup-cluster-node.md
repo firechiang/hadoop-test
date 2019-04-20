@@ -45,7 +45,6 @@ $ source ~/.bashrc                                                              
 #### 五、修改配置[vi conf/hbase-env.sh]（以下配置在文件里面都有，把注释打开，结果改一下即可）
 ```bash
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_171                                              # 配置JDK
-export HADOOP_HOME=/home/hadoop-3.1.2                                                   # 配置HADOOP_HOME
 export HBASE_MANAGES_ZK=false                                                           # 是否启用HBase自带的Zookeeper（我们要使用我们自己的集群所以把这个改为false）    
 ```
 
