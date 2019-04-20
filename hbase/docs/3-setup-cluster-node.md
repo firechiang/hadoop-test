@@ -88,7 +88,7 @@ server001
 server003
 server004
 ```
-#### 八、修改配置[vi conf/backup-masters]，配置备用主节点所在机器（就是 standby 节点）（注意：在哪台机器上启动集群，默认那台机器就是主节点）
+#### 八、修改配置[vi conf/backup-masters] 备用主节点所在机器（就是 standby 节点），这个文件要手动创建。（注意：在哪台机器上启动集群，默认那台机器就是主节点）
 ```bash
 server004
 ```
@@ -111,5 +111,24 @@ $ scp -r ./hbase-2.1.4 root@server003:/home
 
 #### 十二、启动HBase（注意：默认这台机器就是主节点，加上我们上面配置的那台备用主节点，我们现在总共有两个主节点）
 ```bash
-$ start-hbase.sh                   # 启动集群，可以到各台机器上去看看进程启动情况                                
+$ start-hbase.sh                       # 启动集群，可以去看看各机器进程启动情况 ；访问HBase Master：http://192.168.229.133:16010，RegionServer：http://192.168.229.133:16030） 
+
+# 如果有节点相应的进程没有启动，那么可以手动启动，命令如下
+$ hbase-daemon.sh start master         # 单独单独启动 Master
+$ hbase-daemon.sh stop master          # 单独停止 Master
+$ hbase-daemon.sh start regionserver   # 单独启动 RegionServer 
+$ hbase-daemon.sh stop regionserver    # 单独停止 RegionServer                                 
+```
+
+#### 十四、测试故障自动切换（http://192.168.229.133:16010（查看Master状态信息），http://192.168.229.133:16030（查看RegionServer信息））
+```bash
+$ hbase-daemon.sh stop master      # 在Active Master节点执行（停止Active Master），再看看 Standby Master 会不会变成 Active
+$ hbase-daemon.sh start master     # 在集群中，任意一台没有启动 Master 进程的机器上执行（启动 Master进程），再看看这台机器会不会自动加入到备用节点当中来，备用节点在主界面的Backup Masters栏目下有展示）
+```
+
+
+#### 十五、简单使用
+```bash
+$ hbase shell                      # 进入hbase命令行客户端
+$ list                             # 查看所有表
 ```
