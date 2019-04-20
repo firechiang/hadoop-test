@@ -37,6 +37,6 @@ $ cat /home/zookeeper-3.4.6/data/myid           # 查看myid文件是否有id信
 $ zkServer.sh start                              # 到各个节点上启动Zookeeper
 $ jps                                            # 查看java进程，如果有 QuorumPeerMain 进程说明启动成功
 $ zkServer.sh status                             # 查看当前Zookeeper的状态，如果看到 Mode: follower 或者  Mode: leader 这样的状态说明集群搭建成功
-$ zkServer.sh restart　　                        #    重启
+$ zkServer.sh restart　　                        # 重启
 $ zkServer.sh stop                               # 停止Zookeeper                              
 ```
