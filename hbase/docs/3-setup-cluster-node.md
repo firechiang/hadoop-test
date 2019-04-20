@@ -130,5 +130,13 @@ $ hbase-daemon.sh start master     # 在集群中，任意一台没有启动 Mas
 #### 十五、简单使用
 ```bash
 $ hbase shell                      # 进入hbase命令行客户端
+$ list_namespace                   # 查看所有的命名空间 （相当于mysql里面的库）
 $ list                             # 查看所有表
+```
+
+#### 十六、如果使用过程中报 org.apache.hadoop.hbase.PleaseHoldException: Master is initializing 错误，且日志里面不断打印  Master startup cannot progress, in holding-pattern until region onlined 警告，删除 Zookeeper 集群里面 /hbase/meta-region-server 的数据，重启Hbase即可
+```bash
+$ zkCli.sh -server 127.0.0.1       # 连接Zookeeper集群任意一台  
+$ rmr /hbase/meta-region-server    # 删除Hbase RegionSerevr注册信息
+```
 ```
