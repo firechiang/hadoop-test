@@ -61,6 +61,7 @@ $ drop '表名'                                     # 删除表（注意：删�
 
 $ put 'person','roekay001','cf:name','mamomao'   # 往person表添加数据，RowKey是roekay001，列族是cf，列名是name，值是mamomao
 $ get 'person','roekay001','cf:name'             # 获取表名为person，RowKey为roekay001，列族为cf，列名为name的数据
+$ scan 'person'                                  # 获取person表所有数据
 $ delete 'person','roekay001','cf:name'          # 删除表名为person，RowKey为roekay001，列族为cf，列名为name的数据
 $ flush 'person'                                 # 将表数据（内存里面）刷到磁盘（数据在/home/HBaseData/hbase/data/default）
 $ truncate 'person'                              # 清空person表的所有数据

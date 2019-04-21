@@ -18,6 +18,10 @@ public class LocalTest {
 	private Configuration conf;
 	
 	public void connection() throws IOException, URISyntaxException, InterruptedException {
+		/**
+		 * Hadoop集群操作所使用的角色，就是我们HDFS集群里面配置的那个角色
+		 */
+		System.setProperty("HADOOP_USER_NAME","root");
 		this.conf = new Configuration(false);
 		conf.set("fs.defaultFS", "hdfs://localhost:9820");
 		this.fs = FileSystem.get(conf);

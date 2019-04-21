@@ -38,7 +38,10 @@ public class RemoteTest implements Closeable {
 	 * @throws InterruptedException
 	 */
 	public void connection() throws IOException, URISyntaxException, InterruptedException {
-		
+		/**
+		 * Hadoop集群操作所使用的角色，就是我们HDFS集群里面配置的那个角色
+		 */
+		System.setProperty("HADOOP_USER_NAME","root");
 		this.conf = new Configuration(false);
 		/*
 		  *  直接使用HDFS配置文件连接
@@ -48,8 +51,8 @@ public class RemoteTest implements Closeable {
 		conf.set("fs.defaultFS", "hdfs://mycluster");
 		conf.set("dfs.nameservices","mycluster");
 		conf.set("dfs.ha.namenodes.mycluster","myNameNode1,myNameNode2");
-		conf.set("dfs.namenode.rpc-address.mycluster.myNameNode1","172.20.10.7:8020");
-		conf.set("dfs.namenode.rpc-address.mycluster.myNameNode2","172.20.10.8:8020");
+		conf.set("dfs.namenode.rpc-address.mycluster.myNameNode1","192.168.229.133:8020");
+		conf.set("dfs.namenode.rpc-address.mycluster.myNameNode2","192.168.229.129:8020");
 		//hdfs文件系统客户端实现，如果没配将导致java.io.IOException: No FileSystem for scheme: hdfs
 		conf.set("fs.hdfs.impl","org.apache.hadoop.hdfs.DistributedFileSystem");
 		conf.set("dfs.client.failover.proxy.provider.mycluster","org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider");
