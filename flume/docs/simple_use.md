@@ -70,7 +70,7 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/avro-conf.properties  -name 
 $ flume-ng avro-client -H localhost -p 9999 -F ./test.txt          # 测试发送当前目录下 test.txt到Flume avro源，内容相同的文件只能发送一次（另起一个xshell窗口）  
 ```
 
-#### 3.3 测试Flume从Zookeeper读取配置文件来使用，[首先上传配置文件到Zookeeper][1]（这里测试的是avro 数据源配置文件，所以配置文件内容和上面的一样）
+#### 3.3 测试Flume从Zookeeper读取配置文件来使用，[上传配置文件到Zookeeper的源码，先执行这个][1]（这里测试的是avro 数据源配置文件，所以配置文件内容和上面的一样）
 ```bash
 $ flume-ng agent -z 192.168.174.1:2181 -p /flume --name a1 -Dflume.root.logger=INFO,console   # 从zookeeper中读取配置文件并启动，多个zk用逗号隔开， -p是指定文件所在zk的目录 ，--name一般是Agent名也是文件名
 $ flume-ng avro-client -H localhost -p 9999 -F ./test.txt          # 测试发送当前目录下 test.txt到Flume avro源，内容相同的文件只能发送一次（另起一个xshell窗口） 
@@ -128,7 +128,7 @@ $ vi 1.log                                 # 测试往/home/logs目录添加文�
 
 #### 3.6 测试使用 Syslog TCP 数据源（可用于 tcp 数据收集）
 ```bash
-vi syslog-tcp-conf.properties              # 创建配置文件，内容如下：  
+$ vi syslog-tcp-conf.properties            # 创建配置文件，内容如下：  
 
    a1.sources = r1
    a1.channels = c1
@@ -153,7 +153,7 @@ $ telnet localhost 9898                    # windows下连接测试，windows te
 
 #### 3.7 测试使用 Syslog UDP 数据源（可用于 udp 数据收集）[数据发送的测试代码][2]
 ```bash
-vi syslog-udp-conf.properties              # 创建配置文件，内容如下：
+$ vi syslog-udp-conf.properties            # 创建配置文件，内容如下：
 
    a1.sources = r1
    a1.channels = c1
@@ -177,7 +177,7 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/syslog-udp-conf.properties  
 
 #### 3.8 测试使用 http 数据源（用于前端用户行为数据收集）[数据发送的测试代码][3]
 ```bash
-vi http-conf.properties                    # 创建配置文件，内容如下：  
+$ vi http-conf.properties                  # 创建配置文件，内容如下：  
 
    a1.sources = r1
    a1.channels = c1
@@ -224,7 +224,7 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/custom-conf.properties  -nam
 ```
 #### 4.0 测试使用 sequence generator 数据源（Flume启动自动生成 字符序列 （主要用于测试））
 ```bash
-vi sequence-conf.properties                # 创建配置文件，内容如下：  
+$ vi sequence-conf.properties              # 创建配置文件，内容如下：  
 
    a1.sources = r1
    a1.channels = c1
@@ -245,7 +245,7 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/sequence-conf.properties  -n
 
 #### 4.1 测试使用 Stress 数据源（有点像序列生成器，Flume启动就生成大量事件，主要用于压力测试）
 ```bash
-vi stress-conf.properties                  # 创建配置文件，内容如下：  
+$ vi stress-conf.properties                # 创建配置文件，内容如下：  
 
    a1.sources = r1
    a1.channels = c1
