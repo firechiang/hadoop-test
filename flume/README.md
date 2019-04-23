@@ -1,5 +1,5 @@
 #### [一、安装][1]
-#### [二、使用][2]
+#### [二、简单使用][2]
 #### 三、架构
 ![image](https://github.com/firechiang/hadoop-test/blob/master/flume/image/1_flume_framework.png)
 ```bash
