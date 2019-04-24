@@ -55,7 +55,7 @@ $ wget http://central.maven.org/maven2/mysql/mysql-connector-java/8.0.15/mysql-c
 ```
 #### 七、验证Sqoop配置安装是否有问题（如果验证失败会有：Verification has failed, please check Server logs for further details 提示信息）
 ```bash
-$ sqoop2-tool verify   # 检查配置，如果失败报fail，在这个命令执行的目录会生成一个@LOGDIR@目录，里面有个错误信息文件sqoop.log，打开看看是哪里错了。如果成功会有Verification was successful提示，且会自动创建名为SQOOP的数据库，
+$ sqoop2-tool verify   # 检查配置，如果失败报fail，在这个命令执行的目录会生成一个@LOGDIR@目录，里面有个错误信息文件sqoop.log，打开看看是哪里错了。如果成功会有Verification was successful提示，且会自动创建名为SQOOP的数据库
 ```
 
 #### 八、简单使用
