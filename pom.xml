@@ -82,6 +82,7 @@
         <module>yarn</module>
         <module>hive</module>
         <module>hbase</module>
-    <module>sqoop</module>
-  </modules>
+        <module>sqoop</module>
+        <module>cassandra</module>
+    </modules>
 </project>
