@@ -84,6 +84,7 @@ $ nodetool status                                      # 查看集群的状态
 ```
 
 #### 六、远程连接Cassandra初始化账号和密码
+```bash
 $ cqlsh 192.168.83.137 9042 -ucassandra -pcassandra    # 连接（远程Cassandra的IP：127.0.0.1，端口：9042，用户名(-u)：cassandra，密码(-p)：cassandra）
 $ create user jiang with password 'jiang' superuser;   # 创建超级管理员jiang，密码：jiang
 $ exit;                                                # 退出当前登录账号
