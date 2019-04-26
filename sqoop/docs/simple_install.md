@@ -70,4 +70,6 @@ $ show link                                # 显示所有连接
 $ show job                                 # 显示所有任务
 
 $ set option --name verbose --value true   # 开启verbose，方便在出错时及时查错
+
+$ :exit                                    # 退出客户端命令行
 ```
