@@ -55,7 +55,7 @@ storage_port: 7000
 # 客户端和服务端的通信端口（注意配置防火墙）
 native_transport_port: 9042
 
-# 单数据中心机架感知策略
+# 数据中心机架，IP感知策略
 endpoint_snitch: GossipingPropertyFileSnitch
 ```
 

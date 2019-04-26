@@ -55,7 +55,7 @@ storage_port: 7000
 # 客户端和服务端的通信端口（注意配置防火墙）
 native_transport_port: 9042
 
-# 多数据中心的感知策略（我们配的这个策略是：dc(数据中心)和rack(机架)通过显式的定义在cassandra-topology.properties文件里面）
+# 数据中心机架，配置文件感知策略（我们配的这个策略是：dc(数据中心)和rack(机架)通过显式的定义在cassandra-topology.properties文件里面）
 endpoint_snitch: PropertyFileSnitch
 ```
 
