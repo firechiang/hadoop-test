@@ -84,5 +84,6 @@
         <module>hbase</module>
         <module>sqoop</module>
         <module>cassandra</module>
-    </modules>
+    <module>protobuf</module>
+  </modules>
 </project>
