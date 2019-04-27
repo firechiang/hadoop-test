@@ -1,8 +1,7 @@
 syntax = "proto2";
-
 package com.firecode.hadooptest.hbase.protobuf;
 option java_package = "com.firecode.hadooptest.hbase.protobuf";
-//option java_outer_classname = "CallRecord";
+option java_outer_classname = "CallRecordBuilder";
 
 //通话记录类(后面跟的是：属性名=顺序)
 message CallRecord

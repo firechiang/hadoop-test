@@ -3,8 +3,8 @@
 
 package com.firecode.hadooptest.hbase.protobuf;
 
-public final class CallRecordOuterClass {
-  private CallRecordOuterClass() {}
+public final class CallRecordBuilder {
+  private CallRecordBuilder() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -166,15 +166,15 @@ public final class CallRecordOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
+      return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable
+      return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.class, com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.Builder.class);
+              com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.class, com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.Builder.class);
     }
 
     private int bitField0_;
@@ -419,10 +419,10 @@ public final class CallRecordOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord)) {
+      if (!(obj instanceof com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord)) {
         return super.equals(obj);
       }
-      com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord other = (com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord) obj;
+      com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord other = (com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord) obj;
 
       boolean result = true;
       result = result && (hasDnum() == other.hasDnum());
@@ -477,69 +477,69 @@ public final class CallRecordOuterClass {
       return hash;
     }
 
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(byte[] data)
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(java.io.InputStream input)
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseDelimitedFrom(java.io.InputStream input)
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseDelimitedFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parseFrom(
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -552,7 +552,7 @@ public final class CallRecordOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord prototype) {
+    public static Builder newBuilder(com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -577,21 +577,21 @@ public final class CallRecordOuterClass {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.firecode.hadooptest.hbase.protobuf.CallRecord)
-        com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecordOrBuilder {
+        com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecordOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
+        return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable
+        return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.class, com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.Builder.class);
+                com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.class, com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.Builder.class);
       }
 
-      // Construct using com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.newBuilder()
+      // Construct using com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -623,17 +623,17 @@ public final class CallRecordOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
+        return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
       }
 
       @java.lang.Override
-      public com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord getDefaultInstanceForType() {
-        return com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.getDefaultInstance();
+      public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord getDefaultInstanceForType() {
+        return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord build() {
-        com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord result = buildPartial();
+      public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord build() {
+        com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -641,8 +641,8 @@ public final class CallRecordOuterClass {
       }
 
       @java.lang.Override
-      public com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord buildPartial() {
-        com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord result = new com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord(this);
+      public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord buildPartial() {
+        com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord result = new com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -700,16 +700,16 @@ public final class CallRecordOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord) {
-          return mergeFrom((com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord)other);
+        if (other instanceof com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord) {
+          return mergeFrom((com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord other) {
-        if (other == com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord other) {
+        if (other == com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.getDefaultInstance()) return this;
         if (other.hasDnum()) {
           bitField0_ |= 0x00000001;
           dnum_ = other.dnum_;
@@ -757,11 +757,11 @@ public final class CallRecordOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord parsedMessage = null;
+        com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord) e.getUnfinishedMessage();
+          parsedMessage = (com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1092,12 +1092,12 @@ public final class CallRecordOuterClass {
     }
 
     // @@protoc_insertion_point(class_scope:com.firecode.hadooptest.hbase.protobuf.CallRecord)
-    private static final com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord DEFAULT_INSTANCE;
+    private static final com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord();
+      DEFAULT_INSTANCE = new com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord();
     }
 
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord getDefaultInstance() {
+    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1122,7 +1122,7 @@ public final class CallRecordOuterClass {
     }
 
     @java.lang.Override
-    public com.firecode.hadooptest.hbase.protobuf.CallRecordOuterClass.CallRecord getDefaultInstanceForType() {
+    public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1146,8 +1146,8 @@ public final class CallRecordOuterClass {
       "e/protobuf/CallRecord.proto\022&com.firecod" +
       "e.hadooptest.hbase.protobuf\"F\n\nCallRecor" +
       "d\022\014\n\004dnum\030\001 \002(\t\022\016\n\006length\030\002 \002(\t\022\014\n\004type\030" +
-      "\003 \002(\t\022\014\n\004date\030\004 \002(\tB(\n&com.firecode.hado" +
-      "optest.hbase.protobuf"
+      "\003 \002(\t\022\014\n\004date\030\004 \002(\tB;\n&com.firecode.hado" +
+      "optest.hbase.protobufB\021CallRecordBuilder"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
