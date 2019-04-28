@@ -15,6 +15,6 @@
 ### 三、关闭 Eclipse（注意：一定要关闭 Eclipse，才执行下面的操作，否则Eclipse将无法使用）
 ### 四、替换 Protobuf-dt 插件依赖的Guava jar包
 #### 4.1，[下载com.google.guava_21.0.0.v20170206-1425.jar包][1]（注：这个jar包实际就是guava-19.0.jar只是该了名字而已）
-#### 4.2，将我们下载的jar包替换掉Eclipse插件安装目录下的com.google.guava_21.0.0.v20170206-1425.jar包（注：Windows Eclipse插件安装目录一般在：C:\Users\'用户名'\.p2\pool\plugins）
+#### 4.2，将我们下载的jar包替换掉Eclipse插件安装目录下的com.google.guava_21.0.0.v20170206-1425.jar包（注：Windows Eclipse插件安装目录一般在：C:\Users\"用户名"\\.p2\pool\plugins）
 
 [1]: https://github.com/firechiang/hadoop-test/blob/master/protobuf/plug/com.google.guava_21.0.0.v20170206-1425.jar
