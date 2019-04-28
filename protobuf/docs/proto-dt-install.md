@@ -11,3 +11,5 @@
 ![image](https://github.com/firechiang/hadoop-test/blob/master/protobuf/image/4.png)
 ![image](https://github.com/firechiang/hadoop-test/blob/master/protobuf/image/5.png)
 ![image](https://github.com/firechiang/hadoop-test/blob/master/protobuf/image/6.png)
+
+#### 使用说明(https://github.com/firechiang/hadoop-test/blob/master/protobuf/plug/com.google.guava_21.0.0.v20170206-1425.jar)
