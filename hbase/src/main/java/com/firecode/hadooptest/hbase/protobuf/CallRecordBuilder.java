@@ -6,13 +6,7 @@ package com.firecode.hadooptest.hbase.protobuf;
 public final class CallRecordBuilder {
   private CallRecordBuilder() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface CallRecordOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.firecode.hadooptest.hbase.protobuf.CallRecord)
@@ -75,41 +69,43 @@ public final class CallRecordBuilder {
         getDateBytes();
   }
   /**
+   * Protobuf type {@code com.firecode.hadooptest.hbase.protobuf.CallRecord}
+   *
    * <pre>
    *通话记录类(后面跟的是：属性名=顺序)
    * </pre>
-   *
-   * Protobuf type {@code com.firecode.hadooptest.hbase.protobuf.CallRecord}
    */
-  public  static final class CallRecord extends
-      com.google.protobuf.GeneratedMessageV3 implements
+  public static final class CallRecord extends
+      com.google.protobuf.GeneratedMessage implements
       // @@protoc_insertion_point(message_implements:com.firecode.hadooptest.hbase.protobuf.CallRecord)
       CallRecordOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use CallRecord.newBuilder() to construct.
-    private CallRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private CallRecord(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private CallRecord() {
-      dnum_ = "";
-      length_ = "";
-      type_ = "";
-      date_ = "";
+    private CallRecord(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CallRecord defaultInstance;
+    public static CallRecord getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public CallRecord getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private CallRecord(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -121,6 +117,13 @@ public final class CallRecordBuilder {
             case 0:
               done = true;
               break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
@@ -145,20 +148,13 @@ public final class CallRecordBuilder {
               date_ = bs;
               break;
             }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -169,17 +165,31 @@ public final class CallRecordBuilder {
       return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.class, com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<CallRecord> PARSER =
+        new com.google.protobuf.AbstractParser<CallRecord>() {
+      public CallRecord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CallRecord(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CallRecord> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     public static final int DNUM_FIELD_NUMBER = 1;
-    private volatile java.lang.Object dnum_;
+    private java.lang.Object dnum_;
     /**
      * <code>required string dnum = 1;</code>
      */
@@ -221,7 +231,7 @@ public final class CallRecordBuilder {
     }
 
     public static final int LENGTH_FIELD_NUMBER = 2;
-    private volatile java.lang.Object length_;
+    private java.lang.Object length_;
     /**
      * <code>required string length = 2;</code>
      */
@@ -263,7 +273,7 @@ public final class CallRecordBuilder {
     }
 
     public static final int TYPE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object type_;
+    private java.lang.Object type_;
     /**
      * <code>required string type = 3;</code>
      */
@@ -305,7 +315,7 @@ public final class CallRecordBuilder {
     }
 
     public static final int DATE_FIELD_NUMBER = 4;
-    private volatile java.lang.Object date_;
+    private java.lang.Object date_;
     /**
      * <code>required string date = 4;</code>
      */
@@ -346,8 +356,13 @@ public final class CallRecordBuilder {
       }
     }
 
+    private void initFields() {
+      dnum_ = "";
+      length_ = "";
+      type_ = "";
+      date_ = "";
+    }
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -373,121 +388,58 @@ public final class CallRecordBuilder {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, dnum_);
+        output.writeBytes(1, getDnumBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, length_);
+        output.writeBytes(2, getLengthBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, type_);
+        output.writeBytes(3, getTypeBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, date_);
+        output.writeBytes(4, getDateBytes());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, dnum_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getDnumBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, length_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getLengthBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, type_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getTypeBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, date_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getDateBytes());
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord)) {
-        return super.equals(obj);
-      }
-      com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord other = (com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord) obj;
-
-      boolean result = true;
-      result = result && (hasDnum() == other.hasDnum());
-      if (hasDnum()) {
-        result = result && getDnum()
-            .equals(other.getDnum());
-      }
-      result = result && (hasLength() == other.hasLength());
-      if (hasLength()) {
-        result = result && getLength()
-            .equals(other.getLength());
-      }
-      result = result && (hasType() == other.hasType());
-      if (hasType()) {
-        result = result && getType()
-            .equals(other.getType());
-      }
-      result = result && (hasDate() == other.hasDate());
-      if (hasDate()) {
-        result = result && getDate()
-            .equals(other.getDate());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
     }
 
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasDnum()) {
-        hash = (37 * hash) + DNUM_FIELD_NUMBER;
-        hash = (53 * hash) + getDnum().hashCode();
-      }
-      if (hasLength()) {
-        hash = (37 * hash) + LENGTH_FIELD_NUMBER;
-        hash = (53 * hash) + getLength().hashCode();
-      }
-      if (hasType()) {
-        hash = (37 * hash) + TYPE_FIELD_NUMBER;
-        hash = (53 * hash) + getType().hashCode();
-      }
-      if (hasDate()) {
-        hash = (37 * hash) + DATE_FIELD_NUMBER;
-        hash = (53 * hash) + getDate().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -511,71 +463,58 @@ public final class CallRecordBuilder {
     }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
-    @java.lang.Override
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
     /**
+     * Protobuf type {@code com.firecode.hadooptest.hbase.protobuf.CallRecord}
+     *
      * <pre>
      *通话记录类(后面跟的是：属性名=顺序)
      * </pre>
-     *
-     * Protobuf type {@code com.firecode.hadooptest.hbase.protobuf.CallRecord}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.firecode.hadooptest.hbase.protobuf.CallRecord)
         com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecordOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -583,8 +522,7 @@ public final class CallRecordBuilder {
         return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -597,16 +535,18 @@ public final class CallRecordBuilder {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         dnum_ = "";
@@ -620,18 +560,19 @@ public final class CallRecordBuilder {
         return this;
       }
 
-      @java.lang.Override
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
       }
 
-      @java.lang.Override
       public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord getDefaultInstanceForType() {
         return com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.getDefaultInstance();
       }
 
-      @java.lang.Override
       public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord build() {
         com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord result = buildPartial();
         if (!result.isInitialized()) {
@@ -640,7 +581,6 @@ public final class CallRecordBuilder {
         return result;
       }
 
-      @java.lang.Override
       public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord buildPartial() {
         com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord result = new com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord(this);
         int from_bitField0_ = bitField0_;
@@ -666,39 +606,6 @@ public final class CallRecordBuilder {
         return result;
       }
 
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord) {
           return mergeFrom((com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord)other);
@@ -730,29 +637,30 @@ public final class CallRecordBuilder {
           date_ = other.date_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         if (!hasDnum()) {
+          
           return false;
         }
         if (!hasLength()) {
+          
           return false;
         }
         if (!hasType()) {
+          
           return false;
         }
         if (!hasDate()) {
+          
           return false;
         }
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -762,7 +670,7 @@ public final class CallRecordBuilder {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1075,70 +983,29 @@ public final class CallRecordBuilder {
         onChanged();
         return this;
       }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:com.firecode.hadooptest.hbase.protobuf.CallRecord)
     }
 
-    // @@protoc_insertion_point(class_scope:com.firecode.hadooptest.hbase.protobuf.CallRecord)
-    private static final com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord();
+      defaultInstance = new CallRecord(true);
+      defaultInstance.initFields();
     }
 
-    public static com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<CallRecord>
-        PARSER = new com.google.protobuf.AbstractParser<CallRecord>() {
-      @java.lang.Override
-      public CallRecord parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CallRecord(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<CallRecord> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CallRecord> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:com.firecode.hadooptest.hbase.protobuf.CallRecord)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -1164,7 +1031,7 @@ public final class CallRecordBuilder {
     internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor,
         new java.lang.String[] { "Dnum", "Length", "Type", "Date", });
   }
