@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package com.firecode.hadooptest.hbase.protobuf;
+package com.firecode.hadooptest.protobuf;
 option java_package = "com.firecode.hadooptest.protobuf";
 option java_outer_classname = "CallRecordBuilder";
 
