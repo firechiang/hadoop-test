@@ -13,18 +13,18 @@ public final class CallRecordBuilder {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string dnum = 1;</code>
+     * <code>required string dnumPhone = 1;</code>
      */
-    boolean hasDnum();
+    boolean hasDnumPhone();
     /**
-     * <code>required string dnum = 1;</code>
+     * <code>required string dnumPhone = 1;</code>
      */
-    java.lang.String getDnum();
+    java.lang.String getDnumPhone();
     /**
-     * <code>required string dnum = 1;</code>
+     * <code>required string dnumPhone = 1;</code>
      */
     com.google.protobuf.ByteString
-        getDnumBytes();
+        getDnumPhoneBytes();
 
     /**
      * <code>required string length = 2;</code>
@@ -127,7 +127,7 @@ public final class CallRecordBuilder {
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              dnum_ = bs;
+              dnumPhone_ = bs;
               break;
             }
             case 18: {
@@ -188,19 +188,19 @@ public final class CallRecordBuilder {
     }
 
     private int bitField0_;
-    public static final int DNUM_FIELD_NUMBER = 1;
-    private java.lang.Object dnum_;
+    public static final int DNUMPHONE_FIELD_NUMBER = 1;
+    private java.lang.Object dnumPhone_;
     /**
-     * <code>required string dnum = 1;</code>
+     * <code>required string dnumPhone = 1;</code>
      */
-    public boolean hasDnum() {
+    public boolean hasDnumPhone() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string dnum = 1;</code>
+     * <code>required string dnumPhone = 1;</code>
      */
-    public java.lang.String getDnum() {
-      java.lang.Object ref = dnum_;
+    public java.lang.String getDnumPhone() {
+      java.lang.Object ref = dnumPhone_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -208,22 +208,22 @@ public final class CallRecordBuilder {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          dnum_ = s;
+          dnumPhone_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>required string dnum = 1;</code>
+     * <code>required string dnumPhone = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getDnumBytes() {
-      java.lang.Object ref = dnum_;
+        getDnumPhoneBytes() {
+      java.lang.Object ref = dnumPhone_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        dnum_ = b;
+        dnumPhone_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -357,7 +357,7 @@ public final class CallRecordBuilder {
     }
 
     private void initFields() {
-      dnum_ = "";
+      dnumPhone_ = "";
       length_ = "";
       type_ = "";
       date_ = "";
@@ -368,7 +368,7 @@ public final class CallRecordBuilder {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasDnum()) {
+      if (!hasDnumPhone()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -392,7 +392,7 @@ public final class CallRecordBuilder {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getDnumBytes());
+        output.writeBytes(1, getDnumPhoneBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getLengthBytes());
@@ -414,7 +414,7 @@ public final class CallRecordBuilder {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getDnumBytes());
+          .computeBytesSize(1, getDnumPhoneBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -549,7 +549,7 @@ public final class CallRecordBuilder {
 
       public Builder clear() {
         super.clear();
-        dnum_ = "";
+        dnumPhone_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         length_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -588,7 +588,7 @@ public final class CallRecordBuilder {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.dnum_ = dnum_;
+        result.dnumPhone_ = dnumPhone_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -617,9 +617,9 @@ public final class CallRecordBuilder {
 
       public Builder mergeFrom(com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord other) {
         if (other == com.firecode.hadooptest.hbase.protobuf.CallRecordBuilder.CallRecord.getDefaultInstance()) return this;
-        if (other.hasDnum()) {
+        if (other.hasDnumPhone()) {
           bitField0_ |= 0x00000001;
-          dnum_ = other.dnum_;
+          dnumPhone_ = other.dnumPhone_;
           onChanged();
         }
         if (other.hasLength()) {
@@ -642,7 +642,7 @@ public final class CallRecordBuilder {
       }
 
       public final boolean isInitialized() {
-        if (!hasDnum()) {
+        if (!hasDnumPhone()) {
           
           return false;
         }
@@ -680,24 +680,24 @@ public final class CallRecordBuilder {
       }
       private int bitField0_;
 
-      private java.lang.Object dnum_ = "";
+      private java.lang.Object dnumPhone_ = "";
       /**
-       * <code>required string dnum = 1;</code>
+       * <code>required string dnumPhone = 1;</code>
        */
-      public boolean hasDnum() {
+      public boolean hasDnumPhone() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string dnum = 1;</code>
+       * <code>required string dnumPhone = 1;</code>
        */
-      public java.lang.String getDnum() {
-        java.lang.Object ref = dnum_;
+      public java.lang.String getDnumPhone() {
+        java.lang.Object ref = dnumPhone_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            dnum_ = s;
+            dnumPhone_ = s;
           }
           return s;
         } else {
@@ -705,53 +705,53 @@ public final class CallRecordBuilder {
         }
       }
       /**
-       * <code>required string dnum = 1;</code>
+       * <code>required string dnumPhone = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getDnumBytes() {
-        java.lang.Object ref = dnum_;
+          getDnumPhoneBytes() {
+        java.lang.Object ref = dnumPhone_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          dnum_ = b;
+          dnumPhone_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>required string dnum = 1;</code>
+       * <code>required string dnumPhone = 1;</code>
        */
-      public Builder setDnum(
+      public Builder setDnumPhone(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        dnum_ = value;
+        dnumPhone_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string dnum = 1;</code>
+       * <code>required string dnumPhone = 1;</code>
        */
-      public Builder clearDnum() {
+      public Builder clearDnumPhone() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        dnum_ = getDefaultInstance().getDnum();
+        dnumPhone_ = getDefaultInstance().getDnumPhone();
         onChanged();
         return this;
       }
       /**
-       * <code>required string dnum = 1;</code>
+       * <code>required string dnumPhone = 1;</code>
        */
-      public Builder setDnumBytes(
+      public Builder setDnumPhoneBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        dnum_ = value;
+        dnumPhone_ = value;
         onChanged();
         return this;
       }
@@ -1011,10 +1011,11 @@ public final class CallRecordBuilder {
     java.lang.String[] descriptorData = {
       "\nAmain/java/com/firecode/hadooptest/hbas" +
       "e/protobuf/CallRecord.proto\022&com.firecod" +
-      "e.hadooptest.hbase.protobuf\"F\n\nCallRecor" +
-      "d\022\014\n\004dnum\030\001 \002(\t\022\016\n\006length\030\002 \002(\t\022\014\n\004type\030" +
-      "\003 \002(\t\022\014\n\004date\030\004 \002(\tB;\n&com.firecode.hado" +
-      "optest.hbase.protobufB\021CallRecordBuilder"
+      "e.hadooptest.hbase.protobuf\"K\n\nCallRecor" +
+      "d\022\021\n\tdnumPhone\030\001 \002(\t\022\016\n\006length\030\002 \002(\t\022\014\n\004" +
+      "type\030\003 \002(\t\022\014\n\004date\030\004 \002(\tB;\n&com.firecode" +
+      ".hadooptest.hbase.protobufB\021CallRecordBu" +
+      "ilder"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1033,7 +1034,7 @@ public final class CallRecordBuilder {
     internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_firecode_hadooptest_hbase_protobuf_CallRecord_descriptor,
-        new java.lang.String[] { "Dnum", "Length", "Type", "Date", });
+        new java.lang.String[] { "DnumPhone", "Length", "Type", "Date", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

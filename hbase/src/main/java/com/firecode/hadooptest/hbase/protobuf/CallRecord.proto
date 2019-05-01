@@ -7,7 +7,7 @@ option java_outer_classname = "CallRecordBuilder";
 //通话记录类(后面跟的是：属性名=顺序)
 message CallRecord
 {
-    required string dnum = 1;
+    required string dnumPhone = 1;
     required string length = 2;
     required string type = 3;
     required string date = 4;

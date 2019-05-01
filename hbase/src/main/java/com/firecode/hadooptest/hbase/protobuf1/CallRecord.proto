@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package com.firecode.hadooptest.hbase.protobuf1;
+option java_package = "com.firecode.hadooptest.hbase.protobuf1";
+option java_outer_classname = "CallRecordDetail";
+
+message CallRecord
+{
+    required string dnumPhone = 1;
+    required string length = 2;
+    required string type = 3;
+    required string date = 4;
+}
+
+message DayCallRecord
+{
+	//repeated 表示集合，就是 List<CallRecord>的意思
+    repeated CallRecord dayCallRecord = 1;
+
+}

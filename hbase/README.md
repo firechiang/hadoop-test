@@ -1,7 +1,8 @@
 #### [一、伪分布式搭建以及简单使用][2]
 #### [二、完全分布式搭建][3]
 #### [三、使用案例][4]
-#### 四、HBase简介，[架构][1]
+#### [四、优化说明][5]
+#### 五、HBase简介，[架构][1]
 ```bash
 1，Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩、实时读写的分布式数据库
 2，利用Hadoop HDFS作为其文件存储系统,利用Hadoop MapReduce来处理HBase中的海量数据,利用Zookeeper作为其分布式协同服务
@@ -63,3 +64,4 @@
 [2]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/2-setup-single-node.md
 [3]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/3-setup-cluster-node.md
 [4]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/4-use-iezi.md
+[5]: https://github.com/firechiang/hadoop-test/tree/master/hbase/docs/optimization.md

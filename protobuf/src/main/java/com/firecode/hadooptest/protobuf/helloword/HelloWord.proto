@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package com.firecode.hadooptest.protobuf.helloword;
+option java_package = "com.firecode.hadooptest.protobuf.helloword";
+option java_outer_classname = "HelloWrodBuilder";
+
+message HelloWord
+{
+    required int32 id = 1;
+    required string str = 2;
+    optional int32 opt = 3;
+}
