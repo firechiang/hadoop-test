@@ -18,9 +18,19 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class WordCountMain {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+		/**
+		 * Hadoop集群操作所使用的角色，就是我们HDFS集群里面配置的那个角色
+		 */
+		System.setProperty("HADOOP_USER_NAME","root");
+		
 		Configuration conf = new Configuration(true);
 		
-		//conf.set("fs.defaultFS", "hdfs://localhost:9820");  本地跑
+		conf.set("fs.defaultFS", "hdfs://server002:8020");
+		
+		//开启自适应平台支持，用于Windows系统（自动识别系统）
+		conf.set("mapreduce.app-submission.cross-platform", "true");
+		//本地运行
+		conf.set("mapreduce.framework.name", "local");
 		
 		Job job = Job.getInstance(conf);
 		//任务启动类

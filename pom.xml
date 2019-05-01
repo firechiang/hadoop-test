@@ -17,7 +17,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<junit.version>4.10</junit.version>
-		<hadoop.version>3.2.0</hadoop.version>
+		<hadoop.version>3.1.2</hadoop.version>
 	</properties>
 
 	<dependencyManagement>
@@ -46,13 +46,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<dependency>
-		    <groupId>jdk.tools</groupId>
-			<artifactId>jdk.tools</artifactId>
-			<version>1.8</version>
-			<scope>system</scope>
-			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
