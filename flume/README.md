@@ -1,9 +1,15 @@
 #### [一、安装][1]
 #### [二、Source简单使用][2]
 #### [三、HDFS Sink简单使用][3]
-#### [三、Hive Sink简单使用(分区)][4]
-#### [三、Hive Sink简单使用(不分区)][5]
-#### 三、架构
+#### [四、Hive Sink简单使用(分区)][4]
+#### [五、Hive Sink简单使用(不分区)][5]
+#### [六、HBase Sink简单使用(不分区)][6]
+#### [七、自定义 Sink简单使用][8]
+#### [八、File Sink简单使用(将数据存储到机器系统本地)][7]
+#### [九、自定义 JDBC Channel简单使用(将数据缓冲数据存储到Mysql数据库)][9]
+#### [十、复制通道选择器（当一个源绑定了多个通道，那么一份数据会同时发给多个通道，应用场景：一份数据要被多个集群处理）][10]
+#### [十一、多路复用通道选择器（当一个源绑定了多个通道，它会根据头信息将数据发送到对应的通道，有负载均衡的意思）][11]
+#### 七、架构
 ![image](https://github.com/firechiang/hadoop-test/blob/master/flume/image/1_flume_framework.png)
 ```bash
 1，在数据生成器运行的节点上（一般指的是我们的应用），启动单独的Flume Agent 来收集数据，再推送到存储端（HDFS，ElasticSearch等等）
@@ -41,3 +47,9 @@
 [3]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hdfs_sink_simple_use.md
 [4]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hive_sink_simple_use-1.md
 [5]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hive_sink_simple_use-2.md
+[6]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hbase_sink_simple_use.md
+[7]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/file_roll_sink_simple_use.md
+[8]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/custom_sink_simple_use.md
+[9]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/jdbc_channel_simple_use.md
+[10]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/mem_a_channel.md
+[11]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/mem_a_channel-2.md
