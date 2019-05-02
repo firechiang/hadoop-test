@@ -49,6 +49,7 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/source-select-conf-2.propert
 ```
 
 #### 1.3，测试我们上面监听在avro的Flume（另起一个xshell窗口）
+```bash
 $ echo state=US > header_US.txt                 # 在当前目录建立header_US.txt文件，里面的内容是state=US
 $ echo state=CZ > header_CZ.txt                 # 在当前目录建立header_CZ.txt文件，里面的内容是state=CZ
 $ echo aaa > f.txt                              # 在当前目录建立f.txt文件，里面的内容是aaa
