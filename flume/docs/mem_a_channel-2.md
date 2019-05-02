@@ -53,6 +53,7 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/source-select-conf-2.propert
 $ echo state=US > header_US.txt                 # 在当前目录建立header_US.txt文件，里面的内容是state=US
 $ echo state=CZ > header_CZ.txt                 # 在当前目录建立header_CZ.txt文件，里面的内容是state=CZ
 $ echo aaa > f.txt                              # 在当前目录建立f.txt文件，里面的内容是aaa
+
 # 使用avro客户端发送文件数据，到Flume avro源，--headerFile指定的是头信息数据，--filename是要发送的文件（当我们指定header_US.txt头信息的时候，服务端应打印2次，因为state=US指定了2个管道，它会往这两个管道同时发送数据）
 $ flume-ng avro-client -H 127.0.0.1 -p 9191 --headerFile header_US.txt --filename f.txt
 ```
