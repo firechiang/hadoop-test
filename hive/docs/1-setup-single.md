@@ -36,7 +36,7 @@ $ :wq                                                                           
 <!-- 连接关系数库的地址（注意创建库名 hive_remote） -->
 <property>  
     <name>javax.jdo.option.ConnectionURL</name>  
-    <value>jdbc:mysql://server004:3306/hive_remote?createDatabaseIfNotExist=true&amp;serverTimezone=UTC</value>  
+    <value>jdbc:mysql://server004:3306/hive_remote?createDatabaseIfNotExist=true</value>  
 </property>  
    
 <!-- JDBC驱动 -->
