@@ -41,6 +41,8 @@ a1.sinks.s1.channel = c1                   # 将名字叫a1的Agent的Sink（沉
 # 将上面的示例配置复制到 flume-conf.properties 配置文件，再执行以下命令启动Flume
 $ flume-ng agent --conf conf --conf-file /home/apache-flume-1.9.0-bin/conf/flume-conf.properties --name a1 -DFlume.root.logger=INFO,console   # linux 使用
 $ flume-ng  agent -conf ../conf  -conf-file ../conf/flume-conf.properties  -name a1  -property flume.root.logger=INFO,console                 # windows使用
+
+
 # 测试我们上面监听在netcat的Flume（如果没有nc命令，请安装：yum -y install nmap-ncat.x86_64）
 $ nc localhost 44444                       # 另起一个xshell窗口，连接Flume，然后顺便输入数据，看看有没有发送过去（接收端我们配的是console，数据会打印到控制台）
 $ telnet localhost 44444                   # windows下连接测试，windows telnet如果没有开启到 卸载程序下 找到 打开或关闭windows下开启
