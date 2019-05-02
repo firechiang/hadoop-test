@@ -1,7 +1,8 @@
 #### [一、安装][1]
 #### [二、Source简单使用][2]
 #### [三、HDFS Sink简单使用][3]
-#### [三、Hive Sink简单使用][4]
+#### [三、Hive Sink简单使用(分区)][4]
+#### [三、Hive Sink简单使用(不分区)][5]
 #### 三、架构
 ![image](https://github.com/firechiang/hadoop-test/blob/master/flume/image/1_flume_framework.png)
 ```bash
@@ -38,4 +39,5 @@
 [1]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/simple_install.md
 [2]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/source_simple_use.md
 [3]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hdfs_sink_simple_use.md
-[4]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hive_sink_simple_use.md
+[4]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hive_sink_simple_use-1.md
+[5]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/hive_sink_simple_use-2.md
