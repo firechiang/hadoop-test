@@ -52,7 +52,7 @@ $ desc person                      # 查看表基础信息（信息量较少）
 $ desc formatted person            # 查看表详细信息（信息量较多）
 ```
 
-#### 五、导入文件数据到Hive（注意要进入具体的数据库）
+#### 五、导入文件数据到Hive（注意：要使用Metastore客户端，就是用hive命令连接的客户端，且要进入具体的数据库）
 ```bash
 $ load data LOCAL inpath '/home/hive-test-data/person.txt' INTO TABLE person;   # LOCAL 表示本地文件
 ```
