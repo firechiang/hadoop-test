@@ -41,12 +41,7 @@ a1.sources.r1.channels = c1
 a1.sinks.s1.channel = c1
 ```
 
-#### 1.4 解决Flume在HDFS上没有读写权限问题（到HDFS集群上去执行）
-```bash
-$ hadoop fs -chmod -R 777 /flume/          # 因为我们上面配的HDFS目录是以 /flume 为根目录，所以放开/flume目录权限即可
-```
-
-#### 1.5，简单测试使用
+#### 1.4，简单测试使用
 ```bash
 $ flume-ng agent --conf conf --conf-file /home/apache-flume-1.9.0-bin/conf/hdfs-sink-conf.properties --name a1 -Dflume.root.logger=INFO,console    # linux使用
 $ flume-ng  agent -conf ../conf  -conf-file ../conf/hdfs-sink-conf.properties  -name a1  -property flume.root.logger=INFO,console                  # windows使用
@@ -54,4 +49,9 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/hdfs-sink-conf.properties  -
 
 # 测试我们上面监听在netcat的Flume（如果没有nc命令，请安装：yum -y install nmap-ncat.x86_64）
 $ nc 127.0.0.1 9191   # 另起一个xshell窗口，连接Flume，然后顺便输入数据，看看有没有发送过去（接收端我们配的是console，数据会打印到控制台）
+```
+
+#### 1.6 如果报Flume没有HDFS读写权限错误，解决方案如下（到HDFS集群上去执行）
+```bash
+$ hadoop fs -chmod -R 777 /flume/          # 因为我们上面配的HDFS目录是以 /flume 为根目录，所以放开/flume目录权限即可
 ```
