@@ -43,6 +43,28 @@ HADOOP_SECURE_DN_USER=root             # HADOOP_SECURE_DN_USER所使用的角色
 	    /home/hadoop-3.1.2/share/hadoop/yarn/lib/*  
     </value>  
 </property>
+
+<!-- 记录已运行完的MapReduce任务信息到指定的HDFS目录下的服务，默认是不开启的 -->
+<!-- 要启动该服务请执行命令：mr-jobhistory-daemon.sh start historyserver -->
+<!-- 要关闭该服务请执行命令：mr-jobhistory-daemon.sh stop historyserver -->
+<property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>server001:10020</value>
+</property>
+<property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>server001:19888</value>
+</property>
+<!-- 任务正在运行的日志存放在hdfs上的路径 -->
+<property>
+    <name>mapreduce.jobhistory.intermediate-done-dir</name>
+    <value>/history/done_intermediate</value>
+</property>
+<!-- 任务运行完成以后的日志存放在hdfs上的路径 -->
+<property>
+    <name>mapreduce.jobhistory.done-dir</name>
+    <value>/history/done</value>
+</property>
 ```
 ##### 修改[vi yarn-site.xml]
 ```bash
@@ -104,6 +126,12 @@ HADOOP_SECURE_DN_USER=root             # HADOOP_SECURE_DN_USER所使用的角色
 <property>
   <name>yarn.resourcemanager.webapp.address.rm2</name>
   <value>server003:8088</value>
+</property>
+
+<!-- 开启日志聚合，配合上面的jobhistory服务使用 -->
+<property>
+  <name>yarn.log-aggregation-enable</name>
+  <value>true</value>
 </property>
 ```
 

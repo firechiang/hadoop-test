@@ -32,6 +32,10 @@ allowed.system.users=sqoop2           # 允许运行应用程序的系统用户�
 
 #### 五、修改配置[vi sqoop-1.99.7-bin-hadoop200/conf/sqoop.properties]（以下配置项在文件里面都有，只需要修改值即可）
 ```bash
+# 日志打印目录
+org.apache.sqoop.log4j.appender.file.File=/home/sqoop-1.99.7-bin-hadoop200/logs/sqoop.log
+org.apache.sqoop.log4j.appender.audit.File=/home/sqoop-1.99.7-bin-hadoop200/logs/audit.log
+org.apache.sqoop.repository.sysprop.derby.stream.error.file=/home/sqoop-1.99.7-bin-hadoop200/logs/derbyrepo.log
 # 配置Hadoop配置文件目录
 org.apache.sqoop.submission.engine.mapreduce.configuration.directory=/home/hadoop-3.2.0/etc/hadoop
 
@@ -64,9 +68,16 @@ $ wget http://central.maven.org/maven2/mysql/mysql-connector-java/8.0.15/mysql-c
 $ sqoop2-tool verify   # 检查配置，如果失败报fail，在这个命令执行的目录会生成一个@LOGDIR@目录，里面有个错误信息文件sqoop.log，打开看看是哪里错了。如果成功会有Verification was successful提示，且会自动创建名为SQOOP的数据库
 ```
 
-#### 九、简单使用
+#### 九、启动Yarn集群
+#### 十、启动 HistoryServer（MapReduce任务记录服务），我们在mapred-site.xml和yarn-site.xml文件里已经配好了，只需要HDFS集群主节点上去启动即可）
 ```bash
-$ sqoop2-server start                      # 启动 Sqoop 服务端（要停止的话使用：sqoop2-server stop）
+$ mr-jobhistory-daemon.sh start historyserver # 启动 HistoryServer（访问：http://192.168.229.133:19888）
+$ mr-jobhistory-daemon.sh stop historyserver  # 停止HistoryServer
+```
+
+#### 十一、简单使用
+```bash
+$ sqoop2-server start                      # 启动 Sqoop 服务端，默认监听在12000端口（要停止的话使用：sqoop2-server stop）
 $ sqoop2-shell                             # 进入命令行客户端（也可以使用：sqoop.sh client 命令）
 $ show version                             # 显示 Sqoop 服务端版本
 $ show version --all                       # 显示 Sqoop 服务端和客户端版本
