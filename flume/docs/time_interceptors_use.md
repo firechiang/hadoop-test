@@ -45,5 +45,6 @@ $ flume-ng  agent -conf ../conf  -conf-file ../conf/time_interceptors_use -name 
 ```
 
 #### 1.3，测试我们上面监听在netcat的Flume（如果没有nc命令，请安装：yum -y install nmap-ncat.x86_64）
+```bash
 $ nc 127.0.0.1 9191              # 另起一个xshell窗口，连接Flume，然后随便输入数据，看看打印的消息头里面是否有timestamp属性
 ```
