@@ -24,7 +24,13 @@ $ echo $SQOOP_HOME                                                              
     <value>*</value>
 </property>
 ```
-#### 四、修改配置[vi sqoop-1.99.7-bin-hadoop200/conf/sqoop.properties]（以下配置项在文件里面都有，只需要修改值即可）
+
+#### 四、修改Hadoop HDFS集群配置文件[vi container-executor.cfg]（配置项已存在，只需要修改值即可）
+```bash
+allowed.system.users=sqoop2           # 允许运行应用程序的系统用户，多个用逗号分隔
+```
+
+#### 五、修改配置[vi sqoop-1.99.7-bin-hadoop200/conf/sqoop.properties]（以下配置项在文件里面都有，只需要修改值即可）
 ```bash
 # 配置Hadoop配置文件目录
 org.apache.sqoop.submission.engine.mapreduce.configuration.directory=/home/hadoop-3.2.0/etc/hadoop
@@ -37,7 +43,7 @@ org.apache.sqoop.repository.jdbc.user=root
 org.apache.sqoop.repository.jdbc.password=Jiang@123
 ```
 
-#### 五、如果使用Mysql来存储元数据，修改Mysql sql_mode（如果不使用Mysql存储元数据，可以不配置）
+#### 六、如果使用Mysql来存储元数据，修改Mysql sql_mode（如果不使用Mysql存储元数据，可以不配置）
 ```bash
 $ select @@sql_mode;                 # 查询Mysql sql_mode看看是否有 ANSI_QUOTES
 
@@ -49,16 +55,16 @@ $ service mysqld restart             # 重启Mysql
 $ select @@sql_mode;                 # 再查询Mysql sql_mode看看是否有 ANSI_QUOTES
 ```
 
-#### 六、如果使用Mysql来存储元数据，下载Mysql驱动包到 sqoop-1.99.7-bin-hadoop200/server/lib 目录（如果不使用Mysql存储元数据，可以不下载）
+#### 七、如果使用Mysql来存储元数据，下载Mysql驱动包到 sqoop-1.99.7-bin-hadoop200/tools/lib 目录（如果不使用Mysql存储元数据，可以不下载）
 ```bash
 $ wget http://central.maven.org/maven2/mysql/mysql-connector-java/8.0.15/mysql-connector-java-8.0.15.jar
 ```
-#### 七、验证Sqoop配置安装是否有问题（如果验证失败会有：Verification has failed, please check Server logs for further details 提示信息）
+#### 八、验证Sqoop配置安装是否有问题（如果验证失败会有：Verification has failed, please check Server logs for further details 提示信息）
 ```bash
 $ sqoop2-tool verify   # 检查配置，如果失败报fail，在这个命令执行的目录会生成一个@LOGDIR@目录，里面有个错误信息文件sqoop.log，打开看看是哪里错了。如果成功会有Verification was successful提示，且会自动创建名为SQOOP的数据库
 ```
 
-#### 八、简单使用
+#### 九、简单使用
 ```bash
 $ sqoop2-server start                      # 启动 Sqoop 服务端（要停止的话使用：sqoop2-server stop）
 $ sqoop2-shell                             # 进入命令行客户端（也可以使用：sqoop.sh client 命令）
