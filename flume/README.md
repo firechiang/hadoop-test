@@ -9,7 +9,12 @@
 #### [九、自定义 JDBC Channel简单使用(将数据缓冲数据存储到Mysql数据库)][9]
 #### [十、复制通道选择器（当一个源绑定了多个通道，那么一份数据会同时发给多个通道，应用场景：一份数据要被多个集群处理）][10]
 #### [十一、多路复用通道选择器（当一个源绑定了多个通道，它会根据头信息将数据发送到对应的通道，有负载均衡的意思）][11]
-#### 十二、架构
+#### [十二、多个Sink组合使用，使用Sink选择器来做负载均衡（相当于一个生产者多个消费者来提高Flume的数据分发效率）][12]
+#### [十三、多个Sink组合起来，使用Sink选择器来做容错，容灾（只有一个能被使用，其它待命）][13]
+#### [十四、时间戳拦截器简单使用（拦截器会自动在信息头里面加一个时间戳，使用场景：根据头信息做数据路由）][14]
+#### [十五、Host拦截器简单使用（拦截器会自动在信息头里面加入数据来源的IP，使用场景：根据头信息做数据路由）][15]
+#### [十六、多个拦截器组合使用，就是头里面会自动添加多个属性（其它拦截器请看官方文档）][16]
+#### 十七、架构
 ![image](https://github.com/firechiang/hadoop-test/blob/master/flume/image/1_flume_framework.png)
 ```bash
 1，在数据生成器运行的节点上（一般指的是我们的应用），启动单独的Flume Agent 来收集数据，再推送到存储端（HDFS，ElasticSearch等等）
@@ -23,8 +28,9 @@
         
 注意：一个Flume的Agent可以有多个Source，Channel，Sink
 ```
-
-#### 十三、优点
+#### 十八、经典使用模型
+![image](https://github.com/firechiang/hadoop-test/blob/master/flume/image/common_use_framework.png)
+#### 十九、优点
 ```bash
 1，可以和任意集中式进程集成
 2，输入的数据速度大于写入存储目的地的速度，Flume会进行缓冲
@@ -32,7 +38,7 @@
 4，Flume中的事务基于Channe，使用了两种事务模型（sender + receiver），确保消息可靠的被发送
 ```
 
-#### 十四、特点
+#### 二十、特点
 ```bash
 1，Flume可以高效的收集Web Server的Log到HDFS
 2，可以高效获取输入，用于缓冲再转发
@@ -53,3 +59,8 @@
 [9]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/jdbc_channel_simple_use.md
 [10]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/mem_a_channel.md
 [11]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/mem_a_channel-2.md
+[12]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/group_sinks_use_1.md
+[13]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/group_sinks_use_2.md
+[14]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/time_interceptors_use.md
+[15]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/host_interceptors_use.md
+[16]: https://github.com/firechiang/hadoop-test/tree/master/flume/docs/group_interceptors_use.md
