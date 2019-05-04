@@ -14,7 +14,7 @@
 --last-value                                     # 增量导入--check-column那个列最后一个的值（这个值说的是MySql里面的最后一个值，之前的就不会再导入了）
 ```
 
-#### 二、测试sqoop import命令，将MySql单表数据导入到HDFS，将下面的命令粘到命令行执行，参数说明请看上面，反斜杠表示换行
+#### 二、将下面的命令粘到命令行执行（将MySql单表数据导入到HDFS），参数说明请看上面，反斜杠表示换行
 ```bash
 $ sqoop import \
   --connect jdbc:mysql://server004:3306/sqoop_remote \

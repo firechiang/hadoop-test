@@ -10,7 +10,7 @@
 --num-mappers                                    # MapReduce Map的个数（强烈建议指定Map的个数）
 ```
 
-#### 二、测试sqoop export命令，将HDFS数据导出到MySql表，将下面的命令粘到命令行执行，参数说明请看上面，反斜杠表示换行
+#### 二、将下面的命令粘到命令行执行（将HDFS数据导出到MySql表），参数说明请看上面，反斜杠表示换行
 ```bash
 $ sqoop export \
   --connect jdbc:mysql://server004:3306/sqoop_remote \
