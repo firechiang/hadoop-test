@@ -1,5 +1,5 @@
-#### [一、安装][1]
-##### 1.1、下载安装（注意：运行Sqoop需要有HADOOP_HOME环境变量，因为它要加载Hadoop依赖，默认会从这个环境变量里面去找）
+#### 一、安装
+##### 1.1、下载解压安装包
 ```bash
 $ wget http://mirror.bit.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz    # 下载安装包
 $ tar -zxvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ../                                    # 解压到上层目录
@@ -40,8 +40,6 @@ $ sqoop help import                              # 查看sqoop import帮助
 #### [四、sqoop import-all-tables命令使用，将MySql所有表数据导入到HDFS][3]
 #### [五、sqoop export命令使用，将HDFS数据导出到MySql表][4]
 
-
-[1]: https://github.com/firechiang/hadoop-test/tree/master/sqoop/docs/sqoop1-simple-install.md
 [2]: https://github.com/firechiang/hadoop-test/tree/master/sqoop/docs/sqoop-import-use.md
 [3]: https://github.com/firechiang/hadoop-test/tree/master/sqoop/docs/sqoop-import-all-tables-use.md
 [4]: https://github.com/firechiang/hadoop-test/tree/master/sqoop/docs/sqoop-export-use.md
