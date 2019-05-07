@@ -75,10 +75,11 @@ hbase.client.write.buffer：默认为2M，写缓存大小，推荐设置为5M，
 ##### 3.2 HTable参数设置
 ###### 3.2.1 Scanner Caching
 ```bash
-hbase.client.scanner.caching配置项可以设置HBase scanner一次从服务端抓取的数据条数，默认情况下一次一条。通过将其设置成一个合理的值，可以减少scan过程中next()的时间开销，代价是scanner需要通过客户端的内存来维持这些被cache的行记录。
+hbase.client.scanner.caching配置项可以设置HBase scanner一次从服务端抓取的数据条数，默认情况下一次一条。
+通过将其设置成一个合理的值，可以减少scan过程中next()的时间开销，代价是scanner需要通过客户端的内存来维持这些被cache的行记录。
 有两个地方可以进行配置：
-  1，在HBase的conf配置文件中进行配置；
-  3，通过调用Scan.setCaching(int caching)进行配置
+1，在HBase的conf配置文件中进行配置；
+2，通过调用Scan.setCaching(int caching)进行配置
 ```
 
 ###### 3.2.2 Scan Attribute Selection（scan时指定需要的Column Family，可以减少网络传输数据量，否则默认scan操作会返回整行所有Column Family的数据。）
