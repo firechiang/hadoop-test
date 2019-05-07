@@ -107,7 +107,6 @@ public class CallRecordTest extends HBaseConnectionTest {
 		//结束行（指的是Row Key）
 		scan.withStopRow(Bytes.toBytes(endRow));
 		
-		
 		TableName tableName = TableName.valueOf("call_record");
 		Table table = connection.getTable(tableName);
 		ResultScanner rss = table.getScanner(scan);

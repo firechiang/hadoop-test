@@ -20,5 +20,5 @@ package com.firecode.hadooptest.hbase.helloword;
  *
  */
 public class Org {
-
+	
 }
