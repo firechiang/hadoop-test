@@ -55,25 +55,25 @@ hbase.hstore.compaction.ratio 将store file 按照文件年龄排序（older to 
 #### 二、写表操作
 ##### 2.1，多Table并发写，可以打开多个连接，创建多个Table客户端用于并发写操作，提高写数据的吞吐量
 ##### 2.2 HTable参数设置
-###### 2.2.1，Write Buffer（Table客户端的写buffer大小，如果新设置的buffer小于当前写buffer中的数据时，buffer将会被flush到服务端）
+##### 2.3，Write Buffer（Table客户端的写buffer大小，如果新设置的buffer小于当前写buffer中的数据时，buffer将会被flush到服务端）
 ```bash
 hbase.client.write.buffer：默认为2M，写缓存大小，推荐设置为5M，单位是字节，当然越大占用的内存越多。
 ```
-###### 2.2.3，WAL Flag
+##### 2.4，WAL Flag
 ```bash
 在HBae中，客户端向集群中的RegionServer提交数据时（Put/Delete操作），首先会先写WAL（Write Ahead Log）日志（即HLog，一个RegionServer上的所有Region共享一个HLog），只有当WAL日志写成功后，再接着写MemStore，然后客户端被通知提交数据成功；如果写WAL日志失败，客户端则被通知提交失败。这样做的好处是可以做到RegionServer宕机后的数据恢复。
 因此，对于相对不太重要的数据，可以在Put/Delete操作时，通过调用Put.setDurability(Durability.SKIP_WAL)或Delete.setDurability(Durability.SKIP_WAL)函数，放弃写WAL日志，从而提高数据写入的性能。
 值得注意的是：谨慎选择关闭WAL日志，因为这样的话，一旦RegionServer宕机，Put/Delete的数据将会无法根据WAL日志进行恢复。
 ```
 
-##### 2.3 批量写
+##### 2.5 批量写
 ```bash
 通过调用Table.put(Put)方法可以将一个指定的row key记录写入HBase，同样HBase提供了另一个方法：通过调用HTable.put(List<Put>)方法可以将指定的row key列表，批量写入多行记录，这样做的好处是批量执行，只需要一次网络I/O开销，这对于对数据实时性要求高，网络传输RTT高的情景下可能带来明显的性能提升。
 ```
 #### 三、读表操作
 ##### 3.1 多HTable并发读，创建多个HTable客户端，每个读线程负责通过HTable对象进行get操作，提高读数据的吞吐量
 ##### 3.2 HTable参数设置
-###### 3.2.1 Scanner Caching
+##### 3.3 Scanner Caching
 ```bash
 hbase.client.scanner.caching配置项可以设置HBase scanner一次从服务端抓取的数据条数，默认情况下一次一条。
 通过将其设置成一个合理的值，可以减少scan过程中next()的时间开销，代价是scanner需要通过客户端的内存来维持这些被cache的行记录。
@@ -82,19 +82,19 @@ hbase.client.scanner.caching配置项可以设置HBase scanner一次从服务端
 2，通过调用Scan.setCaching(int caching)进行配置
 ```
 
-###### 3.2.2 Scan Attribute Selection（scan时指定需要的Column Family，可以减少网络传输数据量，否则默认scan操作会返回整行所有Column Family的数据。）
-###### 3.2.3 Close ResultScanner（通过scan取完数据后，记得要关闭ResultScanner，否则RegionServer可能会出现问题（对应的Server资源无法释放））
+##### 3.4 Scan Attribute Selection（scan时指定需要的Column Family，可以减少网络传输数据量，否则默认scan操作会返回整行所有Column Family的数据。）
+##### 3.5 Close ResultScanner（通过scan取完数据后，记得要关闭ResultScanner，否则RegionServer可能会出现问题（对应的Server资源无法释放））
 
-##### 3.3 批量读
+#### 3.6 批量读
 ```bash
 通过调用HTable.get(Get)方法可以根据一个指定的row key获取一行记录，同样HBase提供了另一个方法：通过调用HTable.get(List<Get>)方法可以根据一个指定的row key列表，批量获取多行记录，这样做的好处是批量执行，只需要一次网络I/O开销，这对于对数据实时性要求高而且网络传输RTT高的情景下可能带来明显的性能提升。
 ```
-##### 3.4 缓存查询结果
+##### 3.7 缓存查询结果
 ```bash
 对于频繁查询HBase的应用场景，可以考虑在应用程序中做缓存，当有新的查询请求时，首先在缓存中查找，如果存在则直接返回，不再查询HBase；否则对HBase发起读请求查询，然后在应用程序中将查询结果缓存起来。至于缓存的替换策略，可以考虑LRU等常用的策略。
 ```
 
-##### 3.5 Blockcache
+##### 3.8 Blockcache
 ```bash
 HBase上Regionserver的内存分为两个部分，一部分作为Memstore，主要用来写；另外一部分作为BlockCache，主要用于读。
 写请求会先写入Memstore，Regionserver会给每个region提供一个Memstore，当Memstore满64MB以后，会启动 flush刷新到磁盘。当Memstore的总大小超过限制时（heapsize * hbase.regionserver.global.memstore.upperLimit * 0.9），会强行启动flush进程，从最大的Memstore开始flush直到低于限制。
