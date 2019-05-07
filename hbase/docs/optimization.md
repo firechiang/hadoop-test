@@ -103,24 +103,24 @@ HBase上Regionserver的内存分为两个部分，一部分作为Memstore，主�
 有关BlockCache机制，请参考这里：HBase的Block cache，HBase的blockcache机制，hbase中的缓存的计算与使用。
 ```
 
-#### 3.4 HTable和HTablePool使用注意事项
-##### 3.4.1 规避HTable对象的创建开销
+#### 四、HTable和HTablePool使用注意事项
+##### 4.1 规避HTable对象的创建开销
 ```bash
 因为客户端创建HTable对象后，需要进行一系列的操作：检查.META.表确认指定名称的HBase表是否存在，表是否有效等等，整个时间开销比较重，
 可能会耗时几秒钟之长，因此最好在程序启动时一次性创建完成需要的HTable对象，如果使用Java API，一般来说是在构造函数中进行创建，程序启动后直接重用
 ```
-##### 3.4.2 HTable对象不是线程安全的
+##### 4.2 HTable对象不是线程安全的
 ```bash
 HTable对象对于客户端读写数据来说不是线程安全的，因此多线程时，要为每个线程单独创建复用一个HTable对象，不同对象间不要共享HTable对象使用，特别是在客户端auto flash被置为false时，由于存在本地write buffer，可能导致数据不一致。
 ```
 
-##### 3.4.3 HTable对象之间共享Configuration好处在于：
+##### 4.3 HTable对象之间共享Configuration好处在于：
 ```bash
 1，共享ZooKeeper的连接：每个客户端需要与ZooKeeper建立连接，查询用户的table regions位置，这些信息可以在连接建立后缓存起来共享使用。
 2，共享公共的资源：客户端需要通过ZooKeeper查找-ROOT-和.META.表，这个需要网络传输开销，客户端缓存这些公共资源后能够减少后续的网络传输开销，加快查找过程速度。
 备注：即使是高负载的多线程程序，也并没有发现因为共享Configuration而导致的性能问题；如果你的实际情况中不是如此，那么可以尝试不共享Configuration。
 ```
-##### 3.4.4 HTablePool可以解决HTable存在的线程不安全问题，同时通过维护固定数量的HTable对象，能够在程序运行期间复用这些HTable资源对象
+##### 4.4 HTablePool可以解决HTable存在的线程不安全问题，同时通过维护固定数量的HTable对象，能够在程序运行期间复用这些HTable资源对象
 ```bash
 1，HTablePool可以自动创建HTable对象，而且对客户端来说使用上是完全透明的，可以避免多线程间数据并发修改问题。
 2，HTablePool中的HTable对象之间是公用Configuration连接的，能够可以减少网络开销。
