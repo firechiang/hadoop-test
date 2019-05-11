@@ -59,7 +59,7 @@ $ service mysqld restart             # 重启Mysql
 $ select @@sql_mode;                 # 再查询Mysql sql_mode看看是否有 ANSI_QUOTES
 ```
 
-#### 七、如果使用Mysql来存储元数据，下载Mysql驱动包到 sqoop-1.99.7-bin-hadoop200/server/lib 目录（如果不使用Mysql存储元数据，可以不下载）
+#### 七、下载Mysql驱动包到 sqoop-1.99.7-bin-hadoop200/server/lib 目录（如果不使用Mysql，可以不下载）
 ```bash
 $ wget http://central.maven.org/maven2/mysql/mysql-connector-java/8.0.15/mysql-connector-java-8.0.15.jar
 ```

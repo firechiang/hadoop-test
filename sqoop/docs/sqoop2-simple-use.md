@@ -1,6 +1,6 @@
 #### [一、Server安装][1]
 #### [二、Client安装以及简单使用][2]
-#### [二、MySql倒数据到HDFS][3]
+#### [三、MySql倒数据到HDFS][3]
 
 ![image](https://github.com/firechiang/hadoop-test/blob/master/sqoop/image/sqoop2-framework.jpg)
 
