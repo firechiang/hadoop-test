@@ -20,7 +20,7 @@ $ sudo curl -o /etc/yum.repos.d/scylla.repo -L http://repositories.scylladb.com/
 $ sudo yum install scylla                   # 安装 scylla
 ```
 
-#### 四、修改[vi /etc/scylla/scylla.yaml](注意：配置和Cassandra配置一样的。配置项文件里面都有，只需修改值即可)
+#### 四、修改[vi /etc/scylla/scylla.yaml]配置(注意：配置和Cassandra配置一样的。配置项文件里面都有，只需修改值即可)
 ```bash
 # 配置用户名密码才能登陆
 authenticator: PasswordAuthenticator
