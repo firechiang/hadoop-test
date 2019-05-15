@@ -126,7 +126,7 @@ Yes - runs fstrim on your SSD. No - skip this step.
 ScyllaDB setup finished                         
 ```
 
-#### 五、scylla --help 查看帮助，修改[vi /etc/sysconfig/scylla-server]内核配置文件，添加到 SCYLLA_ARGS 选项里面
+#### 五、scylla --help 查看配置帮助，修改[vi /etc/sysconfig/scylla-server]内核配置文件，添加到 SCYLLA_ARGS 选项里面
 ```bash
 --memory 1G                                            # 每个CPU使用的最大内存(不配置的话，默认是4G，如果机器内存不足，将导致无法启动Scylla)
 --smp 1                                                # 使用几个CPU(如果配置的话，最好是配合 --memory 一起配置)
