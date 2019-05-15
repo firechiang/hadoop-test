@@ -132,10 +132,12 @@ ScyllaDB setup finished
 --smp 1                                                # 使用几个CPU(如果配置的话，最好是配合 --memory 一起配置)
 ```
 
-#### 六、启动Scylla服务
+#### 六、启动Scylla服务(http://192.168.83.143:10000/ui)
 ```bash
 $ sudo systemctl start scylla-server                   # 启动
 $ sudo systemctl stop scylla-server                    # 关闭
+$ sudo service scylla-jmx stop                         # 关闭jmx服务
+$ sudo service scylla-jmx start                        # 开启jmx服务(默认已开启)
 $ nodetool status                                      # 查看集群的状态
 ```
 
