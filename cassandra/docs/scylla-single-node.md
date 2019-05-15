@@ -126,14 +126,20 @@ Yes - runs fstrim on your SSD. No - skip this step.
 ScyllaDB setup finished                         
 ```
 
-#### 五、启动Scylla服务
+#### 五、scylla --help 查看帮助，修改[vi /etc/sysconfig/scylla-server]内核配置文件，添加到 SCYLLA_ARGS 选项里面
+```bash
+--memory 1G                                            # 最大使用内存(不配置的话，默认使用机器全部内存且机器内存需大于等于6GB才能启动 ScyllaDB)
+--smp 1                                                # 使用几个CPU(这个一般不配置)
+```
+
+#### 六、启动Scylla服务
 ```bash
 $ sudo systemctl start scylla-server                   # 启动
 $ sudo systemctl stop scylla-server                    # 关闭
 $ nodetool status                                      # 查看集群的状态
 ```
 
-#### 六、远程连接Cassandra初始化账号和密码
+#### 七、远程连接Cassandra初始化账号和密码
 ```bash
 $ cqlsh 192.168.83.137 9042 -ucassandra -pcassandra    # 连接（远程Cassandra的IP：127.0.0.1，端口：9042，用户名(-u)：cassandra，密码(-p)：cassandra）
 $ create user jiang with password 'jiang' superuser;   # 创建超级管理员jiang，密码：jiang
