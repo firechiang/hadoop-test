@@ -31,7 +31,7 @@ $ cp -p /home/scylla-grafana-monitoring-scylla-monitoring-2.3/prometheus/*.yml /
        dc: datacenter1
 ```
 
-#### 四、修改[vi /home/prometheus-2.9.2.linux-amd64/node_exporter_servers.yml]这个文件需手动创建(targets(节点地址)，labels(集群的名字和数据中心的名字)，多个集群和数据中心可使用多个targets和labels配置)
+#### 四、修改[vi /home/prometheus-2.9.2.linux-amd64/node_exporter_servers.yml]，这个文件需手动创建(targets(节点地址)，labels(集群的名字和数据中心的名字)，多个集群和数据中心可使用多个targets和labels配置)
 ```bash
 - targets:
        - server06:9100
@@ -42,7 +42,7 @@ $ cp -p /home/scylla-grafana-monitoring-scylla-monitoring-2.3/prometheus/*.yml /
        dc: datacenter1
 ```
 
-#### 五、修改[vi /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml](这个文件需手动创建)
+#### 五、修改[vi /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml]，这个文件需手动创建
 ```bash
 - targets:
   - 127.0.0.1:56090
@@ -80,7 +80,7 @@ scrape_configs:
       - /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml            
 ```
 
-#### 七、创建[sudo mkdir /home/prometheus-2.9.2.linux-amd64/data]监控数据目录
+#### 七、创建[sudo mkdir /home/prometheus-2.9.2.linux-amd64/data]，监控数据目录
 #### 八、启动alertmanager(报警)服务（& 表示后台启动，http://192.168.83.145:9093）
 ```bash
 $ cd /home/alertmanager-0.17.0.linux-amd64
