@@ -3,6 +3,7 @@
 #### [三、多数据中心集群搭建][3]
 #### [四、ScyllaDB单节点搭建][4]
 #### [五、ScyllaDB单数据中心集群搭建(推荐使用)][5]
+#### [六、ScyllaDB监控搭建][6]
 
 
 #### 种子节点说明(种子节点用于节点启动的时候发现整个集群，可以将任何一个节点设置为种子， 对于种子节点没有什么特殊的，只要你把它写入种子列表里，它就是一个种子节点)
@@ -22,3 +23,4 @@
 [3]: https://github.com/firechiang/hadoop-test/tree/master/cassandra/docs/setup-many-cluster-node.md
 [4]: https://github.com/firechiang/hadoop-test/tree/master/cassandra/docs/scylla-single-node.md
 [5]: https://github.com/firechiang/hadoop-test/tree/master/cassandra/docs/scylla-single-cluster-node.md
+[6]: https://github.com/firechiang/hadoop-test/tree/master/cassandra/docs/scylla-cluster-monitor.md
