@@ -49,7 +49,7 @@ seed_provider:
 api_address: server001
       
 # 是否开始thrift rpc服务器
-start_rpc: false      
+start_rpc: true      
       
 # 集群中服务器与服务器之间相互通信的地址，也可以配置listen_interface，指定使用哪个网卡接口。两者选一配置即可，不要同时配置（这里配置当前主机或IP，为了安全考虑建议配置防火墙）   
 listen_address: server001
@@ -181,6 +181,7 @@ $ sudo service scylla-jmx stop                         # 关闭jmx服务
 $ sudo service scylla-jmx start                        # 开启jmx服务(默认已开启)
 $ nodetool status                                      # 查看集群的状态
 $ nodetool help                                        # 查看 nodetool 命令帮助
+$ nodetool drain                                       # 排空节点（停止接受写入并刷新所有表）
 ```
 
 #### 八、远程连接Cassandra初始化账号和密码(修改一台机器，会自动同步到集群其它机器)
