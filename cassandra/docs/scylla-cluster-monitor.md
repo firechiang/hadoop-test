@@ -80,15 +80,66 @@ scrape_configs:
       - /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml            
 ```
 
-#### 七、创建[sudo mkdir /home/prometheus-2.9.2.linux-amd64/data]，(监控数据目录)
-#### 八、启动alertmanager(报警)服务（& 表示后台启动，http://192.168.83.145:9093）
+#### 七、安装Grafana(需要5.0.0或更高版本)
+```bash
+$ cd /home/tools
+$ wget https://dl.grafana.com/oss/release/grafana-6.1.6-1.x86_64.rpm
+$ sudo yum localinstall grafana-6.1.6-1.x86_64.rpm
+```
+
+#### 八、配置Scylla-Grafana
+```bash
+$ cd /home/scylla-grafana-monitoring-scylla-monitoring-2.3
+$ sudo cp -r grafana/plugins /var/lib/grafana/                   # 拷贝插件到 Grafana
+$ ./generate-dashboards.sh -v 3.0 -M 1.3                         # 生成仪表板配置(scylla 3.0和scylla manager 1.3)
+$ sudo cp grafana/provisioning/dashboards/load.* /etc/grafana/provisioning/dashboards/
+$ sudo mkdir -p /var/lib/grafana/dashboards
+$ sudo cp -r grafana/build/* /var/lib/grafana/dashboards
+$ sudo cp grafana/datasource.yml /etc/grafana/provisioning/datasources/
+```
+
+#### 九、修改[vi /etc/grafana/provisioning/datasources/datasource.yml]设置alertmanager(报警服务地址地址)和prometheus(监控服务服务)
+```bash
+apiVersion: 1
+datasources:
+- name: prometheus
+  type: prometheus
+  url: http://server08:9090
+  access: proxy
+  basicAuth: false
+
+- name: alertmanager
+  type: camptocamp-prometheus-alertmanager-datasource
+  orgId: 1
+  typeLogoUrl: public/img/icn-datasource.svg
+  access: proxy
+  url: http://server08:9093
+  password: 
+  user: 
+  database: 
+  basicAuth: 
+  isDefault: 
+  jsonData:
+    severity_critical: '4'
+    severity_high: '3'
+    severity_warning: '2'
+    severity_info: '1'
+```
+
+#### 十、创建[sudo mkdir /home/prometheus-2.9.2.linux-amd64/data]，(监控数据目录)
+#### 十一、启动alertmanager(报警)服务（& 表示后台启动，http://192.168.83.145:9093）
 ```bash
 $ cd /home/alertmanager-0.17.0.linux-amd64
 $ ./alertmanager &
 ```
 
-#### 九、启动prometheus(监控)服务（& 表示后台启动，http://192.168.83.145:9090）
+#### 十二、启动prometheus(监控)服务（& 表示后台启动，http://192.168.83.145:9090）
 ```bash
 $ cd /home/prometheus-2.9.2.linux-amd64
 $ sudo ./prometheus --config.file=prometheus.yml --storage.tsdb.path /home/prometheus-2.9.2.linux-amd64/data &
+```
+
+#### 十三、启动grafana(仪表板)服务（http://192.168.83.145:3000）
+```bash
+$ sudo service grafana-server start
 ```
