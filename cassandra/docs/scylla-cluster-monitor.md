@@ -22,7 +22,7 @@ $ sudo curl -o /etc/yum.repos.d/scylla-manager.repo -L http://repositories.scyll
 $ sudo yum install scylla-manager-server scylla-manager-client
 ```
 
-#### 四、修改[vi /etc/scylla-manager/scylla-manager.yaml](不建议安装)配置Scylla-Manager的Scylla集群节点以及用户密码
+#### 四、修改[vi /etc/scylla-manager/scylla-manager.yaml]，(不建议安装)配置Scylla-Manager的Scylla集群节点以及用户密码
 ```bash
 database:
   hosts:
