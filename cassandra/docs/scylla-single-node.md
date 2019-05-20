@@ -30,6 +30,8 @@ seed_provider:
   - class_name: org.apache.cassandra.locator.SimpleSeedProvider
     parameters:
       - seeds: "server001"
+ 
+api_address: server001
       
 # 是否开始thrift rpc服务器
 start_rpc: false      

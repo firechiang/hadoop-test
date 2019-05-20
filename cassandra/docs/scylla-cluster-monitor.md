@@ -8,7 +8,64 @@ $ tar -zxvf alertmanager-0.17.0.linux-amd64.tar.gz -C ../    # 解压 alertmanag
 $ tar -zxvf prometheus-2.9.2.linux-amd64.tar.gz -C ../       # 解压 prometheus-2.9.2.linux-amd64.tar.gz 到上层目录
 ```
 
-#### 二、移动配置文件
+#### 二、安装Grafana(需要5.0.0或更高版本)
+```bash
+$ cd /home/tools
+$ wget https://dl.grafana.com/oss/release/grafana-6.1.6-1.x86_64.rpm
+$ sudo yum localinstall grafana-6.1.6-1.x86_64.rpm
+```
+
+#### 三、安装scylla-manager(不建议安装)
+```bash
+$ sudo yum install epel-release
+$ sudo curl -o /etc/yum.repos.d/scylla-manager.repo -L http://repositories.scylladb.com/scylla/repo/c67c347d-6ddf-432d-bc1d-2d93b167be88/centos/scylladb-manager-1.3.repo
+$ sudo yum install scylla-manager-server scylla-manager-client
+```
+
+#### 四、修改[vi /etc/scylla-manager/scylla-manager.yaml](不建议安装)配置Scylla-Manager的Scylla集群节点以及用户密码
+```bash
+database:
+  hosts:
+    - server06
+    - server07
+    - server08
+    
+  user: jiang                                             # 注意：此配置项和hosts同级
+  password: jiang                                         # 注意：此配置项和hosts同级
+  replication_factor: 3                                   # 注意：此配置项和hosts同级
+```
+
+#### 五、配置Scylla-Manager(不建议安装)
+```bash
+$ scyllamgr_setup
+
+Do you want to configure and enable the local ScyllaDB instance as a backend storage for this Scylla Manager installation?
+Answer yes to configure and automatically start ScyllaDB when the node boots; answer no to skip this step.
+[YES/no]yes
+Do you want to enable Scylla Manager?
+Answer yes to automatically start Scylla Manager when the node boots; answer no to skip this step.
+[YES/no]yes
+Created symlink from /etc/systemd/system/multi-user.target.wants/scylla-manager.service to /usr/lib/systemd/system/scylla-manager.service.
+Scylla Manager setup finished.
+```
+
+#### 六、启动Scylla-Manager(不建议安装)
+```bash
+$ sudo systemctl start scylla-manager.service             # 启动
+$ sudo systemctl stop scylla-manager.service              # 停止
+$ sudo systemctl status scylla-manager.service            # 查看状态
+$ source /etc/bash_completion.d/sctool.bash
+$ sctool version                                          # 查看Scylla-Manager版本
+```
+
+#### 七、添加Scylla集群到Scylla-Manager简单配置(不建议安装)，[生产请参考](https://docs.scylladb.com/operating-scylla/manager/1.3/add-a-cluster/)
+```bash
+sctool cluster add --host=server06 --name=myScyllaCluster # 添加集群到Scylla-Manager，整个集群添加一个节点即可
+sctool task list -c cabb63d0-c8f0-448e-ba06-2ff28ed94f52  # 验证是否已注册(cabb63d0-c8f0-448e-ba06-2ff28ed94f52是添加时export SCYLLA_MANAGER_CLUSTER的值)
+sctool status --cluster myScyllaCluster                   # 查看集群状态
+```
+
+#### 八、移动配置文件
 ```bash
 # 将scylla-monitoring的rule_config.yml文件内容替换掉alertmanager的alertmanager.yml的文件内容(注意：它会提示是否替换，请填写 yes)
 $ cp -p /home/scylla-grafana-monitoring-scylla-monitoring-2.3/prometheus/rule_config.yml /home/alertmanager-0.17.0.linux-amd64/alertmanager.yml
@@ -31,7 +88,7 @@ $ cp -p /home/scylla-grafana-monitoring-scylla-monitoring-2.3/prometheus/*.yml /
        dc: datacenter1
 ```
 
-#### 四、修改[vi /home/prometheus-2.9.2.linux-amd64/node_exporter_servers.yml]，这个文件需手动创建(targets(节点地址)，labels(集群的名字和数据中心的名字)，多个集群和数据中心可使用多个targets和labels配置)
+#### 九、修改[vi /home/prometheus-2.9.2.linux-amd64/node_exporter_servers.yml]，这个文件需手动创建(targets(节点地址)，labels(集群的名字和数据中心的名字)，多个集群和数据中心可使用多个targets和labels配置)
 ```bash
 - targets:
        - server06:9100
@@ -42,13 +99,13 @@ $ cp -p /home/scylla-grafana-monitoring-scylla-monitoring-2.3/prometheus/*.yml /
        dc: datacenter1
 ```
 
-#### 五、修改[vi /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml]，(这个文件需手动创建)
+#### 十、修改[vi /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml]，(不建议安装)(这个文件需手动创建)
 ```bash
 - targets:
   - 127.0.0.1:56090
 ```
 
-#### 六、修改[vi /home/prometheus-2.9.2.linux-amd64/prometheus.yml]
+#### 十一、修改[vi /home/prometheus-2.9.2.linux-amd64/prometheus.yml]
 ```bash
 # 修改alertmanager(报警器)服务所在地址
 alerting:
@@ -80,14 +137,7 @@ scrape_configs:
       - /home/prometheus-2.9.2.linux-amd64/scylla_manager_servers.yml            
 ```
 
-#### 七、安装Grafana(需要5.0.0或更高版本)
-```bash
-$ cd /home/tools
-$ wget https://dl.grafana.com/oss/release/grafana-6.1.6-1.x86_64.rpm
-$ sudo yum localinstall grafana-6.1.6-1.x86_64.rpm
-```
-
-#### 八、配置Scylla-Grafana
+#### 十二、配置Scylla-Grafana
 ```bash
 $ cd /home/scylla-grafana-monitoring-scylla-monitoring-2.3
 $ sudo cp -r grafana/plugins /var/lib/grafana/                   # 拷贝插件到 Grafana
@@ -98,7 +148,7 @@ $ sudo cp -r grafana/build/* /var/lib/grafana/dashboards
 $ sudo cp grafana/datasource.yml /etc/grafana/provisioning/datasources/
 ```
 
-#### 九、修改[vi /etc/grafana/provisioning/datasources/datasource.yml]设置alertmanager(报警服务地址地址)和prometheus(监控服务服务)
+#### 十三、修改[vi /etc/grafana/provisioning/datasources/datasource.yml]设置alertmanager(报警服务地址地址)和prometheus(监控服务服务)
 ```bash
 apiVersion: 1
 datasources:
@@ -126,20 +176,20 @@ datasources:
     severity_info: '1'
 ```
 
-#### 十、创建[sudo mkdir /home/prometheus-2.9.2.linux-amd64/data]，(监控数据目录)
-#### 十一、启动alertmanager(报警)服务（& 表示后台启动，http://192.168.83.145:9093）
+#### 十四、创建[sudo mkdir /home/prometheus-2.9.2.linux-amd64/data]，(监控数据目录)
+#### 十五、启动alertmanager(报警)服务（& 表示后台启动，http://192.168.83.145:9093）
 ```bash
 $ cd /home/alertmanager-0.17.0.linux-amd64
 $ ./alertmanager &
 ```
 
-#### 十二、启动prometheus(监控)服务（& 表示后台启动，http://192.168.83.145:9090）
+#### 十六、启动prometheus(监控)服务（& 表示后台启动，http://192.168.83.145:9090）
 ```bash
 $ cd /home/prometheus-2.9.2.linux-amd64
 $ sudo ./prometheus --config.file=prometheus.yml --storage.tsdb.path /home/prometheus-2.9.2.linux-amd64/data &
 ```
 
-#### 十三、启动grafana(仪表板)服务（http://192.168.83.145:3000）
+#### 十七、启动grafana(仪表板)服务（http://192.168.83.145:3000）
 ```bash
 $ sudo service grafana-server start
 ```

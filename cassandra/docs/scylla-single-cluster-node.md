@@ -46,6 +46,8 @@ seed_provider:
     parameters:
       - seeds: "server001,server003"
       
+api_address: server001
+      
 # 是否开始thrift rpc服务器
 start_rpc: false      
       
