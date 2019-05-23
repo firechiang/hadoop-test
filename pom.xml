@@ -77,6 +77,7 @@
         <module>hbase</module>
         <module>sqoop</module>
         <module>cassandra</module>
-    <module>protobuf</module>
-  </modules>
+        <module>protobuf</module>
+        <module>kafka</module>
+    </modules>
 </project>

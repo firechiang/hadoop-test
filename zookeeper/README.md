@@ -38,5 +38,10 @@ $ zkServer.sh start                              # 到各个节点上启动Zooke
 $ jps                                            # 查看java进程，如果有 QuorumPeerMain 进程说明启动成功
 $ zkServer.sh status                             # 查看当前Zookeeper的状态，如果看到 Mode: follower 或者  Mode: leader 这样的状态说明集群搭建成功
 $ zkServer.sh restart　　                        # 重启
-$ zkServer.sh stop                               # 停止Zookeeper                              
+$ zkServer.sh stop                               # 停止Zookeeper   
+
+$ zkCli.sh -server 127.0.0.1:2181                # 连接Zookeeper
+$ ls /                                           # 查看所有根目录
+$ ls /brokers                                    # 查看brokers目录下的所有目录        
+$ get /brokers/topics/test_test                  # 获取 test_test 的数据内容                 
 ```
