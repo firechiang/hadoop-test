@@ -42,9 +42,9 @@ $ kafka-topics.sh --list --bootstrap-server localhost:9092
 # 查看 test_test 主题详细信息(包含分区副本放置策略)
 $ kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic test-test-1
 
-# 创建主题时指定分区副本所在机器（参数--replica-assignment说明：逗号区分分区(每一个逗号分开的区域代表一个分区，从0开始)，冒号区分broker.id（副本所在的机器id））
+# 创建主题时指定分区副本所在机器（参数 --replica-assignment 说明：逗号区分分区(每一个逗号分开的区域代表一个分区，从0开始)，冒号区分broker.id（副本所在的机器id））
 # 创建名字叫test-test-100的topic，副本放置策略是：0号分区放1号机器和2号机器各一个副本，1号分区放1号机器和3号机器各一个副本，2号分区放2号机器和3号机器各一个副本，
-$ kafka-topics.sh --create --bootstrap-server localhost:9092 --topic test-test-100 --replica-assignment 1:2,1:3,2:3,2:3
+$ kafka-topics.sh --create --bootstrap-server localhost:9092 --topic test-test-100 --replica-assignment 1:2,1:3,2:3
 # 查看 test-test-100 主题详细信息(包含分区副本放置策略)
 $ kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic test-test-100
 
