@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * 简单测试kafka admin
  */
-public class KafkaAdminTest extends KafkaConfig {
+public class KafkaAdminTest extends AbstractKafkaConfig {
 	
 	/**
 	 * 创建主题
