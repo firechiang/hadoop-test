@@ -1,4 +1,4 @@
-package com.firecode.hadooptest.kafka.helloword_queue;
+package com.firecode.hadooptest.kafka.helloword.queue;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -8,14 +8,12 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.junit.Test;
 
-import com.firecode.hadooptest.kafka.AbstractKafkaConfig;
-
 /**
  * kafka生产者测试
  * 
  * @author JIANG
  */
-public class ProducerTest extends AbstractKafkaConfig{
+public class ProducerTest extends QueueKafkaConfig{
 	
 
 	@Test
@@ -23,10 +21,14 @@ public class ProducerTest extends AbstractKafkaConfig{
 		for(int i=0;i<100;i++){
 			TimeUnit.SECONDS.sleep(1);
 			String message = "测试消息"+i;
-			//主题会自动创建
+			//消息记录，可指定发送到特定分区(没有指定分区，默认使用key哈希取模得到分区)
 	        ProducerRecord<Integer, String> msg = new ProducerRecord<Integer, String>(topicName,i,message);
 	        //发送消息
-			Future<RecordMetadata> future = procuder.send(msg);
+	        Future<RecordMetadata> future = procuder.send(msg);
+	        //发送消息带回调
+			/*Future<RecordMetadata> future = procuder.send(msg,(RecordMetadata metadata, Exception exception)->{
+				System.err.println("消息发送完成回调");
+			});*/
 			int partition = future.get().partition();
 			System.out.println("消息发送成功，消息所在分区："+partition);
 		}

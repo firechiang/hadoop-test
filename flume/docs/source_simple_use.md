@@ -268,6 +268,32 @@ $ flume-ng agent --conf conf --conf-file /home/apache-flume-1.9.0-bin/conf/stres
 $ flume-ng  agent -conf ../conf  -conf-file ../conf/stress-conf.properties  -name a1  -property flume.root.logger=INFO,console                 # windows使用
 ```
 
+#### 4.2 测试使用 kafka 数据源
+```bash
+$ vi kafka-conf.properties                     # 创建配置文件，内容如下：  
+
+   a1.sources = r1
+   a1.channels = c1
+   a1.sinks = s1
+   
+   a1.sources.r1.type = org.apache.flume.source.kafka.KafkaSource
+   a1.sources.r1.batchSize = 5000
+   a1.sources.r1.batchDurationMillis = 2000
+   a1.sources.r1.kafka.bootstrap.servers = localhost:9092
+   a1.sources.r1.kafka.topics = test1, test2
+   a1.sources.r1.kafka.consumer.group.id = test-test-id
+   
+   a1.channels.c1.type = memory
+   
+   a1.sinks.s1.type = logger
+   
+   a1.sources.r1.channels = c1
+   a1.sinks.s1.channel = c1
+   
+$ flume-ng agent --conf conf --conf-file /home/apache-flume-1.9.0-bin/conf/kafka-conf.properties --name a1 -Dflume.root.logger=INFO,console    # linux使用
+$ flume-ng  agent -conf ../conf  -conf-file ../conf/kafka-conf.properties  -name a1  -property flume.root.logger=INFO,console                  # windows使用
+```
+
 [1]: https://github.com/firechiang/hadoop-test/tree/master/flume/src/main/java/com/firecode/hadooptest/flume/helloword/ZookeeperFileUpload.java
 [2]: https://github.com/firechiang/hadoop-test/tree/master/flume/src/main/java/com/firecode/hadooptest/flume/helloword/SyslogUDPTest.java
 [3]: https://github.com/firechiang/hadoop-test/tree/master/flume/src/main/java/com/firecode/hadooptest/flume/helloword/HttpTest.java

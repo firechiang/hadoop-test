@@ -50,6 +50,11 @@ $ kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic test-test
 
 # 修改主题的分区副本所在机器（注意：只可以增加分区）
 $ kafka-topics.sh --alter --bootstrap-server localhost:9092 --topic test-test-100 --partitions 4 --replica-assignment 1:2,2:3,1:2,2:3
+
+
+# 创建记录时间戳的topic(--config message.timestamp.type=LogAppendTime（表示broker接收到这条消息的时间），CreateTime表示（producer创建这条消息的时间）)
+# 如果想要延迟消费消息，一定要记录时间戳
+$ kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 2 --partitions 2 --topic test-test-1 --config message.timestamp.type=LogAppendTime
 ```
 
 #### 六、发送消息到主题(连接成功后顺便填写数据发送即可)
