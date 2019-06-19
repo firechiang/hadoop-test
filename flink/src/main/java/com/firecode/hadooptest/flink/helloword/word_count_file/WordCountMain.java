@@ -38,6 +38,8 @@ public class WordCountMain {
 		sum.print();
 		// 数据写入磁盘
 		//sum.writeAsCsv("");
+		// 执行任务
+		env.execute("WordCountMain");
 	}
 	
 	
