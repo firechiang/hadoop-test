@@ -42,7 +42,7 @@ public class WordCountMain {
 		print.setParallelism(1);
 		// 数据写入磁盘
 		//sum.writeAsCsv("");
-		// 执行任务
+		// 执行任务（注意：如果没有调用这个函数任务是不会执行的，而只是创建每个操作并将其添加到程序的计划中而已）
 		env.execute("WordCountMain");
 	}
 	
