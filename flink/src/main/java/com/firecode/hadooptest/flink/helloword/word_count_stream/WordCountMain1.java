@@ -17,7 +17,7 @@ import org.apache.flink.util.Collector;
  * 数据流（实时流）的方式统计单词出现次数（计算实时流流数据统称：流处理）
  * @author JIANG
  */
-public class WordCountMain {
+public class WordCountMain1 {
 	
 	
 	public static void main(String[] args) throws Exception {
@@ -30,7 +30,7 @@ public class WordCountMain {
 		DataStreamSource<String> streamDataSet = env.socketTextStream("192.168.83.143", 7070);
 		// 以单条数据为Key，单词和次数为Value
 		SingleOutputStreamOperator<Tuple2<String, Integer>> flatMap = streamDataSet.flatMap(new Tokenizer());
-		// 按照单条数据分组（0就是按照Tuple2<String, Integer> Key分组，也可以通过对象的field名称，但用对象的field名称要自己先定义对象）
+		// 数据分组（0就是按照Tuple2<String, Integer> Key分组，也可以通过对象的field名称，但用对象的field名称要自己先定义对象）
 		KeyedStream<Tuple2<String, Integer>, Tuple> keyBy = flatMap.keyBy(0);
 		// 每5秒统计一次
 		WindowedStream<Tuple2<String, Integer>, Tuple, TimeWindow> timeWindow = keyBy.timeWindow(Time.seconds(5));
