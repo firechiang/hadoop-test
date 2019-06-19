@@ -14,7 +14,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 /**
- * 数据流（实时流）的方式统计单词出现次数
+ * 数据流（实时流）的方式统计单词出现次数（计算实时流流数据统称：流处理）
  * @author JIANG
  */
 public class WordCountMain {

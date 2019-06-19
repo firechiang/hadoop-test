@@ -10,7 +10,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.util.Collector;
 /**
- * 统计文件里面单词出现次数
+ * 统计文件里面单词出现次数（计算文件数据统称：批处理）
  * @author JIANG
  */
 public class WordCountMain {
