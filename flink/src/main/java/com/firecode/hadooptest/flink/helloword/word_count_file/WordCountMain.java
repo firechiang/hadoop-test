@@ -30,9 +30,9 @@ public class WordCountMain {
 		DataSet<String> textDataSet = WordCountData.getDefaultTextLineDataSet(env);
 		// 以单条数据为Key，单词和次数为Value
 		FlatMapOperator<String, Tuple2<String, Integer>> flatMap = textDataSet.flatMap(new Tokenizer());
-		// 按照单条数据分组（0就是按照Tuple2<String, Integer> Key分组）
+		// 按照单条数据分组（0就是按照Tuple2<String, Integer> Key分组，也可以通过对象的field名称，但用对象的field名称要自己先定义对象）
 		UnsortedGrouping<Tuple2<String, Integer>> groupBy = flatMap.groupBy(0);
-		// 求和（1就是按照Tuple2<String, Integer> Value求和）
+		// 求和（1就是按照Tuple2<String, Integer> Value求和，也可以通过对象的field名称，但用对象的field名称要自己先定义对象）
 		AggregateOperator<Tuple2<String, Integer>> sum = groupBy.sum(1);
 		// 打印数据
 		sum.print();
