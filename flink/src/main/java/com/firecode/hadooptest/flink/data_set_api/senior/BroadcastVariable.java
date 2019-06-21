@@ -36,7 +36,7 @@ public class BroadcastVariable {
 				return value;
 			}
 		});
-		// 将数据源 toBroadcast 共享到Map算子（共享数据应该是在Map算子之前执行）
+		// 将数据 toBroadcast 共享到Map算子Key是：broadcastSetName（注意：数据量不要太大，因为这个数据是在内存里面的，共享数据应该是在Map算子之前执行）
 		MapOperator<String, String> withBroadcastSet = map.withBroadcastSet(toBroadcast, "broadcastSetName");
 		withBroadcastSet.print();
 	}
