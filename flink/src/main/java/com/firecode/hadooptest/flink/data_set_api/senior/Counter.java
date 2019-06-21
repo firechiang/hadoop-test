@@ -28,7 +28,7 @@ public class Counter {
 			// 计数器
 			private LongCounter counter = new LongCounter();
 			/**
-			 * 任务开始之前调用
+			 * Map开始之前调用
 			 */
 			@Override
 			public void open(Configuration parameters) throws Exception {
