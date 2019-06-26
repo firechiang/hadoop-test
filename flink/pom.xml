@@ -27,11 +27,19 @@
 			<version>${flink.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- SQL API 相关  -->
 		<dependency>
 			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-table-planner_2.11</artifactId>
+			<artifactId>flink-table-planner_2.12</artifactId>
+			<version>${flink.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-streaming-scala_2.12</artifactId>
 			<version>${flink.version}</version>
 		</dependency>
+		<!-- 日志相关  -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

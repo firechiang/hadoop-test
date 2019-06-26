@@ -7,6 +7,18 @@ public class User {
 	private Integer age;
 	
 	private String job;
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String name, Integer age, String job) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.job = job;
+	}
 
 	public String getName() {
 		return name;
