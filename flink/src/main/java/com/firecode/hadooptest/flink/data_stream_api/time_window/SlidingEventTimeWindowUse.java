@@ -44,12 +44,20 @@ public class SlidingEventTimeWindowUse {
 		/**
 		 * （注意：如果上一步执行了keyBy()函数，那么后面的就是window或timeWindow，而window或timeWindow的后面是并行多任务执行的）
 		 */
-		// 设置5秒的窗口滑动2秒。每隔2秒就会得到一个窗口，其中包含过去5秒内某一段的数据（注意：如果滑动时间小于窗口时间，则可能出现当前窗口和上一个窗口有相同的数据）
+		// 设置5秒的窗口滑动2秒。每隔2秒就会得到一个窗口，其中包含过去5秒的数据（注意：如果滑动时间小于窗口时间，则可能出现当前窗口和上一个窗口有相同的数据）
 		WindowedStream<User, Tuple, TimeWindow> window = keyBy.window(SlidingProcessingTimeWindows.of(Time.seconds(5), Time.seconds(2)));
 		window.sum("age").print();
 		
+		// reduce聚合
+		/*window.reduce(new ReduceFunction<User>() {
+			@Override
+			public User reduce(User value1, User value2) throws Exception {
+				value2.setAge(value1.getAge() + value2.getAge());
+				return value2;
+			}
+		}).print();*/
 		
-		
+		// 可获取当前窗口的全量数据（谨慎使用，数据量可能很大）
 		/*timeWindow.process(new ProcessWindowFunction<User, User, Tuple, TimeWindow>() {
 			private static final long serialVersionUID = 1L;
 			@Override

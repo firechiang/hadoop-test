@@ -50,6 +50,16 @@ public class TumblingEventTimeWindowUse {
 		
 		
 		
+		// reduce聚合
+		/*window.reduce(new ReduceFunction<User>() {
+			@Override
+			public User reduce(User value1, User value2) throws Exception {
+				value2.setAge(value1.getAge() + value2.getAge());
+				return value2;
+			}
+		}).print();*/
+		
+		// 可获取当前窗口的全量数据（谨慎使用，数据量可能很大）
 		/*timeWindow.process(new ProcessWindowFunction<User, User, Tuple, TimeWindow>() {
 			private static final long serialVersionUID = 1L;
 			@Override
