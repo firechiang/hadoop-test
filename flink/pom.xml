@@ -27,7 +27,7 @@
 			<version>${flink.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- SQL API 相关  -->
+		<!-- SQL API 相关 -->
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-planner_2.12</artifactId>
@@ -39,7 +39,7 @@
 			<artifactId>flink-streaming-scala_2.12</artifactId>
 			<version>${flink.version}</version>
 		</dependency>
-		<!-- 日志相关  -->
+		<!-- 日志相关 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -49,6 +49,21 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-nop</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- 连接器 -->
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-connector-kafka_2.12</artifactId>
+			<version>${flink.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-connector-filesystem_2.12</artifactId>
+			<version>${flink.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
 		</dependency>
 	</dependencies>
 </project>
