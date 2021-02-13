@@ -12,6 +12,20 @@
 8，使用消费者保存消息元数据。消费者状态默认保存在zk当中，也可保存在其它OLTP当中
 9，消息可压缩，可在消息header(头)中使用compress type标识
 ```
+
+#### kafka 4大客户端
+ - Producers（生产者）
+ - Consumers（消费者）
+ - Stream processors（流处理）
+ - Connectors（用于链接数据库DB）
+ 
+#### kafka客户端API
+ - AdmainClient API允许管理Topic，Broker以及其他Kafka对象
+ - Producer API发布消息到1个多个Topic
+ - Consumer API订阅一个或多个Topic，并处理产生的消息
+ - Stream API 高效的将输入流转到输出流
+ - Connectors API 从一些源系统或应用程序中拉取数据到Kafka 
+ 
 #### kafka消息副本简介
 ```bash
 1，每个分区有n个副本，可以承受n-1节点故障，每个副本都有自己的leader，其余都是follow
