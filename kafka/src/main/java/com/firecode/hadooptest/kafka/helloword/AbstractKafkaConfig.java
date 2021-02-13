@@ -1,4 +1,4 @@
-package com.firecode.hadooptest.kafka;
+package com.firecode.hadooptest.kafka.helloword;
 
 import java.time.Duration;
 import java.util.HashMap;

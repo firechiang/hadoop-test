@@ -11,6 +11,8 @@ import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.junit.Test;
 
+import com.firecode.hadooptest.kafka.helloword.AbstractKafkaConfig;
+
 /**
  * 简单测试kafka admin
  */

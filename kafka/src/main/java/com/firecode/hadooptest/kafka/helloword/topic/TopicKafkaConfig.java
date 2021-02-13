@@ -8,7 +8,7 @@ import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 
-import com.firecode.hadooptest.kafka.AbstractKafkaConfig;
+import com.firecode.hadooptest.kafka.helloword.AbstractKafkaConfig;
 
 /**
  * topic相关配置

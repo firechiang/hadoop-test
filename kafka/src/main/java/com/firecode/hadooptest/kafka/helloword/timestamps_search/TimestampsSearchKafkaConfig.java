@@ -9,7 +9,8 @@ import java.util.concurrent.ExecutionException;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 
-import com.firecode.hadooptest.kafka.AbstractKafkaConfig;
+import com.firecode.hadooptest.kafka.helloword.AbstractKafkaConfig;
+
 
 /**
  * 延迟消费相关配置相关配置
