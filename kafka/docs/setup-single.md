@@ -7,6 +7,10 @@ $ sudo tar -zxvf kafka_2.12-2.2.0.tgz -C ../                    # 解压到上�
 
 #### 二、修改[vi server.properties]
 ```bash
+# Kfaka集群内部使用绑定的IP和端口
+listeners=PLAINTEXT://127.0.0.1:9092
+# Kfaka集群对外暴露服务的IP和端口（注意：这里的默认值就是listeners的值；还有这里可以配置域名）
+advertised.listeners=PLAINTEXT://127.0.0.1:9092
 # 配置kafka日志目录(注意：手动创建该目录)
 log.dirs=/home/kafka_2.12-2.2.0/logs
 # 配置ZooKeeper集群
@@ -24,6 +28,9 @@ $ echo $KAFKA_HOME
 
 #### 四、指定配置文件启动kafka
 ```bash
+# 指定配置文件启动Kafka
+# kafka-server-start.sh /home/kafka_2.12-2.2.0/config/server.properties 
+# 注意：-daemon 表示加守护进程启动
 $ kafka-server-start.sh -daemon /home/kafka_2.12-2.2.0/config/server.properties
 $ kafka-server-stop.sh                                          # 停止kafka
 ```
