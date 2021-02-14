@@ -1,6 +1,8 @@
 package com.firecode.hadooptest.kafka.helloword;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
@@ -19,6 +21,8 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.After;
 import org.junit.Before;
 
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers.LongDeserializer;
+
 /**
  * kafka配置相关
  * 
@@ -34,10 +38,13 @@ public abstract class AbstractKafkaConfig {
 	 * 注意：KafkaConsumer非线程安全
 	 */
 	protected Consumer<Integer,String> consumer;
+	protected Consumer<String,Long> streamConsumer;
 	protected AdminClient admin;
-	protected Properties adminConfig = new Properties();
-	protected Properties producerConfig = new Properties();
-	protected Properties consumerConfig = new Properties();
+	protected Map<String,Object> adminConfig = new HashMap<>();
+	protected Map<String,Object> producerConfig = new HashMap<>();
+	protected Map<String,Object> consumerConfig = new HashMap<>();
+	protected Map<String,Object> streamConsumerConfig = new HashMap<>();
+	protected Properties streamConfig = new Properties();
 	// 多节点用逗号隔开 192.168.229.133:9092,192.168.229.129:9092,192.168.229.134:9092
 	public static final String SERVER_NAME = "127.0.0.1:9092";
 
@@ -49,7 +56,7 @@ public abstract class AbstractKafkaConfig {
 	@Before
 	public void init() throws InterruptedException, ExecutionException {
 		// 管理端服务地址
-		adminConfig.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG,SERVER_NAME);
+		adminConfig.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG,SERVER_NAME);
 		
 		// 生产服务地址
 		producerConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, SERVER_NAME);
