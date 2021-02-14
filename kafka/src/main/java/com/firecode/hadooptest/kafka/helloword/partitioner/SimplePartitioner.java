@@ -19,6 +19,7 @@ public class SimplePartitioner implements Partitioner {
 
 	@Override
 	public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+		// 一般是根据key做自定义分区处理
 		System.err.println("我在分区");
 		return 0;
 	}

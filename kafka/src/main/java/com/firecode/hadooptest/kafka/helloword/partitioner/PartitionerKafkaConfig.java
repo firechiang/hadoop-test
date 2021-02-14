@@ -21,7 +21,7 @@ public abstract class PartitionerKafkaConfig extends AbstractKafkaConfig {
 	@Override
 	public void config() throws InterruptedException, ExecutionException{
 		//指定生成者分区类
-		config.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, SimplePartitioner.class.getName());
+		producerConfig.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, SimplePartitioner.class.getName());
 	}
 	
 	@Override

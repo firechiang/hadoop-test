@@ -27,9 +27,9 @@ public class ConsumerTest extends QueueKafkaConfig {
 		//consumer.resume(new TopicPartition(topicName,1));
 		//上面的两个操作可以对消费速度加以控制，结合业务使用
 		
-		//消费所有分区的消息(和下面的二选一使用)
+		//订阅所有分区的消息(和下面的二选一使用)
 		consumer.subscribe(Collections.singletonList(topicName));
-		//消费指定分区的消息(和上面的二选一使用)
+		//订阅指定分区的消息(和上面的二选一使用)
 		//consumer.assign(Arrays.asList(new TopicPartition(topicName,1)));
 		
         while(true){

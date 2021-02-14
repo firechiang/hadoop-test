@@ -10,17 +10,17 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 import com.firecode.hadooptest.kafka.helloword.AbstractKafkaConfig;
 /**
- * 手动提交确认相关配置
+ * 手动提交确认偏移量相关配置
  * @author JIANG
  */
 public abstract class ManualCommitKafkaConfig extends AbstractKafkaConfig {
 	
-	protected String topicName = "test-test-101";
+	public static String topicName = "test-test-101";
 	
 	@Override
 	public void config() throws InterruptedException, ExecutionException{
-		//手动提交确认（springboot结合中的enable.auto.commit为false为spring的人工提交模式（spring会自动帮我们提交）。enable.auto.commit为true是采用kafka的默认提交模式）
-		config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+		//手动提交确认偏移量（springboot结合中的enable.auto.commit为false为spring的人工提交模式（spring会自动帮我们提交）。enable.auto.commit为true是采用kafka的默认提交模式）
+		consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
 	}
 	
 	@Override

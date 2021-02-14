@@ -32,7 +32,7 @@ public class ConsumerTest extends TimestampsSearchKafkaConfig {
 		
 		
 		TopicPartition partition = new TopicPartition(topicName,0);
-		//消费指定分区的消息
+		//订阅指定分区的消息
 		consumer.assign(Arrays.asList(partition));
 		Map<TopicPartition, Long> timestampsSearch = new HashMap<TopicPartition,Long>();
 		// 设置查询12 小时之前消息的偏移量

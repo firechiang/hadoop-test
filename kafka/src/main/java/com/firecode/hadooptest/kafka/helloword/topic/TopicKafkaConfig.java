@@ -21,7 +21,7 @@ public abstract class TopicKafkaConfig extends AbstractKafkaConfig {
 	@Override
 	public void config() throws InterruptedException, ExecutionException {
 		//group.id（组）（注意：enable.auto.commit=true时必须有group.id）
-		config.put(ConsumerConfig.GROUP_ID_CONFIG, "DemoConsumer2");
+		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, "DemoConsumer2");
 	}
 	
 	
