@@ -1,4 +1,4 @@
-package com.firecode.hadooptest.kafka.helloword_new.admin_api;
+package com.firecode.hadooptest.kafka.helloword.admin_api;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -117,7 +117,7 @@ public class AdmainApi {
 	}
 	
 	/**
-	 * 增加分区数(注意：分区数只能增加不能减少)
+	 * 修改增加分区数(注意：分区数只能增加不能减少)
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */

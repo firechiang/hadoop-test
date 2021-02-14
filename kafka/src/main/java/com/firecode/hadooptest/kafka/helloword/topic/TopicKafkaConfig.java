@@ -27,6 +27,7 @@ public abstract class TopicKafkaConfig extends AbstractKafkaConfig {
 	
 	@Override
 	public void before() throws InterruptedException, ExecutionException {
+		// 获取所有主题
 		ListTopicsResult listTopics = admin.listTopics();
 		Set<String> names = listTopics.names().get();
 		if(!names.contains(topicName)){

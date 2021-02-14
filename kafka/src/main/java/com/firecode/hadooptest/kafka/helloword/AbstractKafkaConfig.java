@@ -30,6 +30,8 @@ public abstract class AbstractKafkaConfig {
 	protected Consumer<Integer,String> consumer;
 	protected AdminClient admin;
 	protected Map<String,Object> config = new HashMap<>();
+	// 多节点用逗号隔开 192.168.229.133:9092,192.168.229.129:9092,192.168.229.134:9092
+	static final String SERVER_NAME = "127.0.0.1:9092";
 
 	/**
 	 * 初始化配置
@@ -38,12 +40,20 @@ public abstract class AbstractKafkaConfig {
 	 */
 	@Before
 	public void init() throws InterruptedException, ExecutionException {
-		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.229.133:9092,192.168.229.129:9092,192.168.229.134:9092");
+		// 生产服务地址
+		config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, SERVER_NAME);
 		//消息发送类型 sync(同步)，async(异步)
 		//config.put("producer.type","async");
 		//消息压缩类型
 		//config.put(ProducerConfig.COMPRESSION_TYPE_CONFIG,"snappy");
 		
+		
+		config.put(ProducerConfig.RETRIES_CONFIG, "0");
+		// 消息发送最大间隔时间，一毫秒发送一次消息（注意：Kafka的消息不是一条一条发送的是批量发送的）
+		config.put(ProducerConfig.LINGER_MS_CONFIG, "1");
+		// 批量发送消息最大数量（注意：只要消息数量到达这个预值就会触发发送，即使没有到达消息发送最大间隔时间）
+		config.put(ProducerConfig.BATCH_SIZE_CONFIG, "16384");
+		config.put(ProducerConfig.BUFFER_MEMORY_CONFIG, "33554432");
 		//生产者序列化和反序列化
 		config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
 		config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
@@ -52,6 +62,9 @@ public abstract class AbstractKafkaConfig {
 		//acks = 1 指定了必须要有多少个分区副本收到消息，生产者才会认为消息写入是成功的（推荐生产使用）
 		//acks=all 只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应
 		config.put(ProducerConfig.ACKS_CONFIG,"1");
+		
+		// 消费服务地址
+		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, SERVER_NAME);
 		
 		//每个分组消费者启动起来后从哪个位置开始消费消息： none(从最后的位置开始消费(默认配置)，latest(从最后的位置开始消费)，earliest(从0开始，就是重新把所有的消息都消费一遍))
 		//config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"latest");
