@@ -1,6 +1,6 @@
 #### [一、单节点搭建以及简单测试使用][1]
 #### [二、集群搭建以及简单测试使用][2]
-#### [三、Kafka Connect简单使用][3]
+#### [三、Kafka Connect简单使用（不推荐生产使用）][3]
 #### kafka核心简介
 ```bash
 1，kafka没有主从模型，所有broker地位相同，broker信息数据均在zk中维护，并在producer(生产者)和consumer(消费者)之间共享
