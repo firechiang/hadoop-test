@@ -95,6 +95,9 @@ $ curl http://127.0.0.1:9083/connectors
 ["connect-mysql-load-test","connect-mysql-write-test"]	
 
 # 最后手动往k_user表里面添加数据，再去k_user_back表里面看数据是否自动同步过来了
+
+# 删除任务 connect-mysql-load-test
+$ curl -X DELETE -i 'http://127.0.0.1:9083/connectors/connect-mysql-load-test'
 ```
 
 
