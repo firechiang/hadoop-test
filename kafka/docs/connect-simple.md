@@ -1,11 +1,11 @@
 ### 这个要测试的Connct是将数据加载到Kafka，再写回数据库的另一张表里面
 #### 一、从 https://www.confluent.io/hub/ 下载别人已经开发好的Connect插件
-![image](https://github.com/AngelSXD/sxd_first_repository/blob/master/images/20160615165142.png)
-![image](https://github.com/AngelSXD/sxd_first_repository/blob/master/images/20160615165142.png)
-![image](https://github.com/AngelSXD/sxd_first_repository/blob/master/images/20160615165142.png)
+![image](https://github.com/firechiang/hadoop-test/blob/master/kafka/images/001.png)
+![image](https://github.com/firechiang/hadoop-test/blob/master/kafka/images/002.png)
+![image](https://github.com/firechiang/hadoop-test/blob/master/kafka/images/003.png)
 
 #### 二、在Kafka安装同级目录处建立plugins目录，将上面下载好的文件解压至该目录，再下载mysql-connector-java-8.0.23.jar放置lib目录下
-![image](https://github.com/AngelSXD/sxd_first_repository/blob/master/images/20160615165142.png)
+![image](https://github.com/firechiang/hadoop-test/blob/master/kafka/images/004.png)
 
 #### 三、修改 [vi connect-distributed.properties] Connect 配置文件
 ```bash
