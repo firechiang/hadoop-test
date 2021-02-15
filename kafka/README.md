@@ -1,5 +1,6 @@
 #### [一、单节点搭建以及简单测试使用][1]
 #### [二、集群搭建以及简单测试使用][2]
+#### [三、Kafka Connect简单使用][3]
 #### kafka核心简介
 ```bash
 1，kafka没有主从模型，所有broker地位相同，broker信息数据均在zk中维护，并在producer(生产者)和consumer(消费者)之间共享
@@ -50,3 +51,4 @@ leader的本地log写入完成，立即向producer发送确认回执
 ```
 [1]: https://github.com/firechiang/hadoop-test/tree/master/kafka/docs/setup-single.md
 [2]: https://github.com/firechiang/hadoop-test/tree/master/kafka/docs/setup-cluster.md
+[3]: https://github.com/firechiang/hadoop-test/tree/master/kafka/docs/connect-simple.md

@@ -30,7 +30,7 @@ $ echo $KAFKA_HOME
 ```bash
 # 指定配置文件启动Kafka
 # kafka-server-start.sh /home/kafka_2.12-2.2.0/config/server.properties 
-# 注意：-daemon 表示加守护进程启动
+# 注意：-daemon 表示加守护进程启动（也就是后台运行）
 $ kafka-server-start.sh -daemon /home/kafka_2.12-2.2.0/config/server.properties
 $ kafka-server-stop.sh                                          # 停止kafka
 ```
