@@ -15,6 +15,26 @@ advertised.listeners=PLAINTEXT://127.0.0.1:9092
 log.dirs=/home/kafka_2.12-2.2.0/logs
 # 配置ZooKeeper集群
 zookeeper.connect=server002:2181,server003:2181,server004:2181
+
+# 创建Topic默认创建分区数量（注意：默认就是1）
+num.partitions=1
+# 创建Topic默认创建副本数量（建议基数个）
+default.replication.factor=2
+# 最小副本数量（建议2-3个）
+#min.insync.replicasISR=2（这个配置项好像没了，就用下面那个）
+min.insync.replicas=2
+# 是否允许不具备ISR资格的节点（不是挂了的那个节点的副本节点）被选举为Leader（注意：这个默认就是false）
+unclean.leader.election.enable=false
+# 在Kafka收到stop或终止命令时，是否允许自动同步数据（注意：这个默认就是true）
+controlled.shutdown.enable=true
+
+
+# 副本节点一次拉取数据的最大值（就是一次最多拉取多少数据，默认是1M(1 mebibyte)），建议使用默认值，不修改
+#replica.fetch.max.bytes=1048576
+# 注册到ZK供用户使用的主机名（注意：内网环境不需要配置）
+#advertised.host.name=
+#  注册到ZK供用户使用的端口（注意：内网环境不需要配置）
+#advertised.port=
 ```
 
 #### 三、配置kafka环境变量[vi ~/.bashrc]在末尾添加如下内容
@@ -73,4 +93,12 @@ $ kafka-console-producer.sh --broker-list localhost:9092 --topic test-test-1
 ```bash
 $ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-test-1 --from-beginning
 ```
+
+#### 八、Kafka JVM服务器调优参数（机器四核以上，内存最好大于24G）
+```bash
+-Xms6g -Xmx6g -XX:MetaspaceSize=96m -XX:+UseG1GC
+-XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35
+-XX:G1HeapRegionSize=16m -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80
+```
+
 

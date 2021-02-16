@@ -47,6 +47,7 @@ public abstract class AbstractKafkaConfig {
 	protected Properties streamConfig = new Properties();
 	// 多节点用逗号隔开 192.168.229.133:9092,192.168.229.129:9092,192.168.229.134:9092
 	public static final String SERVER_NAME = "127.0.0.1:9092";
+	public static final String SERVER_NAME_SSL = "127.0.0.1:9091";
 
 	/**
 	 * 初始化配置
@@ -99,6 +100,8 @@ public abstract class AbstractKafkaConfig {
 		consumerConfig.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
 		//session timeout
 		consumerConfig.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
+		// 消费者一次拉取数据的最大值 (就是一次最多拉取多少数据，默认是1M（1 mebibyte）)，建议使用默认值，不修改
+		//consumerConfig.put(ConsumerConfig.FETCH_MAX_BYTES_CONFIG, "1048576");
 		this.config();
 		// 注意:KafkaProducer是线程安全的，创建一个就够了
 		this.procuder = new KafkaProducer<>(producerConfig);
